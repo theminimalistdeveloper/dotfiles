@@ -2,19 +2,18 @@
 
 ![Environment on Manjaro with i3 gaps](./screenshot.png)
 
-The idea is to make a clean, minimal, and fluid development experience across Linux and MacOS as much as possible.
-
-Here is the collection of configurations and settings for multiple applications that I use in my workflow.
+The idea is to make a clean, minimal, and fluid development experience, that is as consistent as possible across Linux and macOS.
 
 To manage the configuration files in this repo I use a combination of [GIT](https://git-scm.com/), to version the changes, and [Stow](https://www.gnu.org/software/stow/), to manage the symbolic links to the configurations.
 
-These configurations were tested on [Manjaro](https://manjaro.org/) and [MacOS](https://www.apple.com/de/macos/monterey/), but most of it should be usable in many other Linux distributions.
+These configurations were tested on [Manjaro](https://manjaro.org/) and [macOS](https://www.apple.com/de/macos/monterey/), but most of it should be usable in many other Linux distributions.
 
 ## How To Use It
 Be sure to have [GIT](https://git-scm.com/) and [Stow](https://www.gnu.org/software/stow/) installed.
 
 ### 1. Clone the repository
 This will clone the repository to your `$HOME` directory and change the repository directory.
+
 ```bash
 git clone https://github.com/theminimalistdeveloper/dotfiles.git ~/dotfiles
 cd ~/dotfiles
@@ -23,6 +22,7 @@ cd ~/dotfiles
 Each application has its own directory on the root of the project, choose which one you want to use the configuration.
 From root of the project, issue the following command, note that `{application}` refers to the application folder name.
 For Neovim, for example, it would be:
+
 ```bash
 stow nvim
 ```
