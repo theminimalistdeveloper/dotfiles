@@ -48,7 +48,7 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
 );
 
 --------------------------------------------------------------------------------
--- Language servers configuration
+-- LANGUAGE SERVERS CONFIGURATION
 --------------------------------------------------------------------------------
 
 -- Typescript & Javascript
@@ -112,11 +112,13 @@ lspconfig.tsserver.setup {
 
 -- Rust
 --------------------------------------------------------------------------------
--- RLS
-lspconfig.rls.setup {}
+
+-- Rust analyzer
+lspconfig.rust_analyzer.setup {}
 
 -- Lua
 --------------------------------------------------------------------------------
+
 -- Sumneko
 lspconfig.sumneko_lua.setup {
   settings = {
