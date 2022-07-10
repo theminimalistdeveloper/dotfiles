@@ -1,6 +1,10 @@
 # Environment Configuration
 
-![Environment on Manjaro with i3 gaps](./screenshot.png)
+## Manjaro
+![Environment on Manjaro with i3 gaps](./screenshot-manjaro.png)
+
+## macOS
+![Environment on macOS Monterey](./screenshot-macos.png)
 
 The idea is to make a clean, minimal, and fluid development experience, that is as consistent as possible across Linux and macOS.
 
