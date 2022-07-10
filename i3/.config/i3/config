@@ -139,3 +139,5 @@ bindsym $mod+Shift+e exec i3-msg exit
 bindsym $mod+f fullscreen toggle
 # toggle tiling / floating
 bindsym $mod+Shift+f floating toggle
+# take a screenshot
+bindsym $mod+Shift+p exec "scrot"
