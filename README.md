@@ -34,6 +34,7 @@ Follow the link of each application below to have more information about the con
 * **[Kitty](https://github.com/theminimalistdeveloper/dotfiles/tree/main/kitty)**: The fast, feature-rich, GPU based terminal emulator.
 * **[Nvim](https://github.com/theminimalistdeveloper/dotfiles/tree/main/nvim)**: Hyperextensible Vim-based text editor.
 * **[Picom](https://github.com/theminimalistdeveloper/dotfiles/tree/main/picom)**: Picom is a standalone compositor for Xorg, suitable for use with window managers that do not provide compositing.
+* **[Polybar](https://github.com/theminimalistdeveloper/dotfiles/tree/main/polybar)**: A fast and easy-to-use tool for creating status bars.
 * **[Rofi](https://github.com/theminimalistdeveloper/dotfiles/tree/main/rofi)**: A window switcher, Application launcher and dmenu replacement.
 * **[TMUX](https://github.com/theminimalistdeveloper/dotfiles/tree/main/tmux)**: Tmux is a terminal multiplexer. It lets you switch easily between several programs in one terminal, detach them (they keep running in the background) and reattach them to a different terminal.
 * **[ZSH](https://github.com/theminimalistdeveloper/dotfiles/tree/main/zsh)**: Zsh is a shell designed for interactive use, although it is also a powerful scripting language.
