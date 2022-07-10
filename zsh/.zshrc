@@ -16,7 +16,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git'"
 
 # VIM BINDINGS
-# Set Vim keybindings
+# Enable vi mode
 bindkey -v
 KEYTIMEOUT=1
 
@@ -52,7 +52,11 @@ COMPLETION_WAITING_DOTS="true"
 # aws - Autocomplete for AWS cli
 # git - list of short aliases
 # yarn - List of short aliases
-plugins=(aws yarn)
+plugins=(
+  aws
+  yarn
+  vi-mode
+)
 
 source $ZSH/oh-my-zsh.sh
 
