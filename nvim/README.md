@@ -1,10 +1,8 @@
-# Neovim
+# [Neovim](https://neovim.io)
 
 ![Neovim](./screenshot.png)
 
 "Neovim is a refactor, and sometimes redactor, in the tradition of Vim (which itself derives from Stevie). It is not a rewrite but a continuation and extension of Vim. Many clones and derivatives exist, some very clever—but none are Vim. Neovim is built for users who want the good parts of Vim, and more."
-
-You can find more information about it [here](https://neovim.io)
 
 ## What is this setup about?
 * This setup is mainly focused on editing Javascript, Typescript, and Rust, but could easily be extended to another languages.
