@@ -50,8 +50,8 @@ To install all the necessary plugins run:
 ```
 ## External Dependencies
 
-* [ESLint](https://eslint.org/docs/user-guide/getting-started)
-* [Prettier](https://prettier.io/)
-* [RLS](https://github.com/rust-lang/rls)
-* [Tabnine](https://github.com/rust-lang/rls)
+* [ESLint](https://eslint.org/docs/user-guide/getting-started): Linter for Javscript and Typescript
+* [Prettier](https://prettier.io/): Opinionated Javascript and Typescript code formatter
+* [RLS](https://github.com/rust-lang/rls): Rust language server
+* [Tabnine](https://github.com/rust-lang/rls): AI powered completion engine
 * [JetBrains Mono NerdFont](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/font-info.md): JetBrains open source monospaced fonts for developers.
