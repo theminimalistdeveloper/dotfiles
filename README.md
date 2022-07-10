@@ -1,6 +1,10 @@
 # Environment Configuration
 
-Collection of configurations and settings for multiple applications that I use in my workflow.
+![Environment on Manjaro with i3 gaps](./screenshot.png)
+
+The idea is to make a clean, minimal, and fluid development experience across Linux and MacOS as much as possible.
+
+Here is the collection of configurations and settings for multiple applications that I use in my workflow.
 
 To manage the configuration files in this repo I use a combination of [GIT](https://git-scm.com/), to version the changes, and [Stow](https://www.gnu.org/software/stow/), to manage the symbolic links to the configurations.
 
