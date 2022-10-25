@@ -16,7 +16,7 @@ require('packer').startup(function()
   -- Automatically creates missing LSP diagnostics highlight groups for color
   -- schemes that don't yet support the Neovim 0.5 builtin lsp client.
   use 'folke/lsp-colors.nvim'
-  use 'nvim-treesitter/nvim-treesitter'
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'neovim/nvim-lspconfig'
   -- Signature parameters and documentation
   use 'ray-x/lsp_signature.nvim'
