@@ -1,11 +1,11 @@
---------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 -- NATIVE LSP
 --------------------------------------------------------------------------------
 
 local lspconfig = require 'lspconfig'
 
 local capabilities = require('cmp_nvim_lsp')
-    .update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    .default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local signs = require 'signs'
 
@@ -20,7 +20,7 @@ vim.diagnostic.config({
   update_in_insert = true,
   signs = true,
   underline = true,
-  virtual_text = false,
+  virtual_text = true,
   float = {
     -- To show only the diagnostics of the current cursor position
     scope = 'cursor',
@@ -28,9 +28,9 @@ vim.diagnostic.config({
   },
 });
 
--- Run formatting before saving the buffer for js* ts* files
+-- Run formatting before saving the buffer im.lsp.buf.formatting is deprecated. Use vim.lsp.buf.format { async = true } instead
 vim.api.nvim_command([[
-  autocmd BufWritePre *.lua,*.rs,*.js,*.jsx,*.ts,*.tsx lua vim.lsp.buf.formatting_sync()
+  autocmd BufWritePre *.lua,*.rs,*.js,*.jsx,*.ts,*.tsx lua vim.lsp.buf.format()
 ]])
 
 -- Enable showing the diagnostic of the current cursor position
@@ -101,7 +101,7 @@ lspconfig.efm.setup {
 lspconfig.tsserver.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.documentFormatting = false
     require "lsp_signature".on_attach({
       bind = true, -- This is mandatory, otherwise border config won't get registered.
       hint_prefix = '',
