@@ -59,8 +59,6 @@ require('packer').startup(function()
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   -- MISC
-  -- Tabnine, AI assistant
-  use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
   -- Helper for surrounds around text objects
   use 'tpope/vim-surround'
   -- Git helper
@@ -115,18 +113,15 @@ vim.g.rooter_patterns = { '.git', 'package.json' }
 -- CMP
 local cmp = require 'cmp'
 local lspkind = require 'lspkind'
-local tabnine = require 'cmp_tabnine.config'
 local sources = {
-  { name = 'nvim_lsp', max_item_count = 5 },
-  { name = 'cmp_tabnine', max_item_count = 2 },
-  { name = 'buffer' },
-  { name = 'path' },
-  { name = 'treesitter' },
-  { name = 'ultisnips' },
+  { name = 'nvim_lsp', max_item_count = 10 },
+  { name = 'ultisnips', max_item_count = 2 },
+  { name = 'treesitter', max_item_count = 2 },
+  { name = 'buffer', max_item_count = 2 },
+  { name = 'path', max_item_count = 1 },
 }
 local formats = {
   nvim_lsp = ' LSP',
-  cmp_tabnine = ' Tabnine',
   buffer = '﬘ Buffer',
   path = ' Path',
   treesitter = ' Treesitter',
@@ -211,10 +206,4 @@ cmp.setup.cmdline(':', {
 })
 
 -- Tabnine
-tabnine:setup({
-  max_lines = 1000;
-  max_num_results = 2;
-  sort = true;
-  run_on_every_keystroke = true;
-  snippet_placeholder = '..';
-})
+vim.g.vimspector_enable_mappings = 'HUMAN'
