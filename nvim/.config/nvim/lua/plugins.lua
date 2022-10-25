@@ -17,6 +17,8 @@ require('packer').startup(function()
   -- schemes that don't yet support the Neovim 0.5 builtin lsp client.
   use 'folke/lsp-colors.nvim'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  -- sticky header
+  use 'nvim-treesitter/nvim-treesitter-context'
   use 'neovim/nvim-lspconfig'
   -- Signature parameters and documentation
   use 'ray-x/lsp_signature.nvim'
