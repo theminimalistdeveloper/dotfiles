@@ -79,6 +79,8 @@ require('packer').startup(function()
   use 'theminimalistdeveloper/night-owl.nvim'
   -- Enable navigation between nvim and tmux windows using <c-(h,j,k,l)>
   use 'christoomey/vim-tmux-navigator'
+  -- Debugger
+  use 'puremourning/vimspector'
 end)
 
 -- PLUGINS CONFIGURATION
