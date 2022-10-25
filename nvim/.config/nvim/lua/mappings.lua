@@ -172,3 +172,13 @@ vim.keymap.set('n', '<leader>pj', '<cmd>!node %<cr>')
 
 -- Emmet
 vim.keymap.set('i', '<C-a>', '<Esc>a<C-y>;')
+
+-- Vimspector
+vim.keymap.set('n', '<leader>il', '<Plug>VimspectorLaunch')
+vim.keymap.set('n', '<leader>ir', '<cmd>VimspectorReset<cr>')
+vim.keymap.set('n', '<leader>ic', '<Plug>VimspectorContinue')
+vim.keymap.set('n', '<leader>ii', '<Plug>VimspectorRunToTheCursor')
+vim.keymap.set('n', '<leader>ib', '<Plug>VimspectorToggleBreakpoint')
+vim.keymap.set('n', '<leader>isi', '<Plug>VimspectorStepInto')
+vim.keymap.set('n', '<leader>iso', '<Plug>VimspectorStepOut')
+vim.keymap.set('n', '<leader>isv', '<Plug>VimspectorStepOver')
