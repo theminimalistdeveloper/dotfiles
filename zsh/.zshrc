@@ -129,3 +129,6 @@ alias grsh='git reset --soft HEAD~1'
 # !AGRESSIVE DEVELOPMENT!
 # Add all the changes, commit ammend with noe edit and force push - Do this at your own risk ;)
 alias ga='git add . && git commit --amend --no-edit -n && git push -f'
+# Remove all branches but master
+alias gca='git branch | grep -v master | xargs git branch -D'
+
