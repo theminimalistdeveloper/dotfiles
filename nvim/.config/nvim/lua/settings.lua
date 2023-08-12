@@ -27,9 +27,9 @@ vim.o.wildmode = 'list:longest,full'
 -- Convert tab to spaces
 vim.o.expandtab = true
 -- Set tab to be 2 spaces
-vim.o.tabstop = 2
+vim.o.tabstop = 4
 -- Define the number of spaces used for the auto indent
-vim.o.shiftwidth = 2
+vim.o.shiftwidth = 4
 -- The count of lines go from the current line instead of the top of
 -- the file
 vim.o.relativenumber = true

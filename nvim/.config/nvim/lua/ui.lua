@@ -21,5 +21,6 @@ vim.o.laststatus = 3
 vim.cmd 'colorscheme night-owl'
 -- Hides tildes from non-existing lines
 vim.cmd 'hi EndOfBuffer guifg=bg'
+vim.o.winbar = '%m %f'
 -- Configuration for the status line
 require 'lualine-theme'

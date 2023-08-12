@@ -14,6 +14,9 @@ vim.keymap.set('n', '<leader>r', '<cmd>w<cr>')
 vim.keymap.set('n', '<leader>x', '<cmd>x<cr>')
 -- Quit all buffers at once without saving anything
 vim.keymap.set('n', '<leader>qq', '<cmd>qall!<cr>')
+-- Cleanup all the existing buffers without saving anything
+vim.keymap.set('n', '<leader>a', '<cmd>bufdo bd!<cr>')
+
 
 -- NEOVIM CONFIGURATION
 --------------------------------------------------------------------------------
@@ -82,8 +85,16 @@ vim.keymap.set('n', '<leader>fgs', '<cmd>Telescope git_stash theme=dropdown<cr>'
 vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers theme=dropdown<cr>')
 -- Search through the files in the current folder using grep syntax
 vim.keymap.set('n', '<leader>fgr', '<cmd>Telescope live_grep theme=dropdown<cr>')
--- Search throug the available Neovim keymap configuration
+-- Search through the available Neovim keymap configuration
 vim.keymap.set('n', '<leader>fk', '<cmd>Telescope keymaps theme=dropdown<cr>')
+
+-- NOTE TAKING
+--------------------------------------------------------------------------------
+-- Search through the notes
+local notes_path = '~/Library/CloudStorage/GoogleDrive-theminimalistdeveloper@gmail.com/My\\ Drive/Notes'
+vim.keymap.set('n', '<leader>fn', "<cmd>Telescope live_grep cwd=" .. notes_path .. " theme=dropdown<cr>")
+vim.keymap.set('n', '<leader>no', "<cmd>e " .. notes_path .. "<cr>")
+
 
 -- NVIMTREE
 --------------------------------------------------------------------------------
