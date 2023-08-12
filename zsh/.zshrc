@@ -132,3 +132,44 @@ alias ga='git add . && git commit --amend --no-edit -n && git push -f'
 # Remove all branches but master
 alias gca='git branch | grep -v master | xargs git branch -D'
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+function aws-sts {
+    # awscli and jq is required
+    if [[ $1 ]]; then
+        dst_profile=$1
+        sts_profile="sts"
+
+        arn=$(aws configure get role_arn --profile $dst_profile)
+        creds_json=$(aws --output json --profile $dst_profile sts assume-role --role-arn $arn --role-session-name t1p-iam-central-sts)
+
+        STS_AWS_ACCESS_KEY_ID=`echo ${creds_json} | jq -r '.Credentials.AccessKeyId'`
+        STS_AWS_SECRET_ACCESS_KEY=`echo ${creds_json} | jq -r '.Credentials.SecretAccessKey'`
+        STS_AWS_SESSION_TOKEN=`echo ${creds_json} | jq -r '.Credentials.SessionToken'`
+        STS_AWS_EXPIRATION=`echo ${creds_json} | jq -r '.Credentials.Expiration'`
+        echo "For Copy&Paste"
+        echo ""
+        echo "export AWS_ACCESS_KEY_ID=${STS_AWS_ACCESS_KEY_ID}"
+        echo "export AWS_SECRET_ACCESS_KEY=${STS_AWS_SECRET_ACCESS_KEY}"
+        echo "export AWS_SESSION_TOKEN=${STS_AWS_SESSION_TOKEN}"
+        echo "export AWS_EXPIRATION=${STS_AWS_EXPIRATION}"
+        echo "export AWS_DEFAULT_REGION=eu-west-1"
+
+        aws configure set aws_access_key_id $STS_AWS_ACCESS_KEY_ID --profile $sts_profile
+        aws configure set aws_secret_access_key $STS_AWS_SECRET_ACCESS_KEY --profile $sts_profile
+        aws configure set aws_session_token $STS_AWS_SESSION_TOKEN --profile $sts_profile
+        echo ""
+        echo "aws profile $sts_profile is set with temporary credentials"
+    else
+        echo 'enter aws profile $1'
+    fi
+}
+
+function load_dotenv {
+    if [ ! -f .env ]
+    then
+        export $(cat .env | xargs)
+    fi
+}
