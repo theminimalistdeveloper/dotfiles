@@ -60,11 +60,3 @@ vim.cmd 'syntax on'
 vim.g.loaded_ruby_provider = 0
 -- Disable Perl provider
 vim.g.loaded_perl_provider = 0
-
--- AUTO COMMANDS
---------------------------------------------------------------------------------
-
--- Remove trailing spaces before writing the buffer
-vim.api.nvim_command([[
-  autocmd BufWritePre * %s/\s\+$//e
-]])

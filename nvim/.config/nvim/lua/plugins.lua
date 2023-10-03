@@ -2,189 +2,181 @@
 -- PLUGINS
 -------------------------------------------------------------------------------
 
--- Load the package manager
-vim.cmd [[packadd packer.nvim]]
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- PLUGINS LIST
--------------------------------------------------------------------------------
-
-require('packer').startup(function()
-    -- Plugin manager
-    use { 'wbthomason/packer.nvim' }
-
+local plugins = {
     -- LSP
-    -- Automatically creates missing LSP diagnostics highlight groups for color
-    -- schemes that don't yet support the Neovim 0.5 builtin lsp client.
-    use 'folke/lsp-colors.nvim'
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    -- sticky header
-    use 'nvim-treesitter/nvim-treesitter-context'
-    use 'neovim/nvim-lspconfig'
+    {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        config = function()
+            require "nvim-treesitter.install".compilers = { "gcc" }
+        end,
+    },
+    'nvim-treesitter/nvim-treesitter-context',
+    'williamboman/mason-lspconfig.nvim',
+    {
+        'williamboman/mason.nvim',
+        config = function()
+            require('mason').setup {}
+        end,
+    },
+    'neovim/nvim-lspconfig',
     -- Signature parameters and documentation
-    use 'ray-x/lsp_signature.nvim'
+    'ray-x/lsp_signature.nvim',
+    -- markdown preview
+    { 'iamcco/markdown-preview.nvim',             build = 'cd app && yarn install' },
     -- Icons for the autocomplete list
-    use 'onsails/lspkind-nvim'
-    -- Github Copilot
-    --use {
-    --"zbirenbaum/copilot.lua",
-    --}
-    --use {
-    --"zbirenbaum/copilot-cmp",
-    --}
-
+    'onsails/lspkind-nvim',
     -- COMPLETION
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'hrsh7th/cmp-cmdline'
-    use 'hrsh7th/nvim-cmp'
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
+    {
+        'hrsh7th/nvim-cmp',
+        config = function()
+            local cmp = require 'cmp'
+            local lspkind = require 'lspkind'
+            local sources = {
+                { name = 'nvim_lsp',  max_item_count = 100 },
+                { name = 'buffer',    max_item_count = 5 },
+                { name = 'ultisnips', max_item_count = 3 },
+                { name = 'path',      max_item_count = 1 },
+            }
 
-    -- FILE NAVIGATOR
-    -- Tree view filesystem navigator
-    use {
-        'kyazdani42/nvim-tree.lua',
-        requires = {
-            -- Adds icons to the file navigator items
-            'kyazdani42/nvim-web-devicons',
-        },
-        tag = 'nightly'
-    }
+            cmp.setup({
+                snippet = {
+                    expand = function(args)
+                        vim.fn['UltiSnips#Anon'](args.body)
+                    end,
+                },
+                experimental = { ghost_text = { hl_group = 'LineNr' } },
+                window = {
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
+                },
+                sources = sources,
+                formatting = {
+                    format = lspkind.cmp_format({
+                        mode      = 'symbol_text',
+                        max_width = 50,
+                    }),
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ['<Tab>'] = cmp.mapping.select_next_item({ select = true }),
+                    ['<S-Tab>'] = cmp.mapping.select_prev_item({ select = true }),
+                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                }),
+            })
+
+            -- when searching auto complete with words present in the buffers
+            cmp.setup.cmdline('/', {
+                sources = {
+                    { name = 'buffer' }
+                }
+            })
+
+            -- when executing a command auto complete with commands and paths
+            cmp.setup.cmdline(':', {
+                sources = cmp.config.sources({
+                    { name = 'path' }
+                }, {
+                    { name = 'cmdline' }
+                })
+            })
+        end,
+    },
 
     -- SNIPPETS
     -- Ultisnips - the snippet engine used everywhere
-    use 'sirver/ultisnips'
+    'sirver/ultisnips',
     -- Initial package of snippets for multiple languages
-    use 'honza/vim-snippets'
+    'honza/vim-snippets',
     -- Jest snippets
-    use 'jhkersul/vim-jest-snippets'
+    'jhkersul/vim-jest-snippets',
     -- Necessary to show Ultisnips in the CMP suggestion window
-    use 'quangnguyen30192/cmp-nvim-ultisnips'
+    'quangnguyen30192/cmp-nvim-ultisnips',
 
     -- FUZZY FINDER
-    -- Helper to draw nice popups
-    use 'nvim-lua/popup.nvim'
     -- Helper functions in lua
-    use 'nvim-lua/plenary.nvim'
+    'nvim-lua/plenary.nvim',
     -- Fuzzy finder engine
-    use 'nvim-telescope/telescope.nvim'
+    {
+        'nvim-telescope/telescope.nvim',
+        config = function()
+            local telescope = require 'telescope'
+            telescope.setup({
+                defaults = {},
+                extensions = {
+                    file_browser = {
+                        theme = 'ivy',
+                    },
+                    fzf = {
+                        override_generic_sorter = false,
+                        override_file_sorter = true,
+                        case_mode = 'smart_case',
+                    }
+                }
+            })
+            telescope.load_extension('file_browser')
+            telescope.load_extension('fzf')
+        end,
+    },
+    {
+        "nvim-telescope/telescope-file-browser.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", 'nvim-tree/nvim-web-devicons' }
+    },
     -- use fzf in telescope
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 
     -- MISC
     -- Helper for surrounds around text objects
-    use 'tpope/vim-surround'
+    'tpope/vim-surround',
     -- Git helper
-    use 'tpope/vim-fugitive'
+    'tpope/vim-fugitive',
     -- Gitsigns - Used only for showing blame per line on virtual text
-    use 'lewis6991/gitsigns.nvim'
-    -- Information statusline
-    use 'hoob3rt/lualine.nvim'
-    -- Set the root directory to the folder of the current buffer. really useful
-    use 'airblade/vim-rooter'
-    -- Helper for commenting, works with multiple languages
-    use 'scrooloose/nerdcommenter'
-    -- Helper to run specific tests and test files
-    use 'janko/vim-test'
-    -- HTML / CSS dynamic snippet generator
-    use 'mattn/emmet-vim'
-    -- Theme Night owl
-    use 'theminimalistdeveloper/night-owl.nvim'
-    use { "catppuccin/nvim", as = "catppuccin" }
-    -- Enable navigation between nvim and tmux windows using <c-(h,j,k,l)>
-    use 'christoomey/vim-tmux-navigator'
-    -- Debugger
-    use 'puremourning/vimspector'
-    -- RUST - Cargo dependency helper
-    use 'Saecki/crates.nvim'
-end)
-
--- PLUGINS CONFIGURATION
--------------------------------------------------------------------------------
--- Nvimtree
-require 'nvim-tree'.setup()
-
---require("copilot").setup({
---suggestion = { enabled = false },
---panel = { enabled = false },
---})
-
---require("copilot_cmp").setup()
-
--- Gitsigns
-require 'gitsigns'.setup({ current_line_blame = true })
-
--- Telescope
-local telescope = require 'telescope'
-telescope.setup({
-    defaults = {},
-    extensions = {
-        fzf = {
-            override_generic_sorter = false,
-            override_file_sorter = true,
-            case_mode = 'smart_case',
-        }
-    }
-})
-telescope.load_extension('fzf')
-
--- Vim Rooter
--- considers switches to the folder of the current buffer if it finds some of the files listed below
-vim.g.rooter_patterns = { '.git', 'package.json' }
-
--- CMP
-local cmp = require 'cmp'
-local lspkind = require 'lspkind'
-local sources = {
-    { name = 'buffer',    max_item_count = 5 },
-    --{ name = 'copilot',   max_item_count = 5 },
-    { name = 'nvim_lsp',  max_item_count = 100 },
-    { name = 'path',      max_item_count = 1 },
-    { name = 'ultisnips', max_item_count = 3 },
-}
-
-cmp.setup({
-    snippet = {
-        expand = function(args)
-            vim.fn['UltiSnips#Anon'](args.body)
+    {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup({ current_line_blame = true })
         end,
     },
-    experimental = { ghost_text = { hl_group = 'LineNr' } },
-    window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+    -- Information statusline
+    'hoob3rt/lualine.nvim',
+    -- Set the root directory to the folder of the current buffer. really useful
+    {
+        'airblade/vim-rooter',
+        config = function()
+            -- considers switches to the folder of the current buffer if it finds some of the files listed below
+            vim.g.rooter_patterns = { '.git', 'package.json' }
+        end,
     },
-    sources = sources,
-    formatting = {
-        format = lspkind.cmp_format({
-            mode      = 'symbol_text',
-            max_width = 50,
-            --symbol_map = { Copilot = '' }
-        }),
-    },
-    mapping = cmp.mapping.preset.insert({
-        ['<Tab>'] = cmp.mapping.select_next_item({ select = true }),
-        ['<S-Tab>'] = cmp.mapping.select_prev_item({ select = true }),
-        -- This was removed because it would require 2 Esc's to get out of a suggestion into normal mode
-        --['<Esc>'] = cmp.mapping.close(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    }),
-})
 
--- when searching auto complete with words present in the buffers
-cmp.setup.cmdline('/', {
-    sources = {
-        { name = 'buffer' }
-    }
-})
+    -- Helper for commenting, works with multiple languages
+    'scrooloose/nerdcommenter',
+    -- Helper to run specific tests and test files
+    'janko/vim-test',
+    -- HTML / CSS dynamic snippet generator
+    'mattn/emmet-vim',
+    -- Theme Night owl
+    'theminimalistdeveloper/night-owl.nvim',
+    { "catppuccin/nvim", as = "catppuccin" },
+    -- Enable navigation between nvim and tmux windows using <c-(h,j,k,l)>
+    'christoomey/vim-tmux-navigator',
+    -- RUST - Cargo dependency helper
+    'Saecki/crates.nvim'
+}
 
--- when executing a command auto complete with commands and paths
-cmp.setup.cmdline(':', {
-    sources = cmp.config.sources({
-        { name = 'path' }
-    }, {
-        { name = 'cmdline' }
-    })
-})
-
--- Tabnine
-vim.g.vimspector_enable_mappings = 'HUMAN'
+require("lazy").setup(plugins)

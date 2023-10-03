@@ -14,25 +14,22 @@ vim.keymap.set('n', '<leader>r', '<cmd>w<cr>')
 vim.keymap.set('n', '<leader>x', '<cmd>x<cr>')
 -- Quit all buffers at once without saving anything
 vim.keymap.set('n', '<leader>qq', '<cmd>qall!<cr>')
--- Cleanup all the existing buffers without saving anything
-vim.keymap.set('n', '<leader>a', '<cmd>bufdo bd!<cr>')
-
 
 -- NEOVIM CONFIGURATION
 --------------------------------------------------------------------------------
 
 -- Open mappings
-vim.keymap.set('n', '<leader>ncm', '<cmd>e ~/.config/nvim/lua/mappings.lua<cr>')
+vim.keymap.set('n', '<leader>vm', '<cmd>e ~/.config/nvim/lua/mappings.lua<cr>')
 -- Open plugins
-vim.keymap.set('n', '<leader>ncp', '<cmd>e ~/.config/nvim/lua/plugins.lua<cr>')
+vim.keymap.set('n', '<leader>vp', '<cmd>e ~/.config/nvim/lua/plugins.lua<cr>')
 -- Open UI
-vim.keymap.set('n', '<leader>ncu', '<cmd>e ~/.config/nvim/lua/ui.lua<cr>')
+vim.keymap.set('n', '<leader>vu', '<cmd>e ~/.config/nvim/lua/ui.lua<cr>')
 -- Open LSP
-vim.keymap.set('n', '<leader>ncl', '<cmd>e ~/.config/nvim/lua/lsp.lua<cr>')
+vim.keymap.set('n', '<leader>vl', '<cmd>e ~/.config/nvim/lua/lsp.lua<cr>')
 -- Open settings
-vim.keymap.set('n', '<leader>ncs', '<cmd>e ~/.config/nvim/lua/settings.lua<cr>')
+vim.keymap.set('n', '<leader>vs', '<cmd>e ~/.config/nvim/lua/settings.lua<cr>')
 -- Open init
-vim.keymap.set('n', '<leader>nci', '<cmd>e ~/.config/nvim/init.lua<cr>')
+vim.keymap.set('n', '<leader>vi', '<cmd>e ~/.config/nvim/init.lua<cr>')
 
 -- WINDOW
 --------------------------------------------------------------------------------
@@ -57,50 +54,60 @@ vim.keymap.set('n', '<leader>bn', '<cmd>bn<cr>')
 vim.keymap.set('n', '<leader>bp', '<cmd>bp<cr>')
 -- Toggle between last two buffers
 vim.keymap.set('n', '<leader>bb', '<cmd>b#<cr>')
--- Delete the current buffer
+---- Delete the current buffer
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>')
 -- List all buffers
 vim.keymap.set('n', '<leader>bl', '<cmd>ls<cr>')
 -- Delete all buffers
 vim.keymap.set('n', '<leader>bk', '<cmd>bufdo bd!<cr>')
 
+-- Notes
+--------------------------------------------------------------------------------
+local notes_dir = '~/Notes'
+
 -- TELESCOPE
 --------------------------------------------------------------------------------
-
+--
+local telescope_theme = 'ivy'
 -- Search through Neovim commands
-vim.keymap.set('n', '<leader>fc', '<cmd>Telescope commands theme=dropdown<cr>')
+vim.keymap.set('n', '<leader>fc', string.format('<cmd>Telescope commands theme=%s<cr>', telescope_theme))
 -- Search through Neovim options
-vim.keymap.set('n', '<leader>fvo', '<cmd>Telescope vim_options theme=dropdown<cr>')
+vim.keymap.set('n', '<leader>fvo', string.format('<cmd>Telescope vim_options theme=%s<cr>', telescope_theme))
 -- Search through the loaded configuration files and reload it
-vim.keymap.set('n', '<leader>fl', '<cmd>Telescope reloader theme=dropdown<cr>')
--- Searhch through the files known to Git in the current git folder
-vim.keymap.set('n', '<leader>ff', '<cmd>Telescope git_files theme=dropdown<cr>')
+vim.keymap.set('n', '<leader>fl', string.format('<cmd>Telescope reloader theme=%s<cr>', telescope_theme))
+-- Searhc through the files in the current folder
+vim.keymap.set('n', '<leader>ff', string.format('<cmd>Telescope find_files theme=%s<cr>', telescope_theme))
+-- Searhc through the files known to Git in the current git folder
+vim.keymap.set('n', '<leader>fgf', string.format('<cmd>Telescope git_files theme=%s<cr>', telescope_theme))
 -- Search through the available Git branches
-vim.keymap.set('n', '<leader>fgb', '<cmd>Telescope git_branches theme=dropdown<cr>')
+vim.keymap.set('n', '<leader>fgb', string.format('<cmd>Telescope git_branches theme=%s<cr>', telescope_theme))
 -- Search through the available Git commits
-vim.keymap.set('n', '<leader>fgc', '<cmd>Telescope git_commits theme=dropdown<cr>')
+vim.keymap.set('n', '<leader>fgc', string.format('<cmd>Telescope git_commits theme=%s<cr>', telescope_theme))
 -- Search through the avaialble Git stash
-vim.keymap.set('n', '<leader>fgs', '<cmd>Telescope git_stash theme=dropdown<cr>')
+vim.keymap.set('n', '<leader>fgs', string.format('<cmd>Telescope git_stash theme=%s<cr>', telescope_theme))
 -- Search through the available buffers
-vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers theme=dropdown<cr>')
+vim.keymap.set('n', '<leader>fe', string.format('<cmd>Telescope buffers theme=%s<cr>', telescope_theme))
 -- Search through the files in the current folder using grep syntax
-vim.keymap.set('n', '<leader>fgr', '<cmd>Telescope live_grep theme=dropdown<cr>')
+vim.keymap.set('n', '<leader>fgr', string.format('<cmd>Telescope live_grep theme=%s<cr>', telescope_theme))
 -- Search through the available Neovim keymap configuration
-vim.keymap.set('n', '<leader>fk', '<cmd>Telescope keymaps theme=dropdown<cr>')
-
--- NOTE TAKING
---------------------------------------------------------------------------------
--- Search through the notes
-local notes_path = '~/Library/CloudStorage/GoogleDrive-theminimalistdeveloper@gmail.com/My\\ Drive/Notes'
-vim.keymap.set('n', '<leader>fn', "<cmd>Telescope live_grep cwd=" .. notes_path .. " theme=dropdown<cr>")
-vim.keymap.set('n', '<leader>no', "<cmd>e " .. notes_path .. "<cr>")
-
-
--- NVIMTREE
---------------------------------------------------------------------------------
-
--- Toggle Nvimtree
-vim.keymap.set('n', '<leader>nt', '<cmd>NvimTreeRefresh<cr>:NvimTreeToggle<cr>')
+vim.keymap.set('n', '<leader>fk', string.format('<cmd>Telescope keymaps theme=%s<cr>', telescope_theme))
+-- Search through the available Neovim keymap configuration
+vim.keymap.set('n', '<leader>fb', string.format('<cmd>Telescope file_browser theme=%s<cr>', telescope_theme))
+-- Open file navigator in inbox notes
+vim.keymap.set('n', '<leader>fni',
+    string.format('<cmd>Telescope file_browser path=%s/inbox/ theme=%s<cr>', notes_dir, telescope_theme))
+-- Open file navaigator in personal notes
+vim.keymap.set('n', '<leader>fnp',
+    string.format('<cmd>Telescope file_browser path=%s/personal/ theme=%s<cr>', notes_dir, telescope_theme))
+-- Open file navigator in companies notes
+vim.keymap.set('n', '<leader>fnc',
+    string.format('<cmd>Telescope file_browser path=%s/companies/ theme=%s<cr>', notes_dir, telescope_theme))
+-- Grep in notes dir
+vim.keymap.set('n', '<leader>fng',
+    string.format('<cmd>Telescope live_grep search_dirs={"%s"} theme=%s<cr>', notes_dir, telescope_theme))
+-- Find files in notes dir
+vim.keymap.set('n', '<leader>fn',
+    string.format('<cmd>Telescope find_files search_dirs={"%s"} theme=%s<cr>', notes_dir, telescope_theme))
 
 -- VIM FUGITIVE
 --------------------------------------------------------------------------------
@@ -160,36 +167,9 @@ vim.keymap.set('n', '<leader>lds', '<cmd>lua vim.lsp.buf.document_symbol()<cr>')
 -- Searches for a specific symbol in all the files in the current folder/project
 vim.keymap.set('n', '<leader>lws', '<cmd>lua vim.lsp.buf.workspace_symbol()<cr>')
 -- Format the current file
-vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>')
+vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<cr>')
 -- Jump to the previous diagnostic entry
 vim.keymap.set('n', '<leader>lp', '<cmd>lua vim.diagnostic.goto_prev({ float = false })<cr>')
 -- Jump to the next diagnostic entry
 vim.keymap.set('n', '<leader>ln', '<cmd>lua vim.diagnostic.goto_next({ float = false })<cr>')
 vim.keymap.set('n', '<leader> ', '<cmd>lua vim.diagnostic.goto_next({ float = false })<cr>')
-
--- LANGUAGE SPECIFIC
---------------------------------------------------------------------------------
-
--- Typescript
--- Run current script with ts-node
-vim.keymap.set('n', '<leader>pt', '<cmd>!ts-node %<cr>')
-
--- Javascript
--- Run current script with node
-vim.keymap.set('n', '<leader>pj', '<cmd>!node %<cr>')
-
--- PLUGINS
---------------------------------------------------------------------------------
-
--- Emmet
-vim.keymap.set('i', '<C-a>', '<Esc>a<C-y>;')
-
--- Vimspector
-vim.keymap.set('n', '<leader>il', '<Plug>VimspectorLaunch')
-vim.keymap.set('n', '<leader>ir', '<cmd>VimspectorReset<cr>')
-vim.keymap.set('n', '<leader>ic', '<Plug>VimspectorContinue')
-vim.keymap.set('n', '<leader>ii', '<Plug>VimspectorRunToTheCursor')
-vim.keymap.set('n', '<leader>ib', '<Plug>VimspectorToggleBreakpoint')
-vim.keymap.set('n', '<leader>isi', '<Plug>VimspectorStepInto')
-vim.keymap.set('n', '<leader>iso', '<Plug>VimspectorStepOut')
-vim.keymap.set('n', '<leader>isv', '<Plug>VimspectorStepOver')

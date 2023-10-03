@@ -1,4 +1,4 @@
-------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 -- NATIVE LSP
 --------------------------------------------------------------------------------
 
@@ -30,11 +30,12 @@ vim.diagnostic.config({
 
 -- Run formatting before saving the buffer im.lsp.buf.formatting is deprecated. Use vim.lsp.buf.format { async = true } instead
 vim.api.nvim_command([[
-  autocmd BufWritePre *.lua,*.rs,*.js,*.jsx,*.ts,*.tsx lua vim.lsp.buf.format()
+    autocmd BufWritePre *.lua,*.rs,*.js,*.jsx,*.ts,*.tsx lua vim.lsp.buf.format()
 ]])
 
 -- Enable showing the diagnostic of the current cursor position
 vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope='cursor', border='rounded'})]]
+
 
 -- Add rounded corners to signature and to the hover window
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
@@ -112,26 +113,8 @@ lspconfig.tsserver.setup {
 
 -- Rust
 --------------------------------------------------------------------------------
-
--- Rust analyzer
 lspconfig.rust_analyzer.setup {}
 
 -- Lua
 --------------------------------------------------------------------------------
-
--- Sumneko
-lspconfig.lua_ls.setup {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim', 'use' }
-            },
-            workspace = {
-                library = vim.api.nvim_get_runtime_file('', true)
-            },
-            telemetry = {
-                enable = true,
-            }
-        }
-    }
-}
+lspconfig.lua_ls.setup {}
