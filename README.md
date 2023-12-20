@@ -35,7 +35,7 @@ stow nvim
 Follow the link of each application below to have more information about the configuration.
 
 * **[I3](https://github.com/theminimalistdeveloper/dotfiles/tree/main/i3)**: i3 is a tiling window manager, completely written from scratch.
-* **[Kitty](https://github.com/theminimalistdeveloper/dotfiles/tree/main/kitty)**: The fast, feature-rich, GPU based terminal emulator.
+* **[WezTerm](https://github.com/theminimalistdeveloper/dotfiles/tree/main/wezterm)**:WezTerm is a powerful cross-platform terminal emulator and multiplexer written by Wez and implemented in Rust 
 * **[Nvim](https://github.com/theminimalistdeveloper/dotfiles/tree/main/nvim)**: Hyperextensible Vim-based text editor.
 * **[Picom](https://github.com/theminimalistdeveloper/dotfiles/tree/main/picom)**: Picom is a standalone compositor for Xorg, suitable for use with window managers that do not provide compositing.
 * **[Polybar](https://github.com/theminimalistdeveloper/dotfiles/tree/main/polybar)**: A fast and easy-to-use tool for creating status bars.
