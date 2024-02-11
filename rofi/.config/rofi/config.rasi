@@ -1,90 +1,93 @@
 configuration {
-  font: "SF Display Medium 12";
-  show-icons: true;
-  icon-theme: "Mkos-Big-Sur-Night";
-  display-drun: "";
-  drun-display-format: "{name}";
-  disable-history: false;
-  fullscreen: false;
-  hide-scrollbar: true;
-  sidebar-mode: true;
+    font: "MesloLGM Nerd Font 17px";
+    show-icons: true;
+    display-drun: "";
+    drun-display-format: "{name}";
+    disable-history: false;
+    fullscreen: false;
+    hide-scrollbar: true;
+    sidebar-mode: true;
 }
 
 * {
-  bg: #F9F9F989;
-  fg: #333333;
-  cl: #f0f0f0;
-  dg: #666;
+    background: rgba(18,18,18,0.9);
+    backgroundSecondary: rgba(18,18,18,0.3);
+    textPrimary: rgba(255,255,255,1);
+    textSecondary: rgba(255,255,255,0.7);
+    textDisabled: rgba(255,255,255,0.5);
+    actionActive: rgba(255,255,255,1); 
+    actionDisabledBackground: rgba(255,255,255,0.12); 
+    actionSelected: rgba(255,255,255,0.16);
+    actionDisabled: rgba(255,255,255,0.3);
+    actionHover: rgba(255,255,255,0.08);
 }
 
 window {
-  background-color: @bg;
-  text-color: @fg;
-  border-radius: 5;
-  border: 0px;
-  width: 25%;
-  location: center;
+    background-color: @actionSelected;
+    border-radius: 5;
+    border: 0;
+    width: 700px;
+    location: center;
 }
 
 mainbox {
-  children: [ inputbar, listview ];
+    children: [ inputbar, listview ];
 }
 
 prompt {
-  enabled: false;
+    enabled: false;
 }
 
 entry {
-  text-color: @fg;
-  placeholder-color: @dg;
-  placeholder: "Search";
+    text-color: @textSecondary;
+    placeholder-color: @textDisabled;
+    placeholder: "";
 }
 
 inputbar {
-  children: [ entry ];
-  text-color: @fg;
-  expand: false;
-  padding: 1% 0.3%;
+    children: [ entry ];
+    text-color: @textSecondary;
+    expand: false;
+    padding: 15px;
 }
 
 listview {
-  columns: 1;
-  lines: 5;
-  spacing: 0%;
-  cycle: true;
-  dynamic: false;
-  layout: vertical;
-  scrollbar: false;
-  border: 0;
+    columns: 1;
+    lines: 5;
+    spacing: 0%;
+    cycle: true;
+    dynamic: false;
+    layout: vertical;
+    scrollbar: false;
+    border: 0;
 }
 
 element {
-  text-color: @fg;
-  orientation: horizontal;
-  padding: 0.5%;
-}
-
-element alternate.normal {
-  background-color: @bg;
+    text-color: @textSecondary;
+    orientation: horizontal;
+    padding: 10px;
 }
 
 element selected.normal {
-  background-color: @cl;
-  border-radius: 5;
-  color: @fg;
+    border-radius: 5;
+    background-color: @actionSelected;
+    text-color: @textPrimary;
+}
+
+element alternate.normal {
+    background-color: @background;
+    text-color: @textDisabled;
 }
 
 element normal.normal {
-  background-color: @bg;
+    background-color: @background;
+    text-color: @textDisabled;
 }
 
 element-icon {
-  size: 48px;
+    size: 48px;
 }
 
 element-text {
-  expand: true;
-  highlight: none;
-  vertical-align: 0.5;
-  margin: 0 0.25%;
+    vertical-align: 0.5;
 }
