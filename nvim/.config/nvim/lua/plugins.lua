@@ -24,6 +24,16 @@ local plugins = {
             require "nvim-treesitter.install".compilers = { "gcc" }
         end,
     },
+    {
+        'nvim-tree/nvim-tree.lua',
+        config = function()
+            require('nvim-tree').setup({
+                filters = {
+                    dotfiles = true,
+                }
+            })
+        end,
+    },
     'nvim-treesitter/nvim-treesitter-context',
     'williamboman/mason-lspconfig.nvim',
     {

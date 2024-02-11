@@ -5,6 +5,9 @@
 -- Map the leader key to space. *VERY* important
 vim.g.mapleader = " "
 
+-- Neovin Tree
+vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<cr>')
+
 -- GENERAL COMMANDS
 --------------------------------------------------------------------------------
 
