@@ -1,4 +1,4 @@
-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 -- PLUGINS
 -------------------------------------------------------------------------------
 
@@ -32,11 +32,22 @@ local plugins = {
             require('mason').setup {}
         end,
     },
+    {
+        'nvim-tree/nvim-tree.lua',
+        config = function()
+            require("nvim-tree").setup({
+                filters = { dotfiles = true }
+            })
+        end,
+    },
     'neovim/nvim-lspconfig',
     -- Signature parameters and documentation
     'ray-x/lsp_signature.nvim',
     -- markdown preview
-    { 'iamcco/markdown-preview.nvim',             build = 'cd app && yarn install' },
+    {
+        'iamcco/markdown-preview.nvim',
+        build = 'cd app && yarn install'
+    },
     -- Icons for the autocomplete list
     'onsails/lspkind-nvim',
     -- COMPLETION
@@ -50,17 +61,17 @@ local plugins = {
             local cmp = require 'cmp'
             local lspkind = require 'lspkind'
             local sources = {
-                { name = 'nvim_lsp',  max_item_count = 100 },
-                { name = 'buffer',    max_item_count = 5 },
-                { name = 'ultisnips', max_item_count = 3 },
-                { name = 'path',      max_item_count = 1 },
+                { name = 'luasnip',  max_item_count = 1 },
+                { name = 'nvim_lsp', max_item_count = 5 },
+                { name = 'buffer',   max_item_count = 3 },
+                { name = 'path',     max_item_count = 1 },
             }
 
             cmp.setup({
                 snippet = {
                     expand = function(args)
-                        vim.fn['UltiSnips#Anon'](args.body)
-                    end,
+                        require 'luasnip'.lsp_expand(args.body)
+                    end
                 },
                 experimental = { ghost_text = { hl_group = 'LineNr' } },
                 window = {
@@ -79,6 +90,7 @@ local plugins = {
                     ['<S-Tab>'] = cmp.mapping.select_prev_item({ select = true }),
                     ['<CR>'] = cmp.mapping.confirm({ select = true }),
                 }),
+
             })
 
             -- when searching auto complete with words present in the buffers
@@ -100,12 +112,16 @@ local plugins = {
     },
 
     -- SNIPPETS
-    -- Ultisnips - the snippet engine used everywhere
-    'sirver/ultisnips',
-    -- Initial package of snippets for multiple languages
-    'honza/vim-snippets',
-    -- Jest snippets
-    'jhkersul/vim-jest-snippets',
+    { 'saadparwaiz1/cmp_luasnip' },
+    {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = "make install_jsregexp",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+        end
+    },
     -- Necessary to show Ultisnips in the CMP suggestion window
     'quangnguyen30192/cmp-nvim-ultisnips',
 
@@ -165,7 +181,12 @@ local plugins = {
     },
 
     -- Helper for commenting, works with multiple languages
-    'scrooloose/nerdcommenter',
+    {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end,
+    },
     -- Helper to run specific tests and test files
     'janko/vim-test',
     -- HTML / CSS dynamic snippet generator
@@ -179,4 +200,4 @@ local plugins = {
     'Saecki/crates.nvim'
 }
 
-require("lazy").setup(plugins)
+require("lazy").setup(plugins, {})

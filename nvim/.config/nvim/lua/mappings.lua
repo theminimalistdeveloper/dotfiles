@@ -1,9 +1,11 @@
---------------------------------------------------------------------------------
--- MAPPINGS
+-------------------------------------------------------------------------------- MAPPINGS
 --------------------------------------------------------------------------------
 
 -- Map the leader key to space. *VERY* important
 vim.g.mapleader = " "
+
+-- Neovim tree
+vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<cr>')
 
 -- GENERAL COMMANDS
 --------------------------------------------------------------------------------
@@ -14,6 +16,22 @@ vim.keymap.set('n', '<leader>r', '<cmd>w<cr>')
 vim.keymap.set('n', '<leader>x', '<cmd>x<cr>')
 -- Quit all buffers at once without saving anything
 vim.keymap.set('n', '<leader>qq', '<cmd>qall!<cr>')
+
+-- QUICKFIX
+--------------------------------------------------------------------------------
+
+-- jump to next entry of the quick fix list
+vim.keymap.set('n', '<leader>cn', '<cmd>cn<cr>')
+
+-- jump to previous entry of the quick fix list
+vim.keymap.set('n', '<leader>cp', '<cmd>cn<cr>')
+
+-- SNIPPETS
+--------------------------------------------------------------------------------
+
+local ls = require('luasnip')
+vim.keymap.set({ "i", "s" }, "<Tab>", function() ls.jump(1) end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<S-Tab>", function() ls.jump(-1) end, { silent = true })
 
 -- NEOVIM CONFIGURATION
 --------------------------------------------------------------------------------
@@ -44,6 +62,19 @@ vim.keymap.set('n', '<leader>ws', '<C-w>s')
 vim.keymap.set('n', '<leader>wv', '<C-w>v')
 -- Quit the current window
 vim.keymap.set('n', '<leader>wq', '<C-w>q')
+-- Zoom current window vertically
+vim.keymap.set('n', '<leader>wj', '<C-w>|')
+-- Zoom current window horizontally
+vim.keymap.set('n', '<leader>wh', '<C-w>_')
+-- Resets the current Zoom
+vim.keymap.set('n', '<leader>wk', '<C-w>=')
+
+-- move around windows
+vim.keymap.set('n', '<leader>h', '<C-w>h')
+vim.keymap.set('n', '<leader>j', '<C-w>j')
+vim.keymap.set('n', '<leader>k', '<C-w>k')
+vim.keymap.set('n', '<leader>l', '<C-w>l')
+
 
 -- BUFFERS
 --------------------------------------------------------------------------------
@@ -147,29 +178,29 @@ vim.keymap.set('n', '<leader>tl', '<cmd>TestLast<CR>')
 --------------------------------------------------------------------------------
 
 -- Restart Neovim LSP
-vim.keymap.set('n', '<leader>lt', '<cmd>LspRestart<cr>')
+vim.keymap.set('n', '<leader>st', '<cmd>LspRestart<cr>')
 -- Rename the current object under the cursor, this will rename all the occurrences
-vim.keymap.set('n', '<leader>lr', '<cmd>lua vim.lsp.buf.rename()<cr>')
+vim.keymap.set('n', '<leader>sr', '<cmd>lua vim.lsp.buf.rename()<cr>')
 -- Jump to object definition
-vim.keymap.set('n', '<leader>ld', '<cmd>lua vim.lsp.buf.definition()<cr>')
+vim.keymap.set('n', '<leader>sd', '<cmd>lua vim.lsp.buf.definition()<cr>')
 -- Show the information of the object under the cursor
-vim.keymap.set('n', '<leader>lh', '<cmd>lua vim.lsp.buf.hover()<cr>')
+vim.keymap.set('n', '<leader>sh', '<cmd>lua vim.lsp.buf.hover()<cr>')
 -- Jump to implementation
-vim.keymap.set('n', '<leader>li', '<cmd>lua vim.lsp.buf.implementation()<cr>')
+vim.keymap.set('n', '<leader>si', '<cmd>lua vim.lsp.buf.implementation()<cr>')
 -- Show signature of the object under the cursor
-vim.keymap.set('n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+vim.keymap.set('n', '<leader>ss', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
 -- Jump to type definition
-vim.keymap.set('n', '<leader>lt', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
+vim.keymap.set('n', '<leader>st', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
 -- Show references of the object under the cursor
-vim.keymap.set('n', '<leader>le', '<cmd>lua vim.lsp.buf.references()<cr>')
+vim.keymap.set('n', '<leader>se', '<cmd>lua vim.lsp.buf.references()<cr>')
 -- Show document symbol list of the current file
-vim.keymap.set('n', '<leader>lds', '<cmd>lua vim.lsp.buf.document_symbol()<cr>')
+vim.keymap.set('n', '<leader>sds', '<cmd>lua vim.lsp.buf.document_symbol()<cr>')
 -- Searches for a specific symbol in all the files in the current folder/project
-vim.keymap.set('n', '<leader>lws', '<cmd>lua vim.lsp.buf.workspace_symbol()<cr>')
+vim.keymap.set('n', '<leader>sws', '<cmd>lua vim.lsp.buf.workspace_symbol()<cr>')
 -- Format the current file
-vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<cr>')
+vim.keymap.set('n', '<leader>sf', '<cmd>lua vim.lsp.buf.format()<cr>')
 -- Jump to the previous diagnostic entry
-vim.keymap.set('n', '<leader>lp', '<cmd>lua vim.diagnostic.goto_prev({ float = false })<cr>')
+vim.keymap.set('n', '<leader>sp', '<cmd>lua vim.diagnostic.goto_prev({ float = false })<cr>')
 -- Jump to the next diagnostic entry
-vim.keymap.set('n', '<leader>ln', '<cmd>lua vim.diagnostic.goto_next({ float = false })<cr>')
+vim.keymap.set('n', '<leader>sn', '<cmd>lua vim.diagnostic.goto_next({ float = false })<cr>')
 vim.keymap.set('n', '<leader> ', '<cmd>lua vim.diagnostic.goto_next({ float = false })<cr>')

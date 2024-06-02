@@ -55,7 +55,6 @@ vim.cmd 'filetype plugin indent on';
 -- Enable filetype plugins
 vim.cmd 'filetype plugin on'
 -- Enables syntax highlight
-vim.cmd 'syntax on'
 -- Disable Ruby provider
 vim.g.loaded_ruby_provider = 0
 -- Disable Perl provider

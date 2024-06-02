@@ -3,10 +3,6 @@
 --------------------------------------------------------------------------------
 
 local lspconfig = require 'lspconfig'
-
-local capabilities = require('cmp_nvim_lsp')
-    .default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
 local signs = require 'signs'
 
 -- Set diagnostic signs
@@ -14,6 +10,7 @@ for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
 
 -- General configuration
 vim.diagnostic.config({
@@ -26,7 +23,7 @@ vim.diagnostic.config({
         scope = 'cursor',
         source = true,
     },
-});
+})
 
 -- Run formatting before saving the buffer im.lsp.buf.formatting is deprecated. Use vim.lsp.buf.format { async = true } instead
 vim.api.nvim_command([[
@@ -35,7 +32,6 @@ vim.api.nvim_command([[
 
 -- Enable showing the diagnostic of the current cursor position
 vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope='cursor', border='rounded'})]]
-
 
 -- Add rounded corners to signature and to the hover window
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
@@ -100,7 +96,6 @@ lspconfig.efm.setup {
 -- TSServer
 -- Mainly for signatures
 lspconfig.tsserver.setup {
-    capabilities = capabilities,
     on_attach = function(client, bufnr)
         client.server_capabilities.documentFormatting = false
         require "lsp_signature".on_attach({
@@ -118,3 +113,7 @@ lspconfig.rust_analyzer.setup {}
 -- Lua
 --------------------------------------------------------------------------------
 lspconfig.lua_ls.setup {}
+
+--
+--------------------------------------------------------------------------------
+lspconfig.tailwindcss.setup {}

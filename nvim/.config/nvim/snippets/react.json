@@ -1,0 +1,6 @@
+{
+    "add className": {
+        "prefix": "c",
+        "body": ["className=\"${1:class}\"$2"]
+    }
+}
