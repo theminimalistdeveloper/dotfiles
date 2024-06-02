@@ -177,7 +177,11 @@ vim.keymap.set('n', '<leader>tl', '<cmd>TestLast<CR>')
 -- LSP
 --------------------------------------------------------------------------------
 
--- Restart Neovim LSP
+-- Stop LSP
+vim.keymap.set('n', '<leader>so', '<cmd>LspStop<cr>')
+-- Start LSP
+vim.keymap.set('n', '<leader>sa', '<cmd>LspStart<cr>')
+-- Restart LSP
 vim.keymap.set('n', '<leader>st', '<cmd>LspRestart<cr>')
 -- Rename the current object under the cursor, this will rename all the occurrences
 vim.keymap.set('n', '<leader>sr', '<cmd>lua vim.lsp.buf.rename()<cr>')

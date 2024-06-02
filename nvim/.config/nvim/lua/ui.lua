@@ -18,7 +18,7 @@ vim.o.cursorline = true
 -- One status line for Neovim instance instead one per window
 vim.o.laststatus = 3
 -- Set default theme
-vim.cmd 'colorscheme night-owl'
+vim.cmd 'colorscheme catppuccin'
 -- Hides tildes from non-existing lines
 vim.cmd 'hi EndOfBuffer guifg=bg'
 vim.o.winbar = '%m %f'

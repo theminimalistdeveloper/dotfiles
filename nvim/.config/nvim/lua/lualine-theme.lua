@@ -3,40 +3,40 @@
 --------------------------------------------------------------------------------
 
 local colors = {
-    black  = '#011627',
-    blue   = '#82AAFF',
-    cyan   = '#7FDBCA',
-    grey   = '#639999',
-    red    = '#FF5874',
-    violet = '#c792ea',
-    white  = '#EEEEEE',
-    green  = '#ADDB67',
+    base     = '#303446',
+    blue     = '#8caaee',
+    sapphire = '#85c1dc',
+    crust    = '#232634',
+    red      = '#e78284',
+    mauve    = '#ca9ee6',
+    flamingo = '#eebebe',
+    green    = '#a6d189',
 }
 
 local theme = {
     normal = {
-        a = { fg = colors.black, bg = colors.violet },
-        b = { fg = colors.black, bg = colors.cyan },
-        c = { fg = colors.white, bg = colors.black },
-        x = { fg = colors.white, bg = colors.black },
-        z = { fg = colors.white, bg = colors.gray },
+        a = { fg = colors.base, bg = colors.mauve },
+        b = { fg = colors.base, bg = colors.sapphire },
+        c = { fg = colors.flamingo, bg = colors.base },
+        x = { fg = colors.flamingo, bg = colors.base },
+        z = { fg = colors.flamingo, bg = colors.crust },
     },
     insert = {
-        a = { fg = colors.black, bg = colors.red },
-        z = { fg = colors.white, bg = colors.gray },
+        a = { fg = colors.base, bg = colors.red },
+        z = { fg = colors.flamingo, bg = colors.crust },
     },
     visual = {
-        a = { fg = colors.black, bg = colors.green },
-        z = { fg = colors.white, bg = colors.gray },
+        a = { fg = colors.base, bg = colors.green },
+        z = { fg = colors.flamingo, bg = colors.crust },
     },
     replace = {
-        a = { fg = colors.black, bg = colors.blue },
-        z = { fg = colors.white, bg = colors.gray },
+        a = { fg = colors.base, bg = colors.blue },
+        z = { fg = colors.flamingo, bg = colors.crust },
     },
     inactive = {
-        a = { fg = colors.white, bg = colors.black },
-        b = { fg = colors.white, bg = colors.black },
-        c = { fg = colors.white, bg = colors.black },
+        a = { fg = colors.flamingo, bg = colors.base },
+        b = { fg = colors.flamingo, bg = colors.base },
+        c = { fg = colors.flamingo, bg = colors.base },
     },
 }
 

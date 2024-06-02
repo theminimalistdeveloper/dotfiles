@@ -110,7 +110,7 @@ local plugins = {
             })
         end,
     },
-
+{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, config = function()  require('ibl').setup() end },
     -- SNIPPETS
     { 'saadparwaiz1/cmp_luasnip' },
     {
@@ -187,12 +187,24 @@ local plugins = {
             require('Comment').setup()
         end,
     },
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+        end,
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        }
+    },
     -- Helper to run specific tests and test files
     'janko/vim-test',
     -- HTML / CSS dynamic snippet generator
     'mattn/emmet-vim',
-    -- Theme Night owl
-    'theminimalistdeveloper/night-owl.nvim',
+    -- Themes
     { "catppuccin/nvim", as = "catppuccin" },
     -- Enable navigation between nvim and tmux windows using <c-(h,j,k,l)>
     'christoomey/vim-tmux-navigator',
