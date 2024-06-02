@@ -61,10 +61,10 @@ local plugins = {
             local cmp = require 'cmp'
             local lspkind = require 'lspkind'
             local sources = {
-                { name = 'luasnip',  max_item_count = 1 },
-                { name = 'nvim_lsp', max_item_count = 5 },
-                { name = 'buffer',   max_item_count = 3 },
-                { name = 'path',     max_item_count = 1 },
+                { name = 'luasnip' },
+                { name = 'nvim_lsp' },
+                { name = 'buffer' },
+                { name = 'path' },
             }
 
             cmp.setup({
@@ -82,7 +82,7 @@ local plugins = {
                 formatting = {
                     format = lspkind.cmp_format({
                         mode      = 'symbol_text',
-                        max_width = 50,
+                        max_width = 70,
                     }),
                 },
                 mapping = cmp.mapping.preset.insert({
@@ -110,7 +110,7 @@ local plugins = {
             })
         end,
     },
-{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, config = function()  require('ibl').setup() end },
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, config = function() require('ibl').setup() end },
     -- SNIPPETS
     { 'saadparwaiz1/cmp_luasnip' },
     {
@@ -119,11 +119,13 @@ local plugins = {
         build = "make install_jsregexp",
         dependencies = { "rafamadriz/friendly-snippets" },
         config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
+            local fromVSCode = require("luasnip.loaders.from_vscode")
+            fromVSCode.lazy_load()
+            fromVSCode.lazy_load({
+                paths = { vim.fn.expand("./snippets") }
+            })
         end
     },
-    -- Necessary to show Ultisnips in the CMP suggestion window
-    'quangnguyen30192/cmp-nvim-ultisnips',
 
     -- FUZZY FINDER
     -- Helper functions in lua
@@ -205,7 +207,7 @@ local plugins = {
     -- HTML / CSS dynamic snippet generator
     'mattn/emmet-vim',
     -- Themes
-    { "catppuccin/nvim", as = "catppuccin" },
+    { "catppuccin/nvim",                          as = "catppuccin" },
     -- Enable navigation between nvim and tmux windows using <c-(h,j,k,l)>
     'christoomey/vim-tmux-navigator',
     -- RUST - Cargo dependency helper
