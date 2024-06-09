@@ -157,8 +157,10 @@ local plugins = {
         dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", 'nvim-tree/nvim-web-devicons' }
     },
     -- use fzf in telescope
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-
+    {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make'
+    },
     -- MISC
     -- Helper for surrounds around text objects
     'tpope/vim-surround',
@@ -207,11 +209,18 @@ local plugins = {
     -- HTML / CSS dynamic snippet generator
     'mattn/emmet-vim',
     -- Themes
-    { "catppuccin/nvim",                          as = "catppuccin" },
+    { "catppuccin/nvim", as = "catppuccin" },
     -- Enable navigation between nvim and tmux windows using <c-(h,j,k,l)>
     'christoomey/vim-tmux-navigator',
     -- RUST - Cargo dependency helper
-    'Saecki/crates.nvim'
+    'Saecki/crates.nvim',
+    -- CSS
+    {
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            require 'colorizer'.setup()
+        end,
+    }
 }
 
 require("lazy").setup(plugins, {})
