@@ -79,7 +79,7 @@ alias tmux='tmux -2'
 # Git
 alias g='git '
 # EXA - replacement for ls
-alias ls='exa --icons --git'
+alias ls='exa --icons'
 
 # TMUX
 # Create new session
