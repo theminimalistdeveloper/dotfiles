@@ -59,12 +59,13 @@ vim.cmd 'filetype plugin on'
 vim.g.loaded_ruby_provider = 0
 -- Disable Perl provider
 vim.g.loaded_perl_provider = 0
+vim.opt.termguicolors = true
 
 -- FILETYPES
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.tsx' },
-  callback = function()
-    vim.bo.filetype = 'typescriptreact.javascript'
-  end,
-  group = fileGrp,
+    pattern = { '*.tsx' },
+    callback = function()
+        vim.bo.filetype = 'typescriptreact.javascript'
+    end,
+    group = fileGrp,
 })
