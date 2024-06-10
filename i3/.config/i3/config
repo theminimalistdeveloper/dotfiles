@@ -16,6 +16,7 @@ font pango:"JetBrainsMono NF" 12
 # Remove borders
 default_border normal 1 
 hide_edge_borders none
+gaps inner 10px
 
 # WORKSPACE NAMES
 # Define names for default workspaces for which we configure key bindings later on.
