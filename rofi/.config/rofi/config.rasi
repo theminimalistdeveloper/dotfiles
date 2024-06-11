@@ -1,7 +1,6 @@
 configuration {
-  font: "SF Display Medium 12";
+  font: "JetBrains NF Bold 18";
   show-icons: true;
-  icon-theme: "Mkos-Big-Sur-Night";
   display-drun: "";
   drun-display-format: "{name}";
   disable-history: false;
@@ -11,17 +10,21 @@ configuration {
 }
 
 * {
-  bg: #F9F9F989;
-  fg: #333333;
-  cl: #f0f0f0;
-  dg: #666;
+  base: #303446;
+  surface0: #414559;
+  surface2: #626880;
+  overlay2: #949cbb;
+  text: #c6d0f5;
+  lavander: #babbf1;
+  blue: #8caaee;
 }
 
 window {
-  background-color: @bg;
-  text-color: @fg;
+  background-color: @surface2;
+  text-color: @base;
   border-radius: 5;
-  border: 0px;
+  border: 3px;
+  border-color: @blue;
   width: 25%;
   location: center;
 }
@@ -35,14 +38,14 @@ prompt {
 }
 
 entry {
-  text-color: @fg;
-  placeholder-color: @dg;
+  placeholder-color: @base;
   placeholder: "Search";
+  cursor: pointer;
+  color: @text;
 }
 
 inputbar {
   children: [ entry ];
-  text-color: @fg;
   expand: false;
   padding: 1% 0.3%;
 }
@@ -59,23 +62,24 @@ listview {
 }
 
 element {
-  text-color: @fg;
   orientation: horizontal;
-  padding: 0.5%;
+  padding: 1%;
 }
 
 element alternate.normal {
-  background-color: @bg;
+  background-color: @surface0;
+  color: @overlay2;
 }
 
 element selected.normal {
-  background-color: @cl;
+  color: @base;
+  background-color: @overlay2;
   border-radius: 5;
-  color: @fg;
 }
 
 element normal.normal {
-  background-color: @bg;
+  background-color: @surface0;
+  color: @overlay2;
 }
 
 element-icon {
