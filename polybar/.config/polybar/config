@@ -1,6 +1,7 @@
 [colors]
 # Catppuccin theme
 surface1 = #51576d
+surface2 = #626880
 subtext0 = #a5adce
 blue = #8caaee
 green = #a6d189
@@ -47,6 +48,7 @@ format = <label-state> <label-mode>
 label-mode = %mode%
 label-mode-padding = 2
 label-mode-background = ${colors.red}
+label-mode-foreground = ${colors.base}
 
 label-focused = %index%
 label-focused-foreground = ${colors.base}
@@ -55,6 +57,7 @@ label-focused-padding = 2
 
 label-unfocused = %index%
 label-unfocused-padding = 2
+label-unfocused-background = ${colors.surface2}
 
 label-visible = %index%
 label-visible-underline = 
