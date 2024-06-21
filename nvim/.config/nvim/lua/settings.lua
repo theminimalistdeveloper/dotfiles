@@ -46,8 +46,11 @@ vim.o.smartcase = true
 -- Show not visible characters
 vim.o.list = true
 vim.o.listchars = 'trail:⋅,space:⋅'
--- Uses the indentation to determine where to create folds
-vim.o.foldmethod = 'indent'
+-- Uses the treesitter to determine where to create folds
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.foldtext = ''
+vim.o.foldcolumn = "1"
 -- auto complete options
 vim.o.completeopt = 'menuone,noinsert'
 -- Set the identation on
@@ -67,5 +70,11 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     callback = function()
         vim.bo.filetype = 'typescriptreact.javascript'
     end,
-    group = fileGrp,
+})
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+    pattern = { '*.tsx,*.ts,*.js,*.jsx' },
+    callback = function()
+        vim.o.shiftwidth = 2
+    end,
 })

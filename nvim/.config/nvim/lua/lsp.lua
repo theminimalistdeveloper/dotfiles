@@ -5,9 +5,6 @@
 local lspconfig = require 'lspconfig'
 local signs = require 'signs'
 
---
---------------------------------------------------------------------------------
-lspconfig.tailwindcss.setup {}
 
 -- Set diagnostic signs
 for type, icon in pairs(signs) do
@@ -124,3 +121,7 @@ lspconfig.lua_ls.setup {
         }
     }
 }
+
+-- Tailwindcss
+--------------------------------------------------------------------------------
+lspconfig.tailwindcss.setup {}
