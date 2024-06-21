@@ -24,7 +24,10 @@ vim.keymap.set('n', '<leader>qq', '<cmd>qall!<cr>')
 vim.keymap.set('n', '<leader>cn', '<cmd>cn<cr>')
 
 -- jump to previous entry of the quick fix list
-vim.keymap.set('n', '<leader>cp', '<cmd>cn<cr>')
+vim.keymap.set('n', '<leader>cp', '<cmd>cp<cr>')
+
+-- close quickfix panel
+vim.keymap.set('n', '<leader>cc', '<cmd>cclose<cr>')
 
 -- SNIPPETS
 --------------------------------------------------------------------------------
@@ -68,6 +71,8 @@ vim.keymap.set('n', '<leader>wj', '<C-w>|')
 vim.keymap.set('n', '<leader>wh', '<C-w>_')
 -- Resets the current Zoom
 vim.keymap.set('n', '<leader>wk', '<C-w>=')
+-- Makes the current window the only one open
+vim.keymap.set('n', '<leader>wo', '<C-w><C-O>')
 
 -- move around windows
 vim.keymap.set('n', '<leader>h', '<C-w>h')
@@ -154,13 +159,12 @@ vim.keymap.set('n', '<leader>gl', '<cmd>Git log<cr>')
 -- Git commit
 vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>')
 -- Git status / Git
-vim.keymap.set('n', '<leader>gs', '<cmd>Git<cr>')
--- Git vertial diff
-vim.keymap.set('n', '<leader>gdv', '<cmd>Gvdiff<cr>')
--- Git vertical diff of master branch
-vim.keymap.set('n', '<leader>gdm', '<cmd>Gvdiff master<cr>')
+vim.keymap.set('n', '<leader>g', '<cmd>Git<cr>')
 -- Push the current branch as a new branch to repository
 vim.keymap.set('n', '<leader>gpnb', '<cmd>!gpnb<cr>')
+-- Open Git conflict vertical diff
+vim.keymap.set('n', '<leader>gd', '<cmd>Gvdiffsplit!<cr>')
+
 
 -- TEST
 --------------------------------------------------------------------------------
