@@ -15,7 +15,6 @@ for type, icon in pairs(signs) do
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-
 -- General configuration
 vim.diagnostic.config({
     update_in_insert = true,
@@ -116,8 +115,12 @@ lspconfig.rust_analyzer.setup {}
 
 -- Lua
 --------------------------------------------------------------------------------
-lspconfig.lua_ls.setup {}
-
---
---------------------------------------------------------------------------------
-lspconfig.tailwindcss.setup {}
+lspconfig.lua_ls.setup {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+}
