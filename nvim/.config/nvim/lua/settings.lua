@@ -66,15 +66,24 @@ vim.opt.termguicolors = true
 
 -- FILETYPES
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-    pattern = { '*.tsx' },
-    callback = function()
-        vim.bo.filetype = 'typescriptreact.javascript'
-    end,
+  pattern = { '*.tsx' },
+  callback = function()
+    vim.bo.filetype = 'typescriptreact.javascript'
+  end,
+})
+
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = { '*.md' },
+  callback = function()
+    -- Wrap lines
+    vim.o.wrap = true
+  end,
 })
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-    pattern = { '*.tsx,*.ts,*.js,*.jsx' },
-    callback = function()
-        vim.o.shiftwidth = 2
-    end,
+  pattern = { '*.tsx,*.ts,*.js,*.jsx' },
+  callback = function()
+    vim.o.shiftwidth = 2
+  end,
 })
