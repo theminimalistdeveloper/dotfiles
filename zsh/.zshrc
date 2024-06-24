@@ -34,8 +34,8 @@ ZSH_THEME="spaceship"
 ZSH_DISABLE_COMPFIX=true
 COMPLETION_WAITING_DOTS="true"
 
-# Which plugins would you like to load?
-plugins=(aws git tmux)
+# Which lugins would you like to load?
+plugins=(vi-mode aws git tmux)
 
 source $ZSH/oh-my-zsh.sh
 
