@@ -201,11 +201,34 @@ local plugins = {
     opts = {}
   },
   -- Helper to run specific tests and test files
-  'janko/vim-test',
+  {
+    'nvim-neotest/neotest',
+    dependencies = {
+      'nvim-neotest/nvim-nio',
+      'nvim-lua/plenary.nvim',
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-neotest/neotest-jest',
+    },
+    config = function()
+      require('neotest').setup({
+        adapters = {
+          require('neotest-jest')({
+            jestCommand = "npx jest --",
+            jestConfigFile = "custom.jest.config.ts",
+            env = { CI = true },
+            cwd = function(path)
+              return vim.fn.getcwd()
+            end,
+          }),
+        }
+      })
+    end
+  },
   -- HTML / CSS dynamic snippet generator
   'mattn/emmet-vim',
   -- Themes
-  { "catppuccin/nvim", as = "catppuccin" },
+  { "catppuccin/nvim", as = "catppuccin-latte" },
   -- Enable navigation between nvim and tmux windows using <c-(h,j,k,l)>
   'christoomey/vim-tmux-navigator',
   -- RUST - Cargo dependency helper
