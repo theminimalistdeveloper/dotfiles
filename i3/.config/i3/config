@@ -14,9 +14,12 @@ floating_modifier $mod
 font pango:"JetBrainsMono NF" 12
 
 # Remove borders
-default_border normal 1 
-hide_edge_borders none
+default_border none
+hide_edge_borders both
 gaps inner 10px
+
+# windows
+for_window [all] border none
 
 # WORKSPACE NAMES
 # Define names for default workspaces for which we configure key bindings later on.
@@ -35,27 +38,28 @@ set $ws10 "10"
 # COMMANDS - AUTO EXECUTE ON START
 # Start vpn
 # Execute Picom o enable opacity
-exec --no-startup-id picom --experimental-backends
+exec --no-startup-id picom
 # Theme setup
 exec --no-startup-id /usr/libexec/gsd-xsettings
 # Add default background
-exec feh --bg-fill ~/Pictures/background.png
+exec feh --bg-fill ~/Pictures/background.jpg
 # set the keyboard to us international
 exec setxkbmap -layout us -variant intl
 # Initiate polybar
-exec polybar example
+exec ~/scripts/polybar.sh
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/scripts/i3lock.sh --nofork
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
 exec surfshark
-exec brave
 exec kitty
+exec brave
+exec cider
 
 # BINDINGS
 ################################################################################
@@ -143,7 +147,7 @@ bindsym $mod+space exec "rofi -show drun"
 # split in vertical orientation
 bindsym $mod+v split v
 # lock the session
-bindsym $mod+c exec i3lock -i ~/Pictures/background.png
+bindsym $mod+c exec ~/scripts/i3lock.sh
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -161,6 +165,8 @@ bindsym $mod+Shift+p exec "scrot"
 for_window [class="kitty"] move to workspace $ws1
 for_window [class="Brave-browser"] move to workspace $ws2
 for_window [class="Surfshark"] move to workspace $ws3
+for_window [class="qBittorrent"] move to workspace $ws4
+for_window [class="Cider"] move to workspace $ws5
 
 client.focused #626880#626880 #c6d0f5 #626880 #626880
 client.unfocused #303446 #303446 #626880 #303446 #303446
