@@ -1,5 +1,5 @@
 configuration {
-  font: "JetBrains NF Bold 18";
+  font: "JetBrains NF 20";
   show-icons: true;
   display-drun: "";
   drun-display-format: "{name}";
@@ -10,27 +10,30 @@ configuration {
 }
 
 * {
-  base: #303446;
-  surface0: #414559;
-  surface2: #626880;
-  overlay2: #949cbb;
-  text: #c6d0f5;
-  lavander: #babbf1;
+  surface1: #51576d88;
+  surface2: #62688033;
+  subtext0: #a5adce;
+  subtext1: #c6d0f5;
   blue: #8caaee;
+  green: #a6d189;
+  red: #e78284;
+  text: #fff;
+  base: #303446;
+  black: #00000099;
 }
 
 window {
-  background-color: @surface2;
-  text-color: @base;
+  background-color: @black;
+  text-color: @text;
+  border: 3;
   border-radius: 5;
-  border: 3px;
-  border-color: @blue;
-  width: 25%;
+  border-color: @black;
+  width: 30%;
   location: center;
 }
 
 mainbox {
-  children: [ inputbar, listview ];
+  children: [ inputbar,listview ];
 }
 
 prompt {
@@ -38,8 +41,8 @@ prompt {
 }
 
 entry {
-  placeholder-color: @base;
-  placeholder: "Search";
+  placeholder-color: @subtext1;
+  placeholder: "Search...";
   cursor: pointer;
   color: @text;
 }
@@ -68,18 +71,18 @@ element {
 
 element alternate.normal {
   background-color: @surface0;
-  color: @overlay2;
+  color: @subtext1;
 }
 
 element selected.normal {
-  color: @base;
-  background-color: @overlay2;
+  color: @text;
+  background-color: @surface2;
   border-radius: 5;
 }
 
 element normal.normal {
   background-color: @surface0;
-  color: @overlay2;
+  color: @subtext1;
 }
 
 element-icon {
