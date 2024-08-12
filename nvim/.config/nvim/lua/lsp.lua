@@ -5,7 +5,6 @@
 local lspconfig = require 'lspconfig'
 local signs = require 'signs'
 
-
 -- Set diagnostic signs
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
@@ -65,10 +64,6 @@ local prettier = {
 
 -- EFM
 local efm_languages = {
-  javascript = { prettier },
-  typescript = { prettier },
-  javascriptreact = { eslint, prettier },
-  typescriptreact = { eslint, prettier },
   yaml = { prettier },
   json = { prettier },
   html = { prettier },
@@ -93,18 +88,10 @@ lspconfig.efm.setup {
   filetypes = vim.tbl_keys(efm_languages),
 }
 
+
 -- TSServer
--- Mainly for signatures
-lspconfig.tsserver.setup {
-  on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormatting = false
-    require "lsp_signature".on_attach({
-      bind = true, -- This is mandatory, otherwise border config won't get registered.
-      hint_prefix = '',
-      padding = ' ',
-    }, bufnr)
-  end
-}
+--------------------------------------------------------------------------------
+lspconfig.tsserver.setup {}
 
 -- Rust
 --------------------------------------------------------------------------------

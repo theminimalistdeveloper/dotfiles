@@ -1,4 +1,4 @@
--------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 -- PLUGINS
 -------------------------------------------------------------------------------
 
@@ -39,6 +39,19 @@ local plugins = {
         filters = { dotfiles = true }
       })
     end,
+  },
+  {
+    "folke/trouble.nvim",
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = "Trouble",
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {},
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+    }
   },
   'neovim/nvim-lspconfig',
   -- Signature parameters and documentation
@@ -165,6 +178,14 @@ local plugins = {
   -- Helper for surrounds around text objects
   'tpope/vim-surround',
   -- Git helper
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+    },
+    config = true
+  },
   'tpope/vim-fugitive',
   -- Gitsigns - Used only for showing blame per line on virtual text
   {

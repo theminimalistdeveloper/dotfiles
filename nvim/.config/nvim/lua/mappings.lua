@@ -11,8 +11,6 @@ local telescope_theme = 'ivy'
 
 -- Write current buffer
 vim.keymap.set('n', '<leader>r', '<cmd>w<cr>')
--- Write and close current buffer
-vim.keymap.set('n', '<leader>x', '<cmd>x<cr>')
 -- Quit all buffers at once without saving anything
 vim.keymap.set('n', '<leader>qq', '<cmd>qall!<cr>')
 
@@ -118,6 +116,8 @@ vim.keymap.set('n', '<leader>nn', string.format('<cmd>e %s/inbox/%s.md<cr>', not
 -- TELESCOPE - $F
 --------------------------------------------------------------------------------
 
+local cwd = vim.loop.cwd()
+
 -- Search through Neovim commands
 vim.keymap.set('n', '<leader>fc', string.format('<cmd>Telescope commands theme=%s<cr>', telescope_theme))
 -- Search through Neovim options
@@ -125,23 +125,17 @@ vim.keymap.set('n', '<leader>fvo', string.format('<cmd>Telescope vim_options the
 -- Search through the loaded configuration files and reload it
 vim.keymap.set('n', '<leader>fl', string.format('<cmd>Telescope reloader theme=%s<cr>', telescope_theme))
 -- Searhc through the files in the current folder
-vim.keymap.set('n', '<leader>ff', string.format('<cmd>Telescope find_files theme=%s<cr>', telescope_theme))
+vim.keymap.set('n', '<leader>ff', string.format('<cmd>Telescope find_files theme=%s cwd=%s<cr>', telescope_theme, cwd))
 -- Searhc through the files known to Git in the current git folder
 vim.keymap.set('n', '<leader>fgf', string.format('<cmd>Telescope git_files theme=%s<cr>', telescope_theme))
 -- Search through the available Git branches
 vim.keymap.set('n', '<leader>fgb', string.format('<cmd>Telescope git_branches theme=%s<cr>', telescope_theme))
 -- Search through the available Git commits
 vim.keymap.set('n', '<leader>fgc', string.format('<cmd>Telescope git_commits theme=%s<cr>', telescope_theme))
--- Search through the avaialble Git stash
-vim.keymap.set('n', '<leader>fgs', string.format('<cmd>Telescope git_stash theme=%s<cr>', telescope_theme))
 -- Search through the available buffers
-vim.keymap.set('n', '<leader>fe', string.format('<cmd>Telescope buffers theme=%s<cr>', telescope_theme))
+vim.keymap.set('n', '<leader>fb', string.format('<cmd>Telescope buffers theme=%s<cr>', telescope_theme))
 -- Search through the files in the current folder using grep syntax
-vim.keymap.set('n', '<leader>fgr', string.format('<cmd>Telescope live_grep theme=%s<cr>', telescope_theme))
--- Search through the available Neovim keymap configuration
-vim.keymap.set('n', '<leader>fk', string.format('<cmd>Telescope keymaps theme=%s<cr>', telescope_theme))
--- Search through the available Neovim keymap configuration
-vim.keymap.set('n', '<leader>fb', string.format('<cmd>Telescope file_browser theme=%s<cr>', telescope_theme))
+vim.keymap.set('n', '<leader>fgr', string.format('<cmd>Telescope live_grep theme=%s cwd=%s<cr>', telescope_theme, cwd))
 
 -- VIM FUGITIVE - $G
 --------------------------------------------------------------------------------
@@ -157,9 +151,7 @@ vim.keymap.set('n', '<leader>gl', '<cmd>Git log<cr>')
 -- Git commit
 vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>')
 -- Git status / Git
-vim.keymap.set('n', '<leader>g', '<cmd>Git<cr>')
--- Push the current branch as a new branch to repository
-vim.keymap.set('n', '<leader>gpnb', '<cmd>!gpnb<cr>')
+vim.keymap.set('n', '<leader>gs', '<cmd>Neogit<cr>')
 -- Open Git conflict vertical diff
 vim.keymap.set('n', '<leader>gd', '<cmd>Gvdiffsplit!<cr>')
 
@@ -210,3 +202,12 @@ vim.keymap.set('n', '<leader>lf', '<cmd>lua vim.lsp.buf.format()<cr>')
 vim.keymap.set('n', '<leader>lp', '<cmd>lua vim.diagnostic.goto_prev({ float = false })<cr>')
 -- Jump to the next diagnostic entry
 vim.keymap.set('n', '<leader>ln', '<cmd>lua vim.diagnostic.goto_next({ float = false })<cr>')
+
+-- TROUBLE - $X
+--------------------------------------------------------------------------------
+vim.keymap.set('n', '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>')
+vim.keymap.set('n', '<leader>xX', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>')
+vim.keymap.set('n', '<leader>cs', '<cmd>Trouble symbols toggle focus=false<cr>')
+vim.keymap.set('n', '<leader>cl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>')
+vim.keymap.set('n', '<leader>xL', '<cmd>Trouble loclist toggle<cr>')
+vim.keymap.set('n', '<leader>xQ', '<cmd>Trouble qflist toggle<cr>')
