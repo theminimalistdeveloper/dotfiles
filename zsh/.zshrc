@@ -50,12 +50,32 @@ alias e='exit'
 # open a fzf search on my code directory
 alias cdc='cd $(fd . ~/code -d=5 | fzf)'
 
+alias quarter="git log --shortstat --since \"01.07.2024\" --until \"today\" | \
+  grep -E \"file[s]* changed\" | \
+  sed -E 's/changed, ([0-9]+) deletions/changed, 0 insertions(+), \1 deletions/g' | \
+  awk '{files+=\$1; inserted+=\$4; deleted+=\$6} END {print \"files changed\", files, \"lines inserted:\", inserted, \"lines deleted:\", deleted}'"
+
 # APPLICATIONS
 # Neovim
 alias n='nvim '
 # EXA - replacement for ls
 alias ls='exa --icons'
 
+# tmux 
+alias tn="tmux new -s "
+alias tl="tmux ls"
+alias tk="tmux kill-session -t "
+alias ta="tmux a -t "
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# pnpm
+export PNPM_HOME="/Users/dia0001r/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+export AWS_PROFILE=sts
+# pnpm end
