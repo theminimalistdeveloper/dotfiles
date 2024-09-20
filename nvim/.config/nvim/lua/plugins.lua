@@ -45,14 +45,6 @@ local plugins = {
     opts = {}, -- for default options, refer to the configuration section for custom setup.
     cmd = "Trouble",
   },
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    opts = {},
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    }
-  },
   'neovim/nvim-lspconfig',
   -- Signature parameters and documentation
   'ray-x/lsp_signature.nvim',
@@ -99,11 +91,10 @@ local plugins = {
           }),
         },
         mapping = cmp.mapping.preset.insert({
-          ['<Tab>'] = cmp.mapping.select_next_item({ select = true }),
-          ['<S-Tab>'] = cmp.mapping.select_prev_item({ select = true }),
+          ['<S-j>'] = cmp.mapping.select_next_item({ select = true }),
+          ['<S-k>'] = cmp.mapping.select_prev_item({ select = true }),
           ['<CR>'] = cmp.mapping.confirm({ select = true }),
         }),
-
       })
 
       -- when searching auto complete with words present in the buffers
@@ -177,6 +168,7 @@ local plugins = {
   -- MISC
   -- Helper for surrounds around text objects
   'tpope/vim-surround',
+  'cohama/lexima.vim',
   -- Git helper
   {
     "NeogitOrg/neogit",
@@ -185,14 +177,6 @@ local plugins = {
       "sindrets/diffview.nvim",
     },
     config = true
-  },
-  'tpope/vim-fugitive',
-  -- Gitsigns - Used only for showing blame per line on virtual text
-  {
-    'lewis6991/gitsigns.nvim',
-    config = function()
-      require('gitsigns').setup({ current_line_blame = true })
-    end,
   },
   -- Information statusline
   'hoob3rt/lualine.nvim',
@@ -221,6 +205,88 @@ local plugins = {
     end,
     opts = {}
   },
+  -- DAP
+  {
+    'mfussenegger/nvim-dap',
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+      "williamboman/mason.nvim",
+      'mxsdev/nvim-dap-vscode-js',
+    },
+    config = function()
+      local dap, dapui, dapjs = require("dap"), require("dapui"), require('dap-vscode-js');
+
+      dapui.setup();
+      dapjs.setup({
+        debugger_path = '/Users/dia0001r/code/lab/vscode-js-debug',
+        log_file_path = '/tmp/dap_vscode_js.log',
+        log_console_level = vim.log.levels.DEBUG,
+        adapters = {
+          'pwa-node',
+          'pwa-chrome',
+          'pwa-msedge',
+          'node-terminal',
+          'pwa-extensionHost',
+        },
+      })
+
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+      end
+
+      local languages = {
+        'typescript',
+        'javascript',
+        'javascriptreact',
+        'typescriptreact'
+      }
+
+      for _, language in ipairs(languages) do
+        dap.configurations[language] = {
+          {
+            type = "pwa-node",
+            request = "launch",
+            name = "Launch file",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
+          },
+          {
+            type = "pwa-node",
+            request = "attach",
+            name = "Attach",
+            processId = require 'dap.utils'.pick_process,
+            cwd = "${workspaceFolder}",
+          },
+          {
+            name = "Next.js - server",
+            type = "pwa-node",
+            request = "attach",
+            cwd = "${workspaceFolder}",
+            port = 9231,
+            skipFiles = { '<node_internals>/**', 'node_modules/**' },
+          },
+          {
+            name = "Next.js - client",
+            type = "pwa-chrome",
+            request = "launch",
+            url = "https://localhost:3000",
+            sourceMaps = true
+          }
+        }
+      end
+    end
+  },
   -- Helper to run specific tests and test files
   {
     'nvim-neotest/neotest',
@@ -228,17 +294,17 @@ local plugins = {
       'nvim-neotest/nvim-nio',
       'nvim-lua/plenary.nvim',
       'antoinemadec/FixCursorHold.nvim',
-      'nvim-treesitter/nvim-treesitter',
       'nvim-neotest/neotest-jest',
+      'rouge8/neotest-rust',
     },
     config = function()
       require('neotest').setup({
         adapters = {
           require('neotest-jest')({
-            jestCommand = "npx jest --",
-            jestConfigFile = "custom.jest.config.ts",
+            jestCommand = "pnpm -w run test",
+            jestConfigFile = "jest.config.ts",
             env = { CI = true },
-            cwd = function(path)
+            cwd = function()
               return vim.fn.getcwd()
             end,
           }),

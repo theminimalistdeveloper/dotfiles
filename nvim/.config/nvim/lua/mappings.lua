@@ -18,8 +18,8 @@ vim.keymap.set('n', '<leader>qq', '<cmd>qall!<cr>')
 --------------------------------------------------------------------------------
 
 local ls = require('luasnip')
-vim.keymap.set({ "i", "s" }, "<Tab>", function() ls.jump(1) end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<S-Tab>", function() ls.jump(-1) end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<C-Tab>", function() ls.jump(1) end, { silent = true })
+vim.keymap.set({ "i", "s" }, "<S-C-Tab>", function() ls.jump(-1) end, { silent = true })
 
 -- QUICKFIX - $C
 --------------------------------------------------------------------------------
@@ -31,6 +31,24 @@ vim.keymap.set('n', '<leader>cp', '<cmd>cp<cr>')
 -- Close quickfix panel
 vim.keymap.set('n', '<leader>cc', '<cmd>cclose<cr>')
 
+-- DEBUGGER - $D
+--------------------------------------------------------------------------------
+-- Toggle breakpoint
+vim.keymap.set('n', '<leader>db', '<cmd>lua require("dap").toggle_breakpoint()<cr>')
+-- Continue
+vim.keymap.set('n', '<leader>dc', '<cmd>lua require("dap").continue()<cr>')
+-- Stop
+vim.keymap.set('n', '<leader>dq', '<cmd>lua require("dap").stop()<cr>')
+-- Step into
+vim.keymap.set('n', '<leader>di', '<cmd>lua require("dap").step_into()<cr>')
+-- Step over
+vim.keymap.set('n', '<leader>do', '<cmd>lua require("dap").step_over()<cr>')
+-- Step out
+vim.keymap.set('n', '<leader>de', '<cmd>lua require("dap").step_out()<cr>')
+-- Inspect state
+vim.keymap.set('n', '<leader>ds', '<cmd>lua require("dap").repl.open()<cr>')
+-- Toggle the debugger ui
+vim.keymap.set('n', '<leader>du', '<cmd>lua require("dapui").toggle()<cr>')
 
 -- NEOVIM CONFIGURATION - $V
 --------------------------------------------------------------------------------
@@ -165,9 +183,15 @@ vim.keymap.set('n', '<leader>tn', '<cmd>lua require("neotest").run.run()<cr>')
 vim.keymap.set('n', '<leader>tf', '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<cr>')
 -- Test the last test done
 vim.keymap.set('n', '<leader>tl', '<cmd>lua require("neotest").run.run_last()<cr>')
--- Toggle the output panel
-vim.keymap.set('n', '<leader>tp', '<cmd>lua require("neotest").output_panel.toggle()<cr>')
-vim.keymap.set('n', '<leader>tpc', '<cmd>lua require("neotest").output_clear()<cr>')
+-- Open the output panel
+vim.keymap.set('n', '<leader>tp', '<cmd>lua require("neotest").output.open({ enter=true, auto_close=true })<cr>')
+-- Clear output panel
+vim.keymap.set('n', '<leader>tpc', '<cmd>lua require("neotest").output.clear()<cr>')
+-- Toggle summary panel
+vim.keymap.set('n', '<leader>ts', '<cmd>lua require("neotest").summary.toggle()<cr>')
+-- Run DAP
+vim.keymap.set('n', '<leader>td', '<cmd>lua require("neotest").run.run({ strategy="dap" })<cr>')
+
 
 -- LSP - $L
 --------------------------------------------------------------------------------
@@ -211,3 +235,6 @@ vim.keymap.set('n', '<leader>cs', '<cmd>Trouble symbols toggle focus=false<cr>')
 vim.keymap.set('n', '<leader>cl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>')
 vim.keymap.set('n', '<leader>xL', '<cmd>Trouble loclist toggle<cr>')
 vim.keymap.set('n', '<leader>xQ', '<cmd>Trouble qflist toggle<cr>')
+
+-- MISC
+vim.keymap.set('x', '<C-l>', '<cmd>lua print(vim.fn.wordcount().visual_words)<cr>')

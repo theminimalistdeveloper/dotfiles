@@ -15,7 +15,7 @@ vim.o.cursorline = true
 -- Show column markers at column 80 and 100
 vim.o.colorcolumn = "80"
 -- One status line for Neovim instance instead one per window
-vim.o.laststatus = 3
+-- vim.o.laststatus = 3
 -- Set default theme
 vim.cmd 'colorscheme catppuccin-macchiato'
 -- Hides tildes from non-existing lines
