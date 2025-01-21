@@ -67,6 +67,29 @@ alias tl="tmux ls"
 alias tk="tmux kill-session -t "
 alias ta="tmux a -t "
 
+# git
+# git status
+alias gs="git status"
+alias gso="git status --oneline"
+# git pull
+alias gpl="git pull"
+# git push 
+alias gps="git push"
+alias gpsnb="git push " # todo
+# git checkout
+alias gh="git checkout "
+# git branch 
+alias gb="git branch"
+# git rebase
+alias gr="git rebase"
+# git reset
+alias ges="git reset --soft"
+# git commit
+alias gc="git commit"
+# git add
+alias ga="git add"
+alias gaa="git add ."
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
