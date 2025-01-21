@@ -38,7 +38,7 @@ vim.keymap.set('n', '<leader>db', '<cmd>lua require("dap").toggle_breakpoint()<c
 -- Continue
 vim.keymap.set('n', '<leader>dc', '<cmd>lua require("dap").continue()<cr>')
 -- Stop
-vim.keymap.set('n', '<leader>dq', '<cmd>lua require("dap").stop()<cr>')
+vim.keymap.set('n', '<leader>dq', '<cmd>lua require("dap").close()<cr>')
 -- Step into
 vim.keymap.set('n', '<leader>di', '<cmd>lua require("dap").step_into()<cr>')
 -- Step over

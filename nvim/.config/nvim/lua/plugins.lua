@@ -135,6 +135,7 @@ local plugins = {
   -- Helper functions in lua
   'nvim-lua/plenary.nvim',
   -- Fuzzy finder engine
+  { 'junegunn/fzf' },
   {
     'nvim-telescope/telescope.nvim',
     config = function()
@@ -145,25 +146,14 @@ local plugins = {
           file_browser = {
             theme = 'ivy',
           },
-          fzf = {
-            override_generic_sorter = false,
-            override_file_sorter = true,
-            case_mode = 'smart_case',
-          }
         }
       })
       telescope.load_extension('file_browser')
-      telescope.load_extension('fzf')
     end,
   },
   {
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", 'nvim-tree/nvim-web-devicons' }
-  },
-  -- use fzf in telescope
-  {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    build = 'make'
   },
   -- MISC
   -- Helper for surrounds around text objects
@@ -302,7 +292,6 @@ local plugins = {
         adapters = {
           require('neotest-jest')({
             jestCommand = "pnpm -w run test",
-            jestConfigFile = "jest.config.ts",
             env = { CI = true },
             cwd = function()
               return vim.fn.getcwd()
