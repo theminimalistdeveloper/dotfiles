@@ -16,6 +16,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+  -- AI
+  'github/copilot.vim',
   -- LSP
   {
     'nvim-treesitter/nvim-treesitter',
@@ -44,14 +46,6 @@ local plugins = {
     "folke/trouble.nvim",
     opts = {}, -- for default options, refer to the configuration section for custom setup.
     cmd = "Trouble",
-  },
-  'neovim/nvim-lspconfig',
-  -- Signature parameters and documentation
-  'ray-x/lsp_signature.nvim',
-  -- markdown preview
-  {
-    'iamcco/markdown-preview.nvim',
-    build = 'cd app && yarn install'
   },
   -- Icons for the autocomplete list
   'onsails/lspkind-nvim',
@@ -139,21 +133,28 @@ local plugins = {
   {
     'nvim-telescope/telescope.nvim',
     config = function()
-      local telescope = require 'telescope'
-      telescope.setup({
+      require ('telescope').setup({
         defaults = {},
-        extensions = {
-          file_browser = {
+        pickers = {
+          find_files = {
+            hidden = true,
+            previewer = false,
             theme = 'ivy',
           },
-        }
+          live_grep = {
+            theme = 'ivy',
+            previewer = false,
+          },
+        },
       })
-      telescope.load_extension('file_browser')
     end,
   },
   {
     "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", 'nvim-tree/nvim-web-devicons' }
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons' }
   },
   -- MISC
   -- Helper for surrounds around text objects
@@ -168,16 +169,9 @@ local plugins = {
     },
     config = true
   },
+  { "f-person/git-blame.nvim" },
   -- Information statusline
   'hoob3rt/lualine.nvim',
-  -- Set the root directory to the folder of the current buffer. really useful
-  {
-    'airblade/vim-rooter',
-    config = function()
-      -- considers switches to the folder of the current buffer if it finds some of the files listed below
-      vim.g.rooter_patterns = { '.git', 'package.json' }
-    end,
-  },
   -- Helper for commenting, works with multiple languages
   {
     'numToStr/Comment.nvim',
@@ -195,88 +189,6 @@ local plugins = {
     end,
     opts = {}
   },
-  -- DAP
-  {
-    'mfussenegger/nvim-dap',
-    dependencies = {
-      "nvim-neotest/nvim-nio",
-      "rcarriga/nvim-dap-ui",
-      "theHamsta/nvim-dap-virtual-text",
-      "williamboman/mason.nvim",
-      'mxsdev/nvim-dap-vscode-js',
-    },
-    config = function()
-      local dap, dapui, dapjs = require("dap"), require("dapui"), require('dap-vscode-js');
-
-      dapui.setup();
-      dapjs.setup({
-        debugger_path = '/Users/dia0001r/code/lab/vscode-js-debug',
-        log_file_path = '/tmp/dap_vscode_js.log',
-        log_console_level = vim.log.levels.DEBUG,
-        adapters = {
-          'pwa-node',
-          'pwa-chrome',
-          'pwa-msedge',
-          'node-terminal',
-          'pwa-extensionHost',
-        },
-      })
-
-      dap.listeners.before.attach.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.launch.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated.dapui_config = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited.dapui_config = function()
-        dapui.close()
-      end
-
-      local languages = {
-        'typescript',
-        'javascript',
-        'javascriptreact',
-        'typescriptreact'
-      }
-
-      for _, language in ipairs(languages) do
-        dap.configurations[language] = {
-          {
-            type = "pwa-node",
-            request = "launch",
-            name = "Launch file",
-            program = "${file}",
-            cwd = "${workspaceFolder}",
-          },
-          {
-            type = "pwa-node",
-            request = "attach",
-            name = "Attach",
-            processId = require 'dap.utils'.pick_process,
-            cwd = "${workspaceFolder}",
-          },
-          {
-            name = "Next.js - server",
-            type = "pwa-node",
-            request = "attach",
-            cwd = "${workspaceFolder}",
-            port = 9231,
-            skipFiles = { '<node_internals>/**', 'node_modules/**' },
-          },
-          {
-            name = "Next.js - client",
-            type = "pwa-chrome",
-            request = "launch",
-            url = "https://localhost:3000",
-            sourceMaps = true
-          }
-        }
-      end
-    end
-  },
   -- Helper to run specific tests and test files
   {
     'nvim-neotest/neotest',
@@ -288,23 +200,13 @@ local plugins = {
       'rouge8/neotest-rust',
     },
     config = function()
-      require('neotest').setup({
-        adapters = {
-          require('neotest-jest')({
-            jestCommand = "pnpm -w run test",
-            env = { CI = true },
-            cwd = function()
-              return vim.fn.getcwd()
-            end,
-          }),
-        }
-      })
+      require('neotest').setup({})
     end
   },
   -- HTML / CSS dynamic snippet generator
   'mattn/emmet-vim',
   -- Themes
-  { "catppuccin/nvim", as = "catppuccin-latte" },
+  { "catppuccin/nvim", as = "catppuccin-macchiato" },
   -- Enable navigation between nvim and tmux windows using <c-(h,j,k,l)>
   'christoomey/vim-tmux-navigator',
   -- RUST - Cargo dependency helper

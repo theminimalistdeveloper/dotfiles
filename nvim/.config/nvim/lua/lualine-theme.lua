@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 
 local colors = {
-  base     = '',
+  base     = '#24273a',
   blue     = '#8caaee',
   sapphire = '#85c1dc',
   crust    = '#000000',
@@ -15,23 +15,23 @@ local colors = {
 
 local theme = {
   normal = {
-    a = { fg = colors.crust, bg = colors.mauve },
-    b = { fg = colors.crust, bg = colors.sapphire },
+    a = { fg = colors.mauve, bg = colors.base },
+    b = { fg = colors.sapphire, bg = colors.base },
     c = { fg = colors.flamingo, bg = colors.base },
     x = { fg = colors.flamingo, bg = colors.base },
     z = { fg = colors.flamingo, bg = colors.base },
   },
   insert = {
-    a = { fg = colors.crust, bg = colors.red },
+    a = { fg = colors.red, bg = colors.base },
     z = { fg = colors.base, bg = colors.base },
   },
   visual = {
-    a = { fg = colors.base, bg = colors.green },
-    z = { fg = colors.flamingo, bg = colors.crust },
+    a = { fg = colors.green, bg = colors.base },
+    z = { fg = colors.base, bg = colors.base },
   },
   replace = {
-    a = { fg = colors.crust, bg = colors.blue },
-    z = { fg = colors.flamingo, bg = colors.crust },
+    a = { fg = colors.blue, bg = colors.base },
+    z = { fg = colors.flamingo, bg = colors.base },
   },
   inactive = {
     a = { fg = colors.flamingo, bg = colors.base },
@@ -43,16 +43,64 @@ local theme = {
 require('lualine').setup {
   options = {
     theme = theme,
-    component_separators = '·',
+    component_separators = '',
     section_separators = { left = '', right = '' },
   },
   sections = {
-    lualine_a = { 'mode' },
-    lualine_b = { 'branch' },
-    lualine_c = { 'filename', 'filesize', 'diff' },
-    lualine_x = {},
+    lualine_a = { 'mode', },
+    lualine_b = {'branch', 'diagnostics' },
+    lualine_c = {
+      {
+        'diff',
+        symbols = {
+          added = '󰜄 ',
+          modified = '󰝤 ',
+          removed = '󰛲 ',
+        },
+      },
+      'searchcount',
+    },
+    lualine_x = {
+      {
+        'lsp_status',
+        symbols = {
+          separator = ' / ',
+        },
+      }
+    },
     lualine_y = {},
-    lualine_z = { 'filetype', 'fileformat', 'searchcount', 'progress', 'location', 'diagnostics' },
+    lualine_z = {},
+  },
+  winbar = {
+    lualine_a = {
+      {
+        'filetype',
+        icon_only = true,
+      },
+      {
+         'filename',
+         path = 3,
+      },
+      'filesize',
+      {
+        'fileformat',
+        symbols = {
+          unix = 'LF',
+          dos = 'CRLF',
+          mac = 'CR',
+        },
+      },
+      'encoding',
+    },
+  },
+  inactive_winbar = {
+    lualine_c = {
+      {
+        'filetype',
+        icon_only = true,
+      },
+      'filename',
+    },
   },
   tabline = {},
   extensions = {},

@@ -4,13 +4,14 @@
 -- Map the leader key to space. *very* important
 vim.g.mapleader = " "
 local notes_dir = '~/Notes'
-local telescope_theme = 'ivy'
 
 -- GENERAL COMMANDS
 --------------------------------------------------------------------------------
 
 -- Write current buffer
 vim.keymap.set('n', '<leader>r', '<cmd>w<cr>')
+-- Clean search
+vim.keymap.set('n', '<leader>/', '<cmd>noh<cr>')
 -- Quit all buffers at once without saving anything
 vim.keymap.set('n', '<leader>qq', '<cmd>qall!<cr>')
 
@@ -137,23 +138,23 @@ vim.keymap.set('n', '<leader>nn', string.format('<cmd>e %s/inbox/%s.md<cr>', not
 local cwd = vim.loop.cwd()
 
 -- Search through Neovim commands
-vim.keymap.set('n', '<leader>fc', string.format('<cmd>Telescope commands theme=%s<cr>', telescope_theme))
+vim.keymap.set('n', '<leader>fc', '<cmd>Telescope commands<cr>')
 -- Search through Neovim options
-vim.keymap.set('n', '<leader>fvo', string.format('<cmd>Telescope vim_options theme=%s<cr>', telescope_theme))
+vim.keymap.set('n', '<leader>fvo','<cmd>Telescope vim_options<cr>')
 -- Search through the loaded configuration files and reload it
-vim.keymap.set('n', '<leader>fl', string.format('<cmd>Telescope reloader theme=%s<cr>', telescope_theme))
+vim.keymap.set('n', '<leader>fl', '<cmd>Telescope reloader<cr>')
 -- Searhc through the files in the current folder
-vim.keymap.set('n', '<leader>ff', string.format('<cmd>Telescope find_files theme=%s cwd=%s<cr>', telescope_theme, cwd))
+vim.keymap.set('n', '<leader>ff', string.format('<cmd>Telescope find_files cwd=%s<cr>', cwd))
 -- Searhc through the files known to Git in the current git folder
-vim.keymap.set('n', '<leader>fgf', string.format('<cmd>Telescope git_files theme=%s<cr>', telescope_theme))
+vim.keymap.set('n', '<leader>fgf', '<cmd>Telescope git_files<cr>')
 -- Search through the available Git branches
-vim.keymap.set('n', '<leader>fgb', string.format('<cmd>Telescope git_branches theme=%s<cr>', telescope_theme))
+vim.keymap.set('n', '<leader>fgb', '<cmd>Telescope git_branches<cr>')
 -- Search through the available Git commits
-vim.keymap.set('n', '<leader>fgc', string.format('<cmd>Telescope git_commits theme=%s<cr>', telescope_theme))
+vim.keymap.set('n', '<leader>fgc', '<cmd>Telescope git_commits<cr>')
 -- Search through the available buffers
-vim.keymap.set('n', '<leader>fb', string.format('<cmd>Telescope buffers theme=%s<cr>', telescope_theme))
+vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
 -- Search through the files in the current folder using grep syntax
-vim.keymap.set('n', '<leader>fgr', string.format('<cmd>Telescope live_grep theme=%s cwd=%s<cr>', telescope_theme, cwd))
+vim.keymap.set('n', '<leader>fgr', string.format('<cmd>Telescope live_grep cwd=%s<cr>', cwd))
 
 -- VIM FUGITIVE - $G
 --------------------------------------------------------------------------------
@@ -174,24 +175,39 @@ vim.keymap.set('n', '<leader>gs', '<cmd>Neogit<cr>')
 vim.keymap.set('n', '<leader>gd', '<cmd>Gvdiffsplit!<cr>')
 
 
--- TEST - $T
+-- TEST - $E
 --------------------------------------------------------------------------------
 
 -- Test the nearest test from the current position
-vim.keymap.set('n', '<leader>tn', '<cmd>lua require("neotest").run.run()<cr>')
+vim.keymap.set('n', '<leader>en', '<cmd>lua require("neotest").run.run()<cr>')
 -- Test the current file
-vim.keymap.set('n', '<leader>tf', '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<cr>')
+vim.keymap.set('n', '<leader>ef', '<cmd>lua require("neotest").run.run(vim.fn.expand("%"))<cr>')
 -- Test the last test done
-vim.keymap.set('n', '<leader>tl', '<cmd>lua require("neotest").run.run_last()<cr>')
+vim.keymap.set('n', '<leader>el', '<cmd>lua require("neotest").run.run_last()<cr>')
 -- Open the output panel
-vim.keymap.set('n', '<leader>tp', '<cmd>lua require("neotest").output.open({ enter=true, auto_close=true })<cr>')
+vim.keymap.set('n', '<leader>ep', '<cmd>lua require("neotest").output.open({ enter=true, auto_close=true })<cr>')
 -- Clear output panel
-vim.keymap.set('n', '<leader>tpc', '<cmd>lua require("neotest").output.clear()<cr>')
+vim.keymap.set('n', '<leader>epc', '<cmd>lua require("neotest").output.clear()<cr>')
 -- Toggle summary panel
-vim.keymap.set('n', '<leader>ts', '<cmd>lua require("neotest").summary.toggle()<cr>')
+vim.keymap.set('n', '<leader>es', '<cmd>lua require("neotest").summary.toggle()<cr>')
 -- Run DAP
-vim.keymap.set('n', '<leader>td', '<cmd>lua require("neotest").run.run({ strategy="dap" })<cr>')
+vim.keymap.set('n', '<leader>ed', '<cmd>lua require("neotest").run.run({ strategy="dap" })<cr>')
 
+-- Trouble - $T
+--------------------------------------------------------------------------------
+
+-- Toggle the trouble window
+vim.keymap.set('n', '<leader>tt', '<cmd>Trouble diagnostics toggle<cr>')
+-- Toggle the trouble window with the current buffer diagnostics
+vim.keymap.set('n', '<leader>tb', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>')
+-- Toggle the trouble window for the symbols
+vim.keymap.set('n', '<leader>ts', '<cmd>Trouble symbols toggle focus=false<cr>')
+-- Toggle the trouble window for LSP Definitions / references / ...
+vim.keymap.set('n', '<leader>tl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>')
+-- Toggle the trouble window for the loclist 
+vim.keymap.set('n', '<leader>tl', '<cmd>Trouble loclist toggle<cr>')
+-- Toggle the trouble window for the quickfix list
+vim.keymap.set('n', '<leader>tl', '<cmd>Trouble qflist toggle<cr>')
 
 -- LSP - $L
 --------------------------------------------------------------------------------
