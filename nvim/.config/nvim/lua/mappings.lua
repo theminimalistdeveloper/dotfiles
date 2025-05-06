@@ -8,8 +8,8 @@ local notes_dir = '~/Notes'
 -- GENERAL COMMANDS
 --------------------------------------------------------------------------------
 
--- Write current buffer
-vim.keymap.set('n', '<leader>r', '<cmd>w<cr>')
+-- Write current buffer, with the flags to allow to create new folders
+vim.keymap.set('n', '<leader>r', '<cmd>write ++p<cr>')
 -- Clean search
 vim.keymap.set('n', '<leader>/', '<cmd>noh<cr>')
 -- Quit all buffers at once without saving anything
@@ -117,9 +117,9 @@ vim.keymap.set('n', '<leader>bk', '<cmd>bufdo bd!<cr>')
 --------------------------------------------------------------------------------
 
 -- Neovim Tree toggle in the current directory
-vim.keymap.set('n', '<leader>o', ':NvimTreeToggle<cr>')
+vim.keymap.set('n', '<leader>o', ':e .<cr>')
 -- Neovim tree toggle on the notes directory
-vim.keymap.set('n', '<leader>on', string.format(':NvimTreeToggle %s<cr>', notes_dir))
+vim.keymap.set('n', '<leader>on', string.format(':e %s<cr>', notes_dir))
 
 
 -- NOTES - $N
@@ -127,10 +127,20 @@ vim.keymap.set('n', '<leader>on', string.format(':NvimTreeToggle %s<cr>', notes_
 
 -- Search in the notes folder
 vim.keymap.set('n', '<leader>nf',
-  string.format('<cmd>Telescope live_grep search_dirs=%s theme=%s<cr>', notes_dir, telescope_theme))
+  string.format('<cmd>Telescope live_grep search_dirs=%s theme=%s<cr>', notes_dir, "ivy"))
 
--- Create a new note - it will always go into inbox
-vim.keymap.set('n', '<leader>nn', string.format('<cmd>e %s/inbox/%s.md<cr>', notes_dir, os.date("%Y-%m-%d")))
+-- Create a new note on the inbox 
+vim.keymap.set('n', '<leader>ni', string.format('<cmd>e %s/inbox/%s.md<cr>', notes_dir, os.date("%Y-%m-%d")))
+
+-- Create a new note on the prosieben company in the current year and month 
+vim.keymap.set(
+  'n',
+  '<leader>np',
+  string.format(
+    '<cmd>e %s/companies/prosieben/%s/%s/%s.md<cr>',
+    notes_dir, os.date("%Y"), os.date("%m"), os.date("%Y-%m-%d")
+  )
+)
 
 -- TELESCOPE - $F
 --------------------------------------------------------------------------------

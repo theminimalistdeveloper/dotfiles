@@ -51,6 +51,7 @@ vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.o.foldtext = ''
 vim.o.foldcolumn = "1"
+vim.o.statuscolumn = "%l %s"
 -- auto complete options
 vim.o.completeopt = 'menuone,noinsert'
 -- Set the identation on

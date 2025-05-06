@@ -26,7 +26,6 @@ local plugins = {
       require "nvim-treesitter.install".compilers = { "gcc" }
     end,
   },
-  'nvim-treesitter/nvim-treesitter-context',
   'williamboman/mason-lspconfig.nvim',
   {
     'williamboman/mason.nvim',
@@ -34,14 +33,15 @@ local plugins = {
       require('mason').setup {}
     end,
   },
-  {
-    'nvim-tree/nvim-tree.lua',
-    config = function()
-      require("nvim-tree").setup({
-        filters = { dotfiles = true }
-      })
-    end,
-  },
+  -- {
+  --   'nvim-tree/nvim-tree.lua',
+  --   config = function()
+  --     require("nvim-tree").setup({
+  --       filters = { dotfiles = true }
+  --     })
+  --   end,
+  -- },
+  -- { "nvim-tree/nvim-web-devicons", opts = {} },
   {
     "folke/trouble.nvim",
     opts = {}, -- for default options, refer to the configuration section for custom setup.
@@ -149,16 +149,10 @@ local plugins = {
       })
     end,
   },
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = {
-      'nvim-telescope/telescope.nvim',
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons' }
-  },
   -- MISC
   -- Helper for surrounds around text objects
   'tpope/vim-surround',
+  -- auto close
   'cohama/lexima.vim',
   -- Git helper
   {
@@ -203,8 +197,6 @@ local plugins = {
       require('neotest').setup({})
     end
   },
-  -- HTML / CSS dynamic snippet generator
-  'mattn/emmet-vim',
   -- Themes
   { "catppuccin/nvim", as = "catppuccin-macchiato" },
   -- Enable navigation between nvim and tmux windows using <c-(h,j,k,l)>
