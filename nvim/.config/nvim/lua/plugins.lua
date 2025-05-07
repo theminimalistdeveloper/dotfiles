@@ -33,15 +33,15 @@ local plugins = {
       require('mason').setup {}
     end,
   },
-  -- {
-  --   'nvim-tree/nvim-tree.lua',
-  --   config = function()
-  --     require("nvim-tree").setup({
-  --       filters = { dotfiles = true }
-  --     })
-  --   end,
-  -- },
-  -- { "nvim-tree/nvim-web-devicons", opts = {} },
+  {
+    'nvim-tree/nvim-tree.lua',
+    config = function()
+      require("nvim-tree").setup({
+        filters = { dotfiles = true }
+      })
+    end,
+  },
+  { "nvim-tree/nvim-web-devicons", opts = {} },
   {
     "folke/trouble.nvim",
     opts = {}, -- for default options, refer to the configuration section for custom setup.

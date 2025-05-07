@@ -117,10 +117,7 @@ vim.keymap.set('n', '<leader>bk', '<cmd>bufdo bd!<cr>')
 --------------------------------------------------------------------------------
 
 -- Neovim Tree toggle in the current directory
-vim.keymap.set('n', '<leader>o', ':e .<cr>')
--- Neovim tree toggle on the notes directory
-vim.keymap.set('n', '<leader>on', string.format(':e %s<cr>', notes_dir))
-
+vim.keymap.set('n', '<leader>o', '<cmd>NvimTreeToggle<cr>')
 
 -- NOTES - $N
 --------------------------------------------------------------------------------
