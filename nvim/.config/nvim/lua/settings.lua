@@ -70,6 +70,7 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   callback = function()
     -- Wrap lines
     vim.o.wrap = true
+    vim.cmd 'Copilot disable'
   end,
 })
 

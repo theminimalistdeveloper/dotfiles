@@ -19,8 +19,16 @@ vim.o.colorcolumn = "80"
 vim.o.laststatus = 3
 -- Set default theme
 vim.cmd 'colorscheme catppuccin-macchiato'
+vim.cmd [[
+  hi Normal guibg=NONE ctermbg=NONE
+  hi NormalNC guibg=NONE ctermbg=NONE
+  hi NonText ctermbg=NONE guibg=NONE
+  hi NvimTreeNormal guibg=NONE ctermbg=NONE
+  hi InactiveWindow guibg=NONE ctermbg=NONE
+]]
 -- Hides tildes from non-existing lines
 vim.cmd 'hi EndOfBuffer guifg=bg'
 vim.o.winbar = '%m %f'
+
 -- Configuration for the status line
 require 'lualine-theme'
