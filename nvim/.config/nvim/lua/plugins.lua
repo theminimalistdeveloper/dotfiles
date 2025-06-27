@@ -16,8 +16,37 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+  "github/copilot.vim",
   -- AI
-  'github/copilot.vim',
+  {
+    "olimorris/codecompanion.nvim",
+    opts = {
+      strategies = {
+        -- Change the default chat adapter
+        chat = {
+          adapter = "copilot",
+        },
+      },
+      opts = {
+        -- Set debug logging
+        log_level = "DEBUG",
+      },
+    },
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown", "codecompanion" }
+  },
+  {
+    "echasnovski/mini.diff",
+    config = function()
+      local diff = require("mini.diff")
+      diff.setup({
+        -- Disabled by default
+        source = diff.gen_source.none(),
+      })
+    end,
+  },
   -- LSP
   {
     'nvim-treesitter/nvim-treesitter',
@@ -64,6 +93,9 @@ local plugins = {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
         { name = 'path' },
+        per_filetype = {
+          codecompanion = { "codecompanion" },
+        },
       }
 
       cmp.setup({
@@ -158,7 +190,6 @@ local plugins = {
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim",
     },
     config = true
@@ -188,7 +219,6 @@ local plugins = {
     'nvim-neotest/neotest',
     dependencies = {
       'nvim-neotest/nvim-nio',
-      'nvim-lua/plenary.nvim',
       'antoinemadec/FixCursorHold.nvim',
       'nvim-neotest/neotest-jest',
       'rouge8/neotest-rust',
@@ -198,7 +228,10 @@ local plugins = {
     end
   },
   -- Themes
-  { "catppuccin/nvim", as = "catppuccin-macchiato" },
+  { "catppuccin/nvim", as = "catppuccin-macchiato" , opt = {
+    transparent = true
+
+  }},
   -- Enable navigation between nvim and tmux windows using <c-(h,j,k,l)>
   'christoomey/vim-tmux-navigator',
   -- RUST - Cargo dependency helper
