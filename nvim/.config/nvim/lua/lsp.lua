@@ -16,7 +16,7 @@ vim.api.nvim_command([[
 -------------------------------------------------------------------------------
 
 vim.lsp.config['eslint'] = {
-  cmd = { 'eslint', '--stdio' },
+  cmd = { 'eslint_d', '--stdio' },
   root_markers = { '.eslintrc', '.eslintrc.js', '.eslintrc.json', '.eslintrc.yaml', '.eslintrc.yml' },
   filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' }
 }
@@ -29,10 +29,10 @@ vim.lsp.config['vtsls'] = {
 
 -- Rust
 -------------------------------------------------------------------------------
-vim.lsp.config['rust-analyzer']= {
+vim.lsp.config['rust-analyzer'] = {
   cmd = { 'rust-analyzer' },
   root_markers = { 'Cargo.toml' },
-  filetypes = { 'rust' }
+  filetypes = { 'rust', 'rs' }
 }
 
 -- Lua
@@ -67,10 +67,11 @@ vim.lsp.config['graphql'] = {
 
 vim.lsp.enable({
   'bashls',
+  'dotenv-linter',
   'eslint',
   'graphql',
   'luals',
-  'rust_analyzer',
+  'rust-analyzer',
   'tailwindcss',
   'vtsls',
 })
