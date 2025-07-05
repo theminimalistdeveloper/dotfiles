@@ -62,18 +62,7 @@ local plugins = {
   "github/copilot.vim",
   {
     "olimorris/codecompanion.nvim",
-    opts = {
-      strategies = {
-        -- Change the default chat adapter
-        chat = {
-          adapter = "copilot",
-        },
-      },
-      opts = {
-        -- Set debug logging
-        log_level = "DEBUG",
-      },
-    },
+    opts = {},
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
