@@ -3,7 +3,6 @@
 
 -- Map the leader key to space. *very* important
 vim.g.mapleader = " "
-local notes_dir = '~/Notes'
 
 -- GENERAL COMMANDS
 --------------------------------------------------------------------------------
@@ -122,21 +121,37 @@ vim.keymap.set('n', '<leader>o', '<cmd>NvimTreeToggle<cr>')
 -- NOTES - $N
 --------------------------------------------------------------------------------
 
--- Search in the notes folder
-vim.keymap.set('n', '<leader>nf',
-  string.format('<cmd>Telescope live_grep search_dirs=%s theme=%s<cr>', notes_dir, "ivy"))
+local notes_dir = '~/Notes'
 
--- Create a new note on the inbox 
-vim.keymap.set('n', '<leader>ni', string.format('<cmd>e %s/inbox/%s.md<cr>', notes_dir, os.date("%Y-%m-%d")))
+-- Notes, journals
+vim.keymap.set('n', '<leader>nt', '<cmd>Neorg journal today<cr>')
+vim.keymap.set('n', '<leader>ny', '<cmd>Neorg journal yesterday<cr>')
+vim.keymap.set('n', '<leader>no', '<cmd>Neorg journal tomorrow<cr>')
+vim.keymap.set('n', '<leader>nc', '<cmd>Neorg journal custom<cr>')
+vim.keymap.set('n', '<leader>na', '<cmd>Neorg toc<cr>') -- table of contents
+vim.keymap.set('n', '<leader>nn', '<Plug>(neorg.dirman.new-note)')
 
--- Create a new note on the prosieben company in the current year and month 
+-- Presenter
+vim.keymap.set('n', '<leader>ne', '<Plug>(neorg.presenter.next-page)')
+vim.keymap.set('n', '<leader>np', '<Plug>(neorg.presenter.previous-page)')
+vim.keymap.set('n', '<leader>nx', '<Plug>(neorg.presenter.close)')
+
+-- Workspaces 
+vim.keymap.set('n', '<leader>nwc', '<cmd>Neorg workspace corporate<cr>')
+vim.keymap.set('n', '<leader>nwp', '<cmd>Neorg workspace personal<cr>')
+vim.keymap.set('n', '<leader>nwd', '<cmd>Neorg workspace default<cr>')
+
+-- metadata
+vim.keymap.set('n', '<leader>nm', '<cmd>Neorg inject-metadata<cr>')
+vim.keymap.set('n', '<leader>nu', '<cmd>Neorg update-metadata<cr>')
+
+-- Search current workspace
 vim.keymap.set(
   'n',
-  '<leader>np',
-  string.format(
-    '<cmd>e %s/companies/prosieben/%s/%s/%s.md<cr>',
-    notes_dir, os.date("%Y"), os.date("%m"), os.date("%Y-%m-%d")
-  )
+  '<leader>nf', string.format(
+  '<cmd>Telescope live_grep search_dirs=%s theme=%s<cr>',
+  notes_dir,
+  "ivy")
 )
 
 -- TELESCOPE - $F

@@ -16,8 +16,50 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-  "github/copilot.vim",
+  -- Notes 
+  {
+    "nvim-neorg/neorg",
+    ft = "norg",
+    priority = 100, -- Ensure Neorg is loaded before other plugins that depend on it
+    lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+    version = "*", -- Pin Neorg to the latest stable release
+    config = function ()
+      require('neorg').setup {
+        load = {
+          ["core.defaults"] = {}, -- Load all the default modules
+          ["core.presenter"] = {
+            config = {
+              zen_mode = "zen-mode", -- Use the zen mode plugin for distraction-free writing
+            },
+          },
+          ["core.dirman"] = {
+            config = {
+              workspaces = {
+                personal = "~/Notes/Personal",
+                corporate = "~/Notes/Corporate",
+              },
+              default_workspace = "personal",
+            },
+          },
+          ["core.concealer"] = {
+            config = {
+              conceal = true,
+              conceal_level = 3
+            },
+          },
+          ["core.completion"] = {
+            config = {
+              engine = "nvim-cmp",
+            },
+          },
+        },
+      }
+    end,
+  },
+  "folke/zen-mode.nvim",
+  "nvim-neorg/neorg-telescope", -- Telescope integration for Neorg
   -- AI
+  "github/copilot.vim",
   {
     "olimorris/codecompanion.nvim",
     opts = {
@@ -52,7 +94,28 @@ local plugins = {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = function()
-      require "nvim-treesitter.install".compilers = { "gcc" }
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = {
+          "c",
+          "css",
+          "html",
+          "javascript",
+          "json",
+          "lua",
+          "markdown",
+          "norg",
+          "python",
+          "rust",
+          "typescript",
+        },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+        auto_install = true,
+        indent = { enable = true },
+        incremental_selection = { enable = true },
+    }
     end,
   },
   'williamboman/mason-lspconfig.nvim',

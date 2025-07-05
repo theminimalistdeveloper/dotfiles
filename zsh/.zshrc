@@ -59,7 +59,7 @@ alias quarter="git log --shortstat --since \"01.07.2024\" --until \"today\" | \
 # Neovim
 alias n='nvim '
 # EXA - replacement for ls
-alias ls='exa --icons'
+alias ls='eza --icons'
 
 # tmux 
 alias tn="tmux new -s "
