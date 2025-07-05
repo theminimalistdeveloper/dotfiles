@@ -6,13 +6,8 @@
 }
 
 window#waybar {
-    background-color: rgba(204, 208, 218, 0.5);
-    border-radius: 5px;
-    color: #cad3f5;
-}
-
-window#waybar.hidden {
-    opacity: 0.2;
+    background-color: transparent;
+    color: #CAD3F5;
 }
 
 window#waybar.termite {
@@ -46,7 +41,6 @@ button:hover {
 
 #workspaces button.focused {
     background-color: #64727D;
-    border-radius: 5px;
 }
 
 #workspaces button.urgent {
@@ -76,11 +70,6 @@ button:hover {
 #mpd {
     padding: 0 10px;
     color: #cad3f5;
-}
-
-#window,
-#workspaces {
-    margin: 0 4px;
 }
 
 .modules-left > widget:first-child > #workspaces {
