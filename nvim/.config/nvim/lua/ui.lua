@@ -18,7 +18,7 @@ vim.o.colorcolumn = "80"
 -- One status line for Neovim instance instead one per window
 vim.o.laststatus = 3
 -- Set default theme
-vim.cmd 'colorscheme catppuccin-macchiato'
+vim.cmd 'colorscheme catppuccin'
 vim.cmd [[
   hi Normal guibg=NONE ctermbg=NONE
   hi NormalNC guibg=NONE ctermbg=NONE
@@ -26,8 +26,7 @@ vim.cmd [[
   hi NvimTreeNormal guibg=NONE ctermbg=NONE
   hi InactiveWindow guibg=NONE ctermbg=NONE
 ]]
--- Hides tildes from non-existing lines
-vim.cmd 'hi EndOfBuffer guifg=bg'
+
 vim.o.winbar = '%m %f'
 
 -- Configuration for the status line

@@ -276,7 +276,7 @@ vim.keymap.set('n', '<leader>xQ', '<cmd>Trouble qflist toggle<cr>')
 
 -- Copilot - $A
 --------------------------------------------------------------------------------
-vim.keymap.set('n', '<leader>ac', '<cmd>CodeCompanionChat<cr>')
+vim.keymap.set('n', '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>')
 
 -- MISC
 vim.keymap.set('x', '<C-l>', '<cmd>lua print(vim.fn.wordcount().visual_words)<cr>')

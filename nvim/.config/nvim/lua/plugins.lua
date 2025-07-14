@@ -59,10 +59,38 @@ local plugins = {
   "folke/zen-mode.nvim",
   "nvim-neorg/neorg-telescope", -- Telescope integration for Neorg
   -- AI
-  "github/copilot.vim",
+  {
+    "github/copilot.vim",
+    config = function()
+      vim.g.copilot_filetypes = {
+        javascript = true,
+        typescript = true,
+        typescriptreact = true,
+        javascriptreact = true,
+        python = true,
+        lua = true,
+        rust = true,
+        markdown = false, 
+      }
+    end,
+  },
   {
     "olimorris/codecompanion.nvim",
-    opts = {},
+    config = function()
+      require("codecompanion").setup({
+        strategies = {
+          chat = {
+            adapter = {
+              name="copilot",
+              model= "gemini-2.5-pro",
+            },
+            keymaps= {
+              modes = { n = { "<CR>" }, i = { "<CR>" } },
+            },
+          },
+        },
+      })
+    end,
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
@@ -104,7 +132,7 @@ local plugins = {
         auto_install = true,
         indent = { enable = true },
         incremental_selection = { enable = true },
-    }
+      }
     end,
   },
   'williamboman/mason-lspconfig.nvim',
@@ -118,7 +146,7 @@ local plugins = {
     'nvim-tree/nvim-tree.lua',
     config = function()
       require("nvim-tree").setup({
-        filters = { dotfiles = true }
+        filters = { dotfiles = false }
       })
     end,
   },
@@ -187,13 +215,14 @@ local plugins = {
         sources = cmp.config.sources({
           { name = 'path' }
         }, {
-          { name = 'cmdline' }
-        })
+            { name = 'cmdline' }
+          })
       })
     end,
   },
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, config = function() require('ibl').setup() end },
   -- SNIPPETS
+  -- Add luasnip as source for completion
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, config = function() require('ibl').setup() end },
   { 'saadparwaiz1/cmp_luasnip' },
   {
     "L3MON4D3/LuaSnip",
@@ -221,13 +250,13 @@ local plugins = {
         defaults = {},
         pickers = {
           find_files = {
-            hidden = true,
-            previewer = false,
+            hidden = false,
+            previewer = true,
             theme = 'ivy',
           },
           live_grep = {
             theme = 'ivy',
-            previewer = false,
+            previewer = true,
           },
         },
       })
@@ -282,7 +311,6 @@ local plugins = {
   -- Themes
   { "catppuccin/nvim", as = "catppuccin-macchiato" , opt = {
     transparent = true
-
   }},
   -- Enable navigation between nvim and tmux windows using <c-(h,j,k,l)>
   'christoomey/vim-tmux-navigator',
