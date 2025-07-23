@@ -227,9 +227,9 @@ vim.keymap.set('n', '<leader>ts', '<cmd>Trouble symbols toggle focus=false<cr>')
 -- Toggle the trouble window for LSP Definitions / references / ...
 vim.keymap.set('n', '<leader>tl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>')
 -- Toggle the trouble window for the loclist 
-vim.keymap.set('n', '<leader>tl', '<cmd>Trouble loclist toggle<cr>')
+vim.keymap.set('n', '<leader>to', '<cmd>Trouble loclist toggle<cr>')
 -- Toggle the trouble window for the quickfix list
-vim.keymap.set('n', '<leader>tl', '<cmd>Trouble qflist toggle<cr>')
+vim.keymap.set('n', '<leader>tq', '<cmd>Trouble qflist toggle<cr>')
 
 -- LSP - $L
 --------------------------------------------------------------------------------

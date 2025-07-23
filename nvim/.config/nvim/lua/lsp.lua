@@ -8,6 +8,14 @@ vim.api.nvim_command([[
     autocmd BufWritePre *.rs,*.js,*.jsx,*.ts,*.tsx lua vim.lsp.buf.format()
 ]])
 
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = true,
+  severity_sort = true,
+})
+
 -------------------------------------------------------------------------------
 -- LANGUAGE SERVERS CONFIGURATION
 -------------------------------------------------------------------------------

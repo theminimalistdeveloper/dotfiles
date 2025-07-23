@@ -69,8 +69,8 @@ local plugins = {
         javascriptreact = true,
         python = true,
         lua = true,
-        rust = true,
-        markdown = false, 
+        rust = false,
+        markdown = false,
       }
     end,
   },
@@ -146,6 +146,9 @@ local plugins = {
     'nvim-tree/nvim-tree.lua',
     config = function()
       require("nvim-tree").setup({
+        view = {
+          relativenumber = true
+        },
         filters = { dotfiles = false }
       })
     end,
@@ -275,7 +278,6 @@ local plugins = {
     },
     config = true
   },
-  { "f-person/git-blame.nvim" },
   -- Information statusline
   'hoob3rt/lualine.nvim',
   -- Helper for commenting, works with multiple languages
