@@ -76,8 +76,6 @@ alias gpl="git pull"
 # git push 
 alias gps="git push"
 alias gpsnb="git push " # todo
-# git checkout
-alias gh="git checkout "
 # git branch 
 alias gb="git branch"
 # git rebase
