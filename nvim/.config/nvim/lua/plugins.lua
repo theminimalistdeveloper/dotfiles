@@ -16,6 +16,13 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+  -- Music
+  { "gruvw/strudel.nvim",
+    build = "npm install",
+    config = function()
+      require("strudel").setup()
+    end
+  },
   -- Notes 
   {
     "nvim-neorg/neorg",
@@ -82,10 +89,37 @@ local plugins = {
           chat = {
             adapter = {
               name="copilot",
-              model= "gemini-2.5-pro",
+              model= "claude-sonnet-4",
             },
-            keymaps= {
-              modes = { n = { "<CR>" }, i = { "<CR>" } },
+            keymaps = {
+              send = {
+                i = "<C-CR>",
+                n = "<C-CR>",
+                v = "<C-CR>",
+              },
+            },
+          },
+          inline = {
+            adapter = {
+              name="copilot",
+              model= "claude-sonnet-4",
+            },
+            keymaps = {
+              accept_change = {
+                modes = { n = "ga" },
+                description = "Accept the suggested change",
+              },
+              reject_change = {
+                modes = { n = "gr" },
+                opts = { nowait = true },
+                description = "Reject the suggested change",
+              },
+            },
+          },
+          cmd = {
+            adapter = {
+              name="copilot",
+              model= "claude-sonnet-4",
             },
           },
         },
@@ -147,7 +181,8 @@ local plugins = {
     config = function()
       require("nvim-tree").setup({
         view = {
-          relativenumber = true
+          relativenumber = true,
+          width = 40
         },
         filters = { dotfiles = false }
       })
