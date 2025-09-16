@@ -121,7 +121,7 @@ vim.keymap.set('n', '<leader>o', '<cmd>NvimTreeToggle<cr>')
 -- NOTES - $N
 --------------------------------------------------------------------------------
 
-local notes_dir = '~/Notes'
+local notes_dir = '/Users/dia0001r/Notes'
 
 -- Notes, journals
 vim.keymap.set('n', '<leader>nt', '<cmd>Neorg journal today<cr>')
@@ -146,13 +146,7 @@ vim.keymap.set('n', '<leader>nm', '<cmd>Neorg inject-metadata<cr>')
 vim.keymap.set('n', '<leader>nu', '<cmd>Neorg update-metadata<cr>')
 
 -- Search current workspace
-vim.keymap.set(
-  'n',
-  '<leader>nf', string.format(
-  '<cmd>Telescope live_grep search_dirs=%s theme=%s<cr>',
-  notes_dir,
-  "ivy")
-)
+vim.keymap.set('n', '<leader>nf', '<cmd>lua require("telescope.builtin").live_grep({cwd="~/Notes"})<cr>')
 
 -- TELESCOPE - $F
 --------------------------------------------------------------------------------

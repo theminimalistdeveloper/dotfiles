@@ -64,7 +64,6 @@ local plugins = {
     end,
   },
   "folke/zen-mode.nvim",
-  "nvim-neorg/neorg-telescope", -- Telescope integration for Neorg
   -- AI
   {
     "github/copilot.vim",
@@ -285,15 +284,30 @@ local plugins = {
     'nvim-telescope/telescope.nvim',
     config = function()
       require ('telescope').setup({
-        defaults = {},
+        defaults = {
+          file_ignore_patterns = { 'node_modules', '%.git/', 'target' },
+        },
         pickers = {
           find_files = {
-            hidden = false,
+            hidden = true,
             previewer = true,
-            theme = 'ivy',
+            find_command = {
+              'rg',
+              '--files',
+              '-L'
+            },
           },
           live_grep = {
-            theme = 'ivy',
+            vimgrep_arguments = {
+              'rg',
+              '--color=never',
+              '--no-heading',
+              '--with-filename',
+              '--line-number',
+              '--column',
+              '--smart-case',
+              '-L'
+            },
             previewer = true,
           },
         },
