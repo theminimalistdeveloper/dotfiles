@@ -16,13 +16,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-  -- Music
-  { "gruvw/strudel.nvim",
-    build = "npm install",
-    config = function()
-      require("strudel").setup()
-    end
-  },
   -- Notes 
   {
     "nvim-neorg/neorg",
@@ -63,27 +56,21 @@ local plugins = {
       }
     end,
   },
-  "folke/zen-mode.nvim",
   -- AI
   {
-    "github/copilot.vim",
+    'olimorris/codecompanion.nvim',
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'github/copilot.vim',
+      'j-hui/fidget.nvim',
+    },
     config = function()
-      vim.g.copilot_filetypes = {
-        javascript = true,
-        typescript = true,
-        typescriptreact = true,
-        javascriptreact = true,
-        python = true,
-        lua = true,
-        rust = false,
-        markdown = false,
-      }
-    end,
-  },
-  {
-    "olimorris/codecompanion.nvim",
-    config = function()
-      require("codecompanion").setup({
+      require('codecompanion').setup({
+        display = {
+          action_palette = {
+            provider = "telescope"
+          }
+        },
         strategies = {
           chat = {
             adapter = {
@@ -93,8 +80,8 @@ local plugins = {
             keymaps = {
               send = {
                 i = "<C-CR>",
-                n = "<C-CR>",
-                v = "<C-CR>",
+                n = "<CR>",
+                v = "<CR>",
               },
             },
           },
@@ -146,17 +133,28 @@ local plugins = {
     config = function()
       require('nvim-treesitter.configs').setup {
         ensure_installed = {
-          "c",
-          "css",
-          "html",
-          "javascript",
-          "json",
-          "lua",
-          "markdown",
-          "norg",
-          "python",
-          "rust",
-          "typescript",
+          'css',
+          'diff',
+          'gitcommit',
+          'gitignore',
+          'go',
+          'html',
+          'javascript',
+          'json',
+          'lua',
+          'markdown',
+          'markdown_inline',
+          'norg',
+          'php',
+          'python',
+          'regex',
+          'rust',
+          'scss',
+          'svelte',
+          'toml',
+          'tsx',
+          'typescript',
+          'yaml',
         },
         highlight = {
           enable = true,
@@ -210,9 +208,9 @@ local plugins = {
         { name = 'nvim_lsp' },
         { name = 'buffer' },
         { name = 'path' },
-        per_filetype = {
-          codecompanion = { "codecompanion" },
-        },
+        -- per_filetype = {
+        --   codecompanion = { "codecompanion" },
+        -- },
       }
 
       cmp.setup({
@@ -258,8 +256,14 @@ local plugins = {
     end,
   },
   -- SNIPPETS
-  -- Add luasnip as source for completion
-  { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {}, config = function() require('ibl').setup() end },
+  -- {
+  --   "lukas-reineke/indent-blankline.nvim",
+  --   main = "ibl",
+  --   opts = {},
+  --   config = function()
+  --     require('ibl').setup()
+  --   end
+  -- },
   { 'saadparwaiz1/cmp_luasnip' },
   {
     "L3MON4D3/LuaSnip",
@@ -317,8 +321,6 @@ local plugins = {
   -- MISC
   -- Helper for surrounds around text objects
   'tpope/vim-surround',
-  -- auto close
-  'cohama/lexima.vim',
   -- Git helper
   {
     "NeogitOrg/neogit",
@@ -360,20 +362,10 @@ local plugins = {
     end
   },
   -- Themes
-  { "catppuccin/nvim", as = "catppuccin-macchiato" , opt = {
-    transparent = true
-  }},
+  { "catppuccin/nvim", as = "catppuccin-macchiato" , opt = { transparent = true }},
+  { 'shaunsingh/nord.nvim', opt = { transparent = true }},
   -- Enable navigation between nvim and tmux windows using <c-(h,j,k,l)>
   'christoomey/vim-tmux-navigator',
-  -- RUST - Cargo dependency helper
-  'Saecki/crates.nvim',
-  -- CSS
-  {
-    'norcalli/nvim-colorizer.lua',
-    config = function()
-      require 'colorizer'.setup()
-    end,
-  }
 }
 
 require("lazy").setup(plugins, {})

@@ -268,9 +268,12 @@ vim.keymap.set('n', '<leader>cl', '<cmd>Trouble lsp toggle focus=false win.posit
 vim.keymap.set('n', '<leader>xL', '<cmd>Trouble loclist toggle<cr>')
 vim.keymap.set('n', '<leader>xQ', '<cmd>Trouble qflist toggle<cr>')
 
--- Copilot - $A
+-- AI - $A
 --------------------------------------------------------------------------------
 vim.keymap.set('n', '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>')
+vim.keymap.set('n', '<leader>aa', '<cmd>CodeCompanionActions<cr>')
+vim.keymap.set('v', '<leader>ae', '<cmd>CodeCompanion /explain<cr>')
+vim.keymap.set('v', '<leader>ad', '<cmd>CodeCompanionAdd<cr>')
 
 -- MISC
 vim.keymap.set('x', '<C-l>', '<cmd>lua print(vim.fn.wordcount().visual_words)<cr>')

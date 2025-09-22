@@ -42,7 +42,7 @@ local theme = {
 
 require('lualine').setup {
   options = {
-    theme = theme,
+    theme = 'nord',
     component_separators = '',
     section_separators = { left = '', right = '' },
   },
