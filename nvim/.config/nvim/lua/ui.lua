@@ -18,7 +18,6 @@ vim.o.colorcolumn = "80"
 -- One status line for Neovim instance instead one per window
 vim.o.laststatus = 3
 -- Set default theme
--- vim.cmd 'colorscheme catppuccin-macchiato'
 vim.cmd 'colorscheme nord'
 vim.cmd [[
   hi Normal guibg=NONE ctermbg=NONE
