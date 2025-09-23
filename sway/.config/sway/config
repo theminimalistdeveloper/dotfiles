@@ -9,7 +9,10 @@ include /etc/sway/config.d/*
 # Set mod key to be windows
 set $mod Mod4
 blur enable
+shadows enable
+corner_radius 10
 smart_borders on
+smart_gaps on
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 # Font for window titles. Will also be used by the bar unless a different font
@@ -136,14 +139,12 @@ bindsym $mod+Shift+p exec grim ~/Pictures/$(date +"%d%m%Y%s_grim.png")
 
 # Shutdown mode
 # extracted from here https://faq.i3wm.org/question/239/how-do-i-suspendlockscreen-and-logout.1.html
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $mode_system System (l) lock, (e) logout, (r) reboot, (s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym l exec swaylock, mode "default"
+    bindsym e exec swaymsg exit, mode "default"
+    bindsym r exec systemctl -i reboot, mode "default"
+    bindsym Shift+s exec systemctl -i poweroff, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
