@@ -8,9 +8,6 @@ include /etc/sway/config.d/*
 
 # Set mod key to be windows
 set $mod Mod4
-blur enable
-shadows enable
-corner_radius 10
 smart_borders on
 smart_gaps on
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -159,3 +156,5 @@ input * {
 set $laptop eDP-1
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
+
+exec_always --no-startup-id "for i in {1..5}; do swaymsg workspace $i; done; swaymsg workspace 1"
