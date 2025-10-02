@@ -109,8 +109,8 @@ mode "resize" {
 
 # MISC
 ## Action brightness
-bindsym F5 exec --no-startup-id brightnessctl set 5%-
-bindsym F6 exec --no-startup-id brightnessctl set +5%
+bindsym --locked XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
 
 # ## Action volume
 bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
@@ -135,7 +135,6 @@ bindsym $mod+Shift+f floating toggle
 bindsym $mod+Shift+p exec grim ~/Pictures/$(date +"%d%m%Y%s_grim.png")
 
 # Shutdown mode
-# extracted from here https://faq.i3wm.org/question/239/how-do-i-suspendlockscreen-and-logout.1.html
 set $mode_system System (l) lock, (e) logout, (r) reboot, (s) shutdown
 mode "$mode_system" {
     bindsym l exec swaylock, mode "default"
@@ -156,5 +155,3 @@ input * {
 set $laptop eDP-1
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
-
-exec_always --no-startup-id "for i in {1..5}; do swaymsg workspace $i; done; swaymsg workspace 1"
