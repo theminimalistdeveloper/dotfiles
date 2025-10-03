@@ -11,12 +11,12 @@
     "sway/window"
   ],
   "modules-right": [
+    "pulseaudio",
     "network",
     "backlight",
     "cpu",
     "memory",
     "temperature",
-    "pulseaudio",
     "battery",
     "clock"
   ],
@@ -45,7 +45,7 @@
   },
   "cpu": {
     "format": "",
-    "on-click": "gnome-system-monitor"
+    "on-click": "gnome-system-monitor",
   },
   "memory": {
     "format": "",
@@ -140,10 +140,11 @@
     },
     "max-volume": 150,
     "tooltip": true,
-    "tooltip-format": "{source}\nVolume: {volume}%",
-    "format": "{icon}",
-    "format-bluetooth": "{icon}",
-    "format-bluetooth-muted": "{icon}",
+    "tooltip-format": "{source} {volume}%",
+    "tooltip-format-bluetooth": "{source} {volume}%",
+    "format": "{volume} {icon}",
+    "format-bluetooth": "󰂯 {icon}",
+    "format-bluetooth-muted": "󰂯 {icon}",
     "format-muted": "󰝟  {format_source}",
     "format-source": "󰍬",
     "format-source-muted": "",
