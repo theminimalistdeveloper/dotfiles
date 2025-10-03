@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 -- UI
 --------------------------------------------------------------------------------
+---@diagnostic disable: undefined-global
 
 -- Fix sign column (the column before the numbers) to avoid layout shifting
 vim.o.signcolumn = 'yes:1'
@@ -18,7 +19,7 @@ vim.o.colorcolumn = "80"
 -- One status line for Neovim instance instead one per window
 vim.o.laststatus = 3
 -- Set default theme
-vim.cmd 'colorscheme nord'
+vim.cmd 'colorscheme onenord'
 vim.cmd [[
   hi Normal guibg=NONE ctermbg=NONE
   hi NormalNC guibg=NONE ctermbg=NONE

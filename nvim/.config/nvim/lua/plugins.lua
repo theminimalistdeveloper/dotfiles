@@ -1,8 +1,10 @@
 ------------------------------------------------------------------------------
 -- PLUGINS
 -------------------------------------------------------------------------------
+---@diagnostic disable: undefined-global
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -362,8 +364,7 @@ local plugins = {
     end
   },
   -- Themes
-  { "catppuccin/nvim", as = "catppuccin-macchiato" , opt = { transparent = true }},
-  { 'shaunsingh/nord.nvim', opt = { transparent = true }},
+  'rmehri01/onenord.nvim',
   -- Enable navigation between nvim and tmux windows using <c-(h,j,k,l)>
   'christoomey/vim-tmux-navigator',
 }

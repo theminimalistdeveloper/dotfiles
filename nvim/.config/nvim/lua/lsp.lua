@@ -1,6 +1,7 @@
 -------------------------------------------------------------------------------
 -- NATIVE LSP
 -------------------------------------------------------------------------------
+---@diagnostic disable: undefined-global
 
 -- Run formatting before saving the buffer im.lsp.buf.formatting is deprecated.
 -- Use vim.lsp.buf.format { async = true } instead
