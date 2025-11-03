@@ -1,7 +1,9 @@
--------------------------------------------------------------------------------
+--- ----------------------------------------------------------------------------
 -- NATIVE LSP
 -------------------------------------------------------------------------------
 ---@diagnostic disable: undefined-global
+
+local lsp = vim.lsp
 
 -- Run formatting before saving the buffer im.lsp.buf.formatting is deprecated.
 -- Use vim.lsp.buf.format { async = true } instead
@@ -24,13 +26,13 @@ vim.diagnostic.config({
 -- Typescript & Javascript
 -------------------------------------------------------------------------------
 
-vim.lsp.config['eslint'] = {
+lsp.config['eslint'] = {
   cmd = { 'eslint_d', '--stdio' },
   root_markers = { '.eslintrc', '.eslintrc.js', '.eslintrc.json', '.eslintrc.yaml', '.eslintrc.yml' },
   filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' }
 }
 
-vim.lsp.config['vtsls'] = {
+lsp.config['vtsls'] = {
   cmd = { 'vtsls', '--stdio' },
   root_markers = { 'tsconfig.json', 'package.json' },
   filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' }
@@ -38,7 +40,7 @@ vim.lsp.config['vtsls'] = {
 
 -- Rust
 -------------------------------------------------------------------------------
-vim.lsp.config['rust-analyzer'] = {
+lsp.config['rust-analyzer'] = {
   cmd = { 'rust-analyzer' },
   root_markers = { 'Cargo.toml' },
   filetypes = { 'rust', 'rs' }
@@ -46,7 +48,7 @@ vim.lsp.config['rust-analyzer'] = {
 
 -- Lua
 -------------------------------------------------------------------------------
-vim.lsp.config['luals'] = {
+lsp.config['luals'] = {
   cmd = { 'lua-language-server' },
   root_markers = { '.luarc.json', '.luarc.jsonc' },
   filetypes = { 'lua' }
@@ -56,8 +58,53 @@ vim.lsp.config['luals'] = {
 -------------------------------------------------------------------------------
 vim.lsp.config['tailwindcss'] = {
   cmd = { 'tailwindcss-language-server', '--stdio' },
-  root_markers = { 'tailwind.config.js', 'tailwind.config.cjs', 'tailwind.config.ts', 'tailwind.config.tsx', 'tailwind.config.json' },
-  filetypes = { 'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' }
+  root_markers = {
+    'tailwind.config.js',
+    'tailwind.config.cjs',
+    'tailwind.config.ts',
+    'tailwind.config.tsx',
+    'tailwind.config.json',
+    'tailwind.config.mjs',
+    'package.json' -- fallback for npm projects
+  },
+  filetypes = {
+    'html',
+    'css',
+    'scss',
+    'sass',
+    'postcss',
+    'javascript',
+    'javascriptreact',
+    'typescript',
+    'typescriptreact',
+    'vue',
+    'svelte',
+    'astro',
+    'jsx',
+    'tsx'
+  },
+  settings = {
+    tailwindCSS = {
+      classAttributes = { "class", "className", "classList", "ngClass" },
+      lint = {
+        cssConflict = "warning",
+        invalidApply = "error",
+        invalidConfigPath = "error",
+        invalidScreen = "error",
+        invalidTailwindDirective = "error",
+        invalidVariant = "error",
+        recommendedVariantOrder = "warning"
+      },
+      validate = true
+    }
+  }
+}
+
+-- Biome
+--------------------------------------------------------------------------------
+vim.lsp.config['biome'] = {
+  cmd = {'biome'},
+  filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' }
 }
 
 -- Bash
