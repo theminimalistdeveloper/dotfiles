@@ -1,4 +1,4 @@
---- ----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- NATIVE LSP
 -------------------------------------------------------------------------------
 ---@diagnostic disable: undefined-global
@@ -17,7 +17,39 @@ vim.diagnostic.config({
   underline = true,
   update_in_insert = true,
   severity_sort = true,
+  float = {
+    border = 'rounded',
+    source = 'always',
+  },
 })
+
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+  vim.lsp.handlers.hover,
+  {
+    title = ' Hover ',
+    border = 'none',
+    max_width = 100,
+    max_height = 24,
+    pad_top = 1,
+    pad_bottom = 1,
+    style = 'minimal',
+    foscusable = false,
+  }
+)
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  {
+    title = ' Signature Help ',
+    border = 'none',
+    max_width = 100,
+    max_height = 24,
+    pad_top = 1,
+    pad_bottom = 1,
+    style = 'minimal',
+    foscusable = false,
+  }
+)
 
 -------------------------------------------------------------------------------
 -- LANGUAGE SERVERS CONFIGURATION
@@ -26,16 +58,25 @@ vim.diagnostic.config({
 -- Typescript & Javascript
 -------------------------------------------------------------------------------
 
+local jsFiletypes = {
+  'javascript',
+  'javascriptreact',
+  'javascript.jsx',
+  'typescript',
+  'typescriptreact',
+  'typescript.tsx'
+}
+
 lsp.config['eslint'] = {
   cmd = { 'eslint_d', '--stdio' },
   root_markers = { '.eslintrc', '.eslintrc.js', '.eslintrc.json', '.eslintrc.yaml', '.eslintrc.yml' },
-  filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' }
+  filetypes = jsFiletypes,
 }
 
 lsp.config['vtsls'] = {
   cmd = { 'vtsls', '--stdio' },
   root_markers = { 'tsconfig.json', 'package.json' },
-  filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' }
+  filetypes = jsFiletypes
 }
 
 -- Rust
@@ -102,10 +143,7 @@ vim.lsp.config['tailwindcss'] = {
 
 -- Biome
 --------------------------------------------------------------------------------
-vim.lsp.config['biome'] = {
-  cmd = {'biome'},
-  filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' }
-}
+vim.lsp.config['biome'] = { cmd = {'biome'}, filetypes = jsFiletypes }
 
 -- Bash
 -------------------------------------------------------------------------------
