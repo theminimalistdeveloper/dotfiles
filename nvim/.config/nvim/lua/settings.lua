@@ -67,17 +67,23 @@ vim.g.loaded_perl_provider = 0
 vim.opt.termguicolors = true
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.md' },
+  pattern = { '*.md', '*.norg' },
   callback = function()
-    -- Wrap lines
     vim.o.wrap = true
     vim.cmd 'Copilot disable'
   end,
 })
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.tsx,*.ts,*.js,*.jsx' },
+  pattern = { '*.tsx', '*.ts', '*.js', '*.jsx' },
   callback = function()
     vim.o.shiftwidth = 2
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { ".env", ".env.*" },
+  callback = function()
+    vim.bo.filetype = "dotenv"
   end,
 })

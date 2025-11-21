@@ -1,5 +1,5 @@
---------------------------------------------------------------------------------
 -- NATIVE LSP
+--------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 ---@diagnostic disable: undefined-global
 
@@ -23,8 +23,8 @@ vim.diagnostic.config({
   },
 })
 
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-  vim.lsp.handlers.hover,
+lsp.handlers['textDocument/hover'] = lsp.with(
+  lsp.handlers.hover,
   {
     title = ' Hover ',
     border = 'none',
@@ -37,8 +37,8 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
   }
 )
 
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-  vim.lsp.handlers.signature_help,
+lsp.handlers['textDocument/signatureHelp'] = lsp.with(
+  lsp.handlers.signature_help,
   {
     title = ' Signature Help ',
     border = 'none',
@@ -54,50 +54,19 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
 -------------------------------------------------------------------------------
 -- LANGUAGE SERVERS CONFIGURATION
 -------------------------------------------------------------------------------
-
--- Typescript & Javascript
--------------------------------------------------------------------------------
-
-local jsFiletypes = {
-  'javascript',
-  'javascriptreact',
-  'javascript.jsx',
-  'typescript',
-  'typescriptreact',
-  'typescript.tsx'
-}
-
-lsp.config['eslint'] = {
-  cmd = { 'eslint_d', '--stdio' },
-  root_markers = { '.eslintrc', '.eslintrc.js', '.eslintrc.json', '.eslintrc.yaml', '.eslintrc.yml' },
-  filetypes = jsFiletypes,
-}
-
-lsp.config['vtsls'] = {
-  cmd = { 'vtsls', '--stdio' },
-  root_markers = { 'tsconfig.json', 'package.json' },
-  filetypes = jsFiletypes
-}
-
--- Rust
--------------------------------------------------------------------------------
-lsp.config['rust-analyzer'] = {
-  cmd = { 'rust-analyzer' },
-  root_markers = { 'Cargo.toml' },
-  filetypes = { 'rust', 'rs' }
-}
-
--- Lua
--------------------------------------------------------------------------------
-lsp.config['luals'] = {
-  cmd = { 'lua-language-server' },
-  root_markers = { '.luarc.json', '.luarc.jsonc' },
-  filetypes = { 'lua' }
-}
-
--- Tailwindcss
--------------------------------------------------------------------------------
-vim.lsp.config['tailwindcss'] = {
+lsp.config['bashls'] = {}
+lsp.config['biome'] = {}
+lsp.config['cssls'] = {}
+lsp.config['docker_compose_language_service'] = {}
+lsp.config['dotenv-linter'] = {}
+lsp.config['graphql'] = {}
+lsp.config['html'] = {}
+lsp.config['jsonls'] = {}
+lsp.config['lua_ls'] = {}
+lsp.config['luals'] = {}
+lsp.config['rust_analyzer'] = {}
+lsp.config['rust-analyzer'] = {}
+lsp.config['tailwindcss'] = {
   cmd = { 'tailwindcss-language-server', '--stdio' },
   root_markers = {
     'tailwind.config.js',
@@ -140,32 +109,78 @@ vim.lsp.config['tailwindcss'] = {
     }
   }
 }
-
--- Biome
---------------------------------------------------------------------------------
-vim.lsp.config['biome'] = { cmd = {'biome'}, filetypes = jsFiletypes }
-
--- Bash
--------------------------------------------------------------------------------
-vim.lsp.config['bashls'] = {
-  cmd = { 'bash-language-server', 'start' },
-  filetypes = { 'sh', 'bash' }
+lsp.config['vtsls'] = {
+  cmd = { 'vtsls', '--stdio' },
+  root_markers = {
+    'package.json',
+    'tsconfig.json',
+    'jsconfig.json',
+    '.git'
+  },
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'typescript',
+    'typescriptreact',
+    'vue'
+  },
+  settings = {
+    complete_function_calls = true,
+    vtsls = {
+      enableMoveToFileCodeAction = true,
+      autoUseWorkspaceTsdk = true,
+      experimental = {
+        completion = {
+          enableServerSideFuzzyMatch = true,
+        },
+      },
+    },
+    typescript = {
+      updateImportsOnFileMove = { enabled = "always" },
+      suggest = {
+        completeFunctionCalls = true,
+      },
+      inlayHints = {
+        enumMemberValues = { enabled = true },
+        functionLikeReturnTypes = { enabled = true },
+        parameterNames = { enabled = "literals" },
+        parameterTypes = { enabled = true },
+        propertyDeclarationTypes = { enabled = true },
+        variableTypes = { enabled = false },
+      },
+    },
+    javascript = {
+      updateImportsOnFileMove = { enabled = "always" },
+      suggest = {
+        completeFunctionCalls = true,
+      },
+      inlayHints = {
+        enumMemberValues = { enabled = true },
+        functionLikeReturnTypes = { enabled = true },
+        parameterNames = { enabled = "literals" },
+        parameterTypes = { enabled = true },
+        propertyDeclarationTypes = { enabled = true },
+        variableTypes = { enabled = false },
+      },
+    },
+  },
 }
+lsp.config['yamlls'] = {}
 
--- Graphql
--------------------------------------------------------------------------------
-vim.lsp.config['graphql'] = {
-  cmd = { 'graphql-lsp', 'server', '-m', 'stream' },
-  filetypes = { 'graphql' }
-}
-
-vim.lsp.enable({
+lsp.enable({
   'bashls',
+  'biome',
+  'cssls',
+  'docker_compose_language_service',
   'dotenv-linter',
-  'eslint',
   'graphql',
+  'html',
+  'jsonls',
+  'lua_ls',
   'luals',
   'rust-analyzer',
+  'rust_analyzer',
   'tailwindcss',
   'vtsls',
+  'yamlls',
 })

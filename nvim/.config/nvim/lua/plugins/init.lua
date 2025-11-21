@@ -17,36 +17,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local plugins = {
-  require 'plugins/cmp-buffer',
-  require 'plugins/cmp-cmdline',
-  require 'plugins/cmp-luasnip',
-  require 'plugins/cmp-nvim-lsp',
-  require 'plugins/cmp-path',
+require("lazy").setup({
   require 'plugins/codecompanion',
-  require 'plugins/fzf',
-  require 'plugins/lspkind-nvim',
-  require 'plugins/lualine',
-  require 'plugins/luasnip',
   require 'plugins/mason',
-  require 'plugins/mason-lspconfig',
-  require 'plugins/minidiff',
-  require 'plugins/mini-pairs',
   require 'plugins/neogit',
-  require 'plugins/neorg',
-  require 'plugins/neotest',
-  require 'plugins/nvim-cmp',
   require 'plugins/nvim-tree',
+  require 'plugins/mini',
   require 'plugins/nvim-treesitter',
-  require 'plugins/nvim-web-devicons',
   require 'plugins/onenord',
-  require 'plugins/plenary',
-  require 'plugins/telescope',
   require 'plugins/trouble',
-  require 'plugins/ts-comment',
-  require 'plugins/vim-surround',
   require 'plugins/vim-tmux-navigator',
-  require 'plugins/which-key',
-}
-
-require("lazy").setup(plugins, {})
+}, {})

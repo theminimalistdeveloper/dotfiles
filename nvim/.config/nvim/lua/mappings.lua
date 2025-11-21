@@ -98,7 +98,7 @@ vim.keymap.set('n', '<leader>wo', '<C-w><C-O>')
 -- Open mappings
 vim.keymap.set('n', '<leader>vm', '<cmd>e ~/.config/nvim/lua/mappings.lua<cr>')
 -- Open plugins
-vim.keymap.set('n', '<leader>vp', '<cmd>e ~/.config/nvim/lua/plugins.lua<cr>')
+vim.keymap.set('n', '<leader>vp', '<cmd>e ~/.config/nvim/lua/plugins/init.lua<cr>')
 -- Open UI
 vim.keymap.set('n', '<leader>vu', '<cmd>e ~/.config/nvim/lua/ui.lua<cr>')
 -- Open LSP

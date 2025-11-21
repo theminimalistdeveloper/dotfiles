@@ -4,6 +4,7 @@ return {
     'MunifTanjim/nui.nvim',
     'github/copilot.vim',
     'j-hui/fidget.nvim',
+    'nvim-lua/plenary.nvim',
   },
   config = function()
     require('codecompanion').setup({
