@@ -22,5 +22,6 @@ plugins=(aws git tmux)
 # LOADING
 source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/zsh/aliases.zsh
+source $HOME/dotfiles/zsh/nvm.zsh
 
 bindkey -v
