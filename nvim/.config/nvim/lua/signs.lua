@@ -3,10 +3,10 @@
 --------------------------------------------------------------------------------
 
 local signs = {
-  Error = "💩",  -- Pile of poo
-  Warn = "🤢",   -- Nauseated face
-  Info = "📢",   -- Megaphone
-  Hint = "🙋",   -- Person raising hand
+  Error = "", -- Bug
+  Warn = "⚡", -- Bolt
+  Info = "", -- Info script
+  Hint = "", -- Lightbulb
 }
 
 return signs;
