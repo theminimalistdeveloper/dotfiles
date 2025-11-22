@@ -1,37 +1,21 @@
----@diagnostic disable: undefined-global
--- vim.api.nvim_set_hl(0, 'StatuslineLSP', { 
-
---   fg = '#98c379', 
---   bg = '#2c323c', 
---   bold = true 
--- })
-
 local function lsp_info()
   local clients = vim.lsp.get_clients({ bufnr = 0 })
   if #clients == 0 then
     return ""
   end
-  
+
   local client_names = {}
   for _, client in ipairs(clients) do
     table.insert(client_names, client.name)
   end
-  
+
   return string.format("  %s", table.concat(client_names, ", "))
 end
 
 return {
-  'nvim-mini/mini.nvim',
+  'nvim-mini/mini.statusline',
   opts = {},
-  version = '*',
   config = function()
-    require('mini.comment').setup()
-    require('mini.completion').setup()
-    require('mini.diff').setup()
-    require('mini.icons').setup()
-    require('mini.move').setup()
-    require('mini.pairs').setup()
-    require('mini.snippets').setup()
     require('mini.statusline').setup({
       content = {
         active = function()
@@ -43,7 +27,7 @@ return {
           local location = require('mini.statusline').section_location({ trunc_width = 75 })
 
           return require('mini.statusline').combine_groups({
-            { hl = mode_hl, = { mode } },
+            { hl = mode_hl, string = { mode } },
             { hl = 'MiniStatuslineDevinfo', strings = { git, diagnostics } },
             { hl = 'MiniStatuslineFilename', strings = { filename } },
             '%=',
@@ -54,9 +38,5 @@ return {
         end,
       },
     })
-    require('mini.surround').setup()
-    require('mini.pick').setup()
-    require('mini.clue').setup()
-    require('mini.git').setup()
-  end
+  end,
 }

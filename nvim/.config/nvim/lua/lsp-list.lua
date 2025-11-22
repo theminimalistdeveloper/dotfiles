@@ -1,0 +1,16 @@
+return {
+  'bashls',
+  'biome',
+  'cssls',
+  'docker_compose_language_service',
+  'dotenv-linter',
+  'graphql',
+  'html',
+  'jsonls',
+  'lua_ls',
+  'rust_analyzer',
+  'taplo',
+  'tailwindcss',
+  'vtsls',
+  'yamlls',
+}

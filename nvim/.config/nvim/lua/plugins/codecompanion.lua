@@ -10,14 +10,14 @@ return {
     require('codecompanion').setup({
       display = {
         action_palette = {
-          provider = "telescope"
+          provider = "mini_pick"
         }
       },
       strategies = {
         chat = {
           adapter = {
             name="copilot",
-            model= "claude-sonnet-4",
+            model= "gemini-3-pro-preview",
           },
           keymaps = {
             send = {
@@ -30,7 +30,7 @@ return {
         inline = {
           adapter = {
             name="copilot",
-            model= "claude-sonnet-4",
+            model= "gemini-3-pro-preview",
           },
           keymaps = {
             accept_change = {
@@ -47,7 +47,7 @@ return {
         cmd = {
           adapter = {
             name="copilot",
-            model= "claude-sonnet-4",
+            model= "gemini-3-pro-preview",
           },
         },
       },

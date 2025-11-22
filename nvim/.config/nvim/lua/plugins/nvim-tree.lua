@@ -4,6 +4,7 @@ local signs = require 'signs'
 
 return {
   'nvim-tree/nvim-tree.lua',
+  -- dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     require("nvim-tree").setup({
       diagnostics = {
@@ -30,7 +31,7 @@ return {
     })
   end,
   keys = {
-    { '<leader>oo', '<cmd>NvimTreeToggle<cr>',    mode = 'n' },
+    { '<leader>oo', '<cmd>NvimTreeToggle<cr>', mode = 'n' },
     { '<leader>of', '<cmd>NvimTreeFindFile!<cr>', mode = 'n' },
   },
 }

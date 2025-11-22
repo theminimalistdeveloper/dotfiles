@@ -1,7 +1,6 @@
 --------------------------------------------------------------------------------
 -- BASIC SETTINGS
 --------------------------------------------------------------------------------
----@diagnostic disable: undefined-global
 
 -- Change the terminal title
 vim.o.title = true
@@ -14,7 +13,6 @@ vim.o.updatetime = 250
 -- Undo settings, keep a much longer history of
 -- undoes even between sessions by storing in an external file
 vim.o.undodir = vim.env.HOME .. '/.undodir'
-vim.b.undofile = true
 -- Hides the buffer instead of closing the files
 vim.o.hidden = true
 -- Ignore case when searching
@@ -60,10 +58,6 @@ vim.cmd 'filetype plugin indent on';
 -- Enable filetype plugins
 vim.cmd 'filetype plugin on'
 -- Enables syntax highlight
--- Disable Ruby provider
-vim.g.loaded_ruby_provider = 0
--- Disable Perl provider
-vim.g.loaded_perl_provider = 0
 vim.opt.termguicolors = true
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
@@ -71,19 +65,5 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   callback = function()
     vim.o.wrap = true
     vim.cmd 'Copilot disable'
-  end,
-})
-
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.tsx', '*.ts', '*.js', '*.jsx' },
-  callback = function()
-    vim.o.shiftwidth = 2
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = { ".env", ".env.*" },
-  callback = function()
-    vim.bo.filetype = "dotenv"
   end,
 })

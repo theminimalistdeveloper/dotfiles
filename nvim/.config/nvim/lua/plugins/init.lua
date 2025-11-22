@@ -1,4 +1,4 @@
-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 -- PLUGINS
 -------------------------------------------------------------------------------
 ---@diagnostic disable: undefined-global
@@ -17,14 +17,18 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-  require 'plugins/codecompanion',
-  require 'plugins/mason',
-  require 'plugins/neogit',
-  require 'plugins/nvim-tree',
-  require 'plugins/mini',
-  require 'plugins/nvim-treesitter',
-  require 'plugins/onenord',
-  require 'plugins/trouble',
-  require 'plugins/vim-tmux-navigator',
-}, {})
+-- Automatically require all plugin files
+local plugins = {}
+local plugin_files = vim.fn.glob(vim.fn.stdpath("config") .. "/lua/plugins/*.lua", true, true)
+
+for _, file in ipairs(plugin_files) do
+  local filename = vim.fn.fnamemodify(file, ":t:r") -- Get filename without extension
+  if filename ~= "init" then -- Skip init.lua to avoid circular dependency
+    local plugin_module = require("plugins/" .. filename)
+    if type(plugin_module) == "table" then
+      table.insert(plugins, plugin_module)
+    end
+  end
+end
+
+require("lazy").setup(plugins, {})

@@ -1,6 +1,5 @@
 -- MAPPINGS
 --------------------------------------------------------------------------------
----@diagnostic disable: undefined-global
 
 -- Map the leader key to space. *very* important
 vim.g.mapleader = " "
@@ -99,6 +98,8 @@ vim.keymap.set('n', '<leader>wo', '<C-w><C-O>')
 vim.keymap.set('n', '<leader>vm', '<cmd>e ~/.config/nvim/lua/mappings.lua<cr>')
 -- Open plugins
 vim.keymap.set('n', '<leader>vp', '<cmd>e ~/.config/nvim/lua/plugins/init.lua<cr>')
+-- Open mini plugins
+vim.keymap.set('n', '<leader>vn', '<cmd>e ~/.config/nvim/lua/plugins/mini.lua<cr>')
 -- Open UI
 vim.keymap.set('n', '<leader>vu', '<cmd>e ~/.config/nvim/lua/ui.lua<cr>')
 -- Open LSP

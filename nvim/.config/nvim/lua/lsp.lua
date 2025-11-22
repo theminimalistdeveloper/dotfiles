@@ -1,7 +1,5 @@
 -- NATIVE LSP
 --------------------------------------------------------------------------------
--------------------------------------------------------------------------------
----@diagnostic disable: undefined-global
 
 local lsp = vim.lsp
 
@@ -23,49 +21,167 @@ vim.diagnostic.config({
   },
 })
 
-lsp.handlers['textDocument/hover'] = lsp.with(
-  lsp.handlers.hover,
-  {
-    title = ' Hover ',
-    border = 'none',
-    max_width = 100,
-    max_height = 24,
-    pad_top = 1,
-    pad_bottom = 1,
-    style = 'minimal',
-    foscusable = false,
-  }
-)
-
-lsp.handlers['textDocument/signatureHelp'] = lsp.with(
-  lsp.handlers.signature_help,
-  {
-    title = ' Signature Help ',
-    border = 'none',
-    max_width = 100,
-    max_height = 24,
-    pad_top = 1,
-    pad_bottom = 1,
-    style = 'minimal',
-    foscusable = false,
-  }
-)
-
 -------------------------------------------------------------------------------
 -- LANGUAGE SERVERS CONFIGURATION
 -------------------------------------------------------------------------------
-lsp.config['bashls'] = {}
-lsp.config['biome'] = {}
-lsp.config['cssls'] = {}
-lsp.config['docker_compose_language_service'] = {}
-lsp.config['dotenv-linter'] = {}
-lsp.config['graphql'] = {}
-lsp.config['html'] = {}
-lsp.config['jsonls'] = {}
-lsp.config['lua_ls'] = {}
-lsp.config['luals'] = {}
-lsp.config['rust_analyzer'] = {}
-lsp.config['rust-analyzer'] = {}
+
+local schemastore = require('schemastore')
+lsp.config['biome'] = {
+  cmd = { 'biome', 'lsp-proxy' },
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'typescript',
+    'typescriptreact',
+    'json',
+    'jsonc',
+    'css',
+    'vue',
+    'astro',
+    'svelte'
+  },
+  root_markers = {
+    'biome.json',
+    'biome.jsonc',
+    'package.json',
+    '.git'
+  },
+  single_file_support = true,
+  settings = {
+    biome = {
+      -- Enable formatting
+      formatter = {
+        enabled = true,
+        formatOnSave = true,
+        indentStyle = "space",
+        indentSize = 2,
+        lineWidth = 80
+      },
+      -- Enable linting
+      linter = {
+        enabled = true,
+        rules = {
+          recommended = true
+        }
+      },
+      -- Enable code actions
+      codeAction = {
+        enabled = true
+      }
+    }
+  }
+}
+lsp.config['cssls'] = {
+  cmd = { 'vscode-css-language-server', '--stdio' },
+  filetypes = { 'css', 'scss', 'less' },
+  root_markers = { 'package.json', '.git' },
+  settings = {
+    css = {
+      validate = true,
+      lint = {
+        unknownAtRules = "ignore"
+      }
+    },
+    scss = {
+      validate = true,
+      lint = {
+        unknownAtRules = "ignore"
+      }
+    },
+    less = {
+      validate = true,
+      lint = {
+        unknownAtRules = "ignore"
+      }
+    }
+  }
+}
+lsp.config['docker_compose_language_service'] = {
+  cmd = { 'docker-compose-langserver', '--stdio' },
+  filetypes = { 'yaml.docker-compose', 'yaml' },
+  root_markers = { 'docker-compose.yml', 'docker-compose.yaml', 'compose.yml', 'compose.yaml' },
+  settings = {}
+}
+lsp.config['dotenv-linter'] = {
+  cmd = { 'dotenv-linter', '--stdin' },
+  filetypes = { 'dotenv' },
+  root_markers = { '.env', '.env.local', '.env.development', '.env.production' },
+  settings = {}
+}
+lsp.config['graphql'] = {
+  cmd = { 'graphql-lsp', 'server', '-m', 'stream' },
+  filetypes = { 'graphql', 'gql', 'typescriptreact', 'javascriptreact' },
+  root_markers = { '.graphqlrc', '.graphqlrc.json', 'package.json', '.git' },
+  settings = {}
+}
+lsp.config['jsonls'] = {
+  cmd = { 'vscode-json-language-server', '--stdio' },
+  filetypes = { 'json', 'jsonc' },
+  root_markers = { 'package.json', '.git' },
+  settings = {
+    json = {
+      schemastore.json.schemas(),
+      validate = { enable = true }
+    }
+  }
+}
+lsp.config['lua_ls'] = {
+  cmd = { 'lua-language-server' },
+  filetypes = { 'lua' },
+  root_markers = { { '.luarc.json', '.luarc.jsonc' }, '.git' },
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = runtime_path,
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = { 'vim' },
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+        -- Disable the missing-fields warning
+        checkThirdParty = false,
+      },
+      telemetry = {
+        enable = false,
+      },
+      completion = {
+        callSnippet = "Replace"
+      },
+      hint = {
+        enable = true,
+      },
+    },
+  },
+}
+lsp.config['rust_analyzer'] = {
+  cmd = { 'rust-analyzer' },
+  filetypes = { 'rust' },
+  root_markers = { 'Cargo.toml', 'rust-project.json', '.git' },
+  settings = {
+    ['rust-analyzer'] = {
+      cargo = {
+        allFeatures = true,
+        loadOutDirsFromCheck = true,
+        runBuildScripts = true,
+      },
+      checkOnSave = {
+        allFeatures = true,
+        command = 'check',
+        extraArgs = { '--no-deps' },
+      },
+      procMacro = {
+        enable = true,
+        ignored = {},
+      },
+    },
+  }
+}
 lsp.config['tailwindcss'] = {
   cmd = { 'tailwindcss-language-server', '--stdio' },
   root_markers = {
@@ -165,22 +281,47 @@ lsp.config['vtsls'] = {
     },
   },
 }
-lsp.config['yamlls'] = {}
+lsp.config['yamlls'] = {
+  cmd = { 'yaml-language-server', '--stdio' },
+  filetypes = { 'yaml', 'yml' },
+  root_markers = { '.yamllint', '.yamllint.yml', 'package.json', '.git' },
+  settings = {
+    yaml = {
+      schemas = schemastore.yaml.schemas(),
+      validate = true,
+      completion = true,
+      hover = true
+    }
+  }
+}
+lsp.config['taplo'] = {
+  cmd = { 'taplo', 'lsp', 'stdio' },
+  filetypes = { 'toml' },
+  root_markers = { 'Cargo.toml', 'pyproject.toml', '.git' },
+  settings = {
+    taplo = {
+      configFile = {
+        enabled = true
+      },
+      schema = {
+        enabled = true,
+        catalogs = {
+          "https://www.schemastore.org/api/json/catalog.json"
+        }
+      }
+    }
+  }
+}
+lsp.config['bashls'] = {
+  cmd = { 'bash-language-server', 'start' },
+  filetypes = { 'sh', 'bash' },
+  root_markers = { '.git' },
+  single_file_support = true,
+  settings = {
+    bashIde = {
+      globPattern = "**/*@(.sh|.inc|.bash|.command)"
+    }
+  }
+}
 
-lsp.enable({
-  'bashls',
-  'biome',
-  'cssls',
-  'docker_compose_language_service',
-  'dotenv-linter',
-  'graphql',
-  'html',
-  'jsonls',
-  'lua_ls',
-  'luals',
-  'rust-analyzer',
-  'rust_analyzer',
-  'tailwindcss',
-  'vtsls',
-  'yamlls',
-})
+lsp.enable(require('lsp-list'))
