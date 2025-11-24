@@ -163,24 +163,6 @@ lsp.config['rust_analyzer'] = {
   cmd = { 'rust-analyzer' },
   filetypes = { 'rust' },
   root_markers = { 'Cargo.toml', 'rust-project.json', '.git' },
-  settings = {
-    ['rust-analyzer'] = {
-      cargo = {
-        allFeatures = true,
-        loadOutDirsFromCheck = true,
-        runBuildScripts = true,
-      },
-      checkOnSave = {
-        allFeatures = true,
-        command = 'check',
-        extraArgs = { '--no-deps' },
-      },
-      procMacro = {
-        enable = true,
-        ignored = {},
-      },
-    },
-  }
 }
 lsp.config['tailwindcss'] = {
   cmd = { 'tailwindcss-language-server', '--stdio' },
