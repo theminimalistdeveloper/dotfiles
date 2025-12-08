@@ -1,7 +1,3 @@
-return {
-  'nvim-mini/mini.pairs',
-  opts = {},
-  config = function()
-    require('mini.pairs').setup()
-  end,
-}
+vim.pack.add({'https://github.com/nvim-mini/mini.pairs'})
+
+require('mini.pairs').setup()

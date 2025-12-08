@@ -1,8 +1,4 @@
-return {
-  'williamboman/mason.nvim',
-  config = function()
-    require('mason').setup {
-      ensure_installed = require('../lsp-list')
-    }
-  end,
+vim.pack.add({'https://github.com/williamboman/mason.nvim'})
+require('mason').setup {
+  ensure_installed = require('../lsp-list')
 }

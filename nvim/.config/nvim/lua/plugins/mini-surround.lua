@@ -1,7 +1,3 @@
-return {
-  'nvim-mini/mini.surround',
-  opts = {},
-  config = function()
-    require('mini.surround').setup()
-  end,
-}
+vim.pack.add({'https://github.com/nvim-mini/mini.surround'})
+
+require('mini.surround').setup()
