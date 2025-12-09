@@ -5,7 +5,7 @@
   "spacing": 0,
   "modules-left": [
     "sway/workspaces",
-    "sway/mode",
+    "sway/mode"
   ],
   "modules-center": [
     "sway/window"
@@ -13,7 +13,6 @@
   "modules-right": [
     "pulseaudio",
     "network",
-    "backlight",
     "cpu",
     "memory",
     "temperature",
@@ -34,7 +33,7 @@
     "icon-size": 21,
     "spacing": 10,
     "icons": {
-      "blueman": "bluetooth",
+      "blueman": "bluetooth"
     }
   },
   "clock": {
@@ -45,7 +44,7 @@
   },
   "cpu": {
     "format": "",
-    "on-click": "gnome-system-monitor",
+    "on-click": "gnome-system-monitor"
   },
   "memory": {
     "format": "",
@@ -73,13 +72,12 @@
       "critical": 15
     },
     "format": "{icon}",
-    "format-full": "{icon}",
     "format-charging": "󰂄",
     "format-plugged": "",
     "format-alt": "{time} {icon}",
     // "format-good": "", // An empty format will hide the module
     "format-full": "<span color='#a3be8c'>{icon}</span>",
-    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
   },
   "power-profiles-daemon": {
     "format": "{icon}",
@@ -123,7 +121,7 @@
     "format-wired": "{icon}",
     "tooltip-format-wifi": "{essid} {signalStrength}% {ipaddr}",
     "tooltip-format-ethernet": "Interface {ifname} {ipaddr}",
-    "on-click": "nm-connection-editor",
+    "on-click": "nm-connection-editor"
   },
  "pulseaudio": {
     "format-icons": {
