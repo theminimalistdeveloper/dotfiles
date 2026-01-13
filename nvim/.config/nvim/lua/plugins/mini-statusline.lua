@@ -17,21 +17,23 @@ vim.pack.add({'https://github.com/nvim-mini/mini.statusline'})
 require('mini.statusline').setup({
   content = {
     active = function()
-      local mode, mode_hl = require('mini.statusline').section_mode({ trunc_width = 120 })
-      local git = require('mini.statusline').section_git({ trunc_width = 75 })
-      local diagnostics = require('mini.statusline').section_diagnostics({ trunc_width = 75 })
-      local filename = require('mini.statusline').section_filename({ trunc_width = 140 })
-      local fileinfo = require('mini.statusline').section_fileinfo({ trunc_width = 120 })
-      local location = require('mini.statusline').section_location({ trunc_width = 75 })
+      local statusline = require('mini.statusline')
+      local mode = statusline.section_mode({ trunc_width = 75 })
+      local git = statusline.section_git({ trunc_width = 75 })
+      local diff = statusline.section_diff({ trunc_width = 75 })
+      local diagnostics = statusline.section_diagnostics({ trunc_width = 75 })
+      local filename = statusline.section_filename({ trunc_width = 140 })
+      local fileinfo = statusline.section_fileinfo({ trunc_width = 120 })
+      local search_count = statusline.section_searchcount({ trunc_width = 75 })
 
       return require('mini.statusline').combine_groups({
-        { hl = mode_hl, string = { mode } },
-        { hl = 'MiniStatuslineDevinfo', strings = { git, diagnostics } },
-        { hl = 'MiniStatuslineFilename', strings = { filename } },
+        { string = { mode, }, strings = { mode:upper()} },
+        { strings = { git, diff,  diagnostics } },
+        { strings = { filename } },
         '%=',
-        { hl = 'StatuslineLSP', strings = { lsp_info() } },
-        { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
-        { hl = mode_hl, strings = { location } },
+        { strings = { lsp_info() } },
+        { strings = { fileinfo } },
+        { strings = { search_count } },
       })
     end,
   },

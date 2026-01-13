@@ -52,7 +52,7 @@ require('codecompanion').setup({
   },
 })
 
-vim.keymap.set('n', '<leader>aa', '<cmd>CodeCompanionActions<cr>')
-vim.keymap.set('n', '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>')
-vim.keymap.set('v', '<leader>ad', '<cmd>CodeCompanionAdd<cr>')
-vim.keymap.set('v', '<leader>ae', '<cmd>CodeCompanion /explain<cr>')
+vim.keymap.set('n', '<leader>aa', '<cmd>CodeCompanionActions<cr>', {desc='CodeCompanion Actions'})
+vim.keymap.set('n', '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', {desc='Toggle CodeCompanion Chat'})
+vim.keymap.set('v', '<leader>ad', '<cmd>CodeCompanionAdd<cr>', {desc='CodeCompanion Add'})
+vim.keymap.set('v', '<leader>ae', '<cmd>CodeCompanion /explain<cr>', {desc='CodeCompanion Explain'})

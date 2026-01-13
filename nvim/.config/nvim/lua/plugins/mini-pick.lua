@@ -1,13 +1,7 @@
 vim.pack.add({'https://github.com/nvim-mini/mini.pick'})
 
-require('mini.pick').setup({
-  source = {
-    files = {
-      command = { 'rg', '--files', '--hidden', '--glob', '--no-ignore' },
-    },
-  },
-})
+require('mini.pick').setup()
 
-vim.keymap.set('v', '<leader>ff', '<cmd>Pick files<cr>' )
-vim.keymap.set('n', '<leader>fg', '<cmd>Pick grep_live<cr>')
-vim.keymap.set('n', '<leader>fb', '<cmd>Pick buffers<cr>')
+vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>', { desc='Find files'})
+vim.keymap.set('n', '<leader>fg', '<cmd>Pick grep_live<cr>', { desc='Live grep'})
+vim.keymap.set('n', '<leader>fb', '<cmd>Pick buffers<cr>', { desc='Find buffers'})

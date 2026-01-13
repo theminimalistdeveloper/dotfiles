@@ -26,4 +26,6 @@ vim.cmd [[
   hi NonText ctermbg=NONE guibg=NONE
   hi NvimTreeNormal guibg=NONE ctermbg=NONE
   hi InactiveWindow guibg=NONE ctermbg=NONE
+  hi StatusLine guibg=NONE ctermbg=NONE
+  hi StatusLineTerm guibg=NONE ctermbg=NONE
 ]]

@@ -27,5 +27,5 @@ require("nvim-tree").setup({
   filters = { dotfiles = false }
 })
 
-vim.keymap.set('n', '<leader>oo', '<cmd>NvimTreeToggle<cr>')
-vim.keymap.set('n', '<leader>of', '<cmd>NvimTreeFindFile!<cr>')
+vim.keymap.set('n', '<leader>oo', '<cmd>NvimTreeToggle<cr>', { desc='Toggle Nvim Tree'})
+vim.keymap.set('n', '<leader>of', '<cmd>NvimTreeFindFile!<cr>', { desc='Show the current file in Nvim Tree'})
