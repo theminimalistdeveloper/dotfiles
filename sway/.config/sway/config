@@ -35,9 +35,9 @@ set $ws10 "10"
 
 # COMMANDS - AUTO EXECUTE ON START
 exec waybar
-exec kitty
+exec ghostty
 exec brave
-exec swaybg -i ~/Pictures/background.jpg -m center
+exec swaybg -c 000000
 
 # BINDINGS
 ################################################################################
@@ -118,7 +118,7 @@ bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@
 bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.2
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec ghostty
 # kill focused window
 bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
