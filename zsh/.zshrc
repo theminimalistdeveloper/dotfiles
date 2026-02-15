@@ -23,5 +23,7 @@ plugins=(aws git tmux)
 source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/zsh/aliases.zsh
 source $HOME/dotfiles/zsh/nvm.zsh
+source $HOME/api-keys.zsh
 
 bindkey -v
+export PATH="$HOME/.local/bin:$PATH"
