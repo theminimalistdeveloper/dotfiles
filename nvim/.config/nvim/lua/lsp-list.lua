@@ -4,6 +4,7 @@ return {
   'cssls',
   'docker_compose_language_service',
   'dotenv-linter',
+  'emmet-language-server',
   'graphql',
   'html',
   'jsonls',
