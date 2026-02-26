@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "blink.cmp": {
+      "rev": "b4d379393882561f9055abe780342ee00f02c573",
+      "src": "https://github.com/Saghen/blink.cmp"
+    },
     "claudecode.nvim": {
       "rev": "db2d1269ff3afdfcbb3f791760e03ef3a593d1b3",
       "src": "https://github.com/douglasjordan2/claudecode.nvim"
