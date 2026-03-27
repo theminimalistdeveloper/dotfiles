@@ -49,21 +49,21 @@ vim.o.listchars = 'trail:⋅,space:⋅'
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.o.foldtext = ''
-vim.o.foldcolumn = "1"
-vim.o.statuscolumn = "%l %s"
+vim.o.foldcolumn = '1'
+vim.o.statuscolumn = '%l %s'
 -- auto complete options
 vim.o.completeopt = 'menuone,noinsert'
 -- Set the identation on
-vim.cmd 'filetype plugin indent on';
+vim.cmd('filetype plugin indent on')
 -- Enable filetype plugins
-vim.cmd 'filetype plugin on'
+vim.cmd('filetype plugin on')
 -- Enables syntax highlight
 vim.opt.termguicolors = true
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.md', '*.norg' },
-  callback = function()
-    vim.o.wrap = true
-    vim.cmd 'Copilot disable'
-  end,
+    pattern = { '*.md', '*.norg' },
+    callback = function()
+        vim.o.wrap = true
+        vim.cmd('Copilot disable')
+    end,
 })

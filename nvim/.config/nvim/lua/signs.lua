@@ -3,10 +3,10 @@
 --------------------------------------------------------------------------------
 
 local signs = {
-  Error = "", -- Bug
-  Warn = "⚡", -- Bolt
-  Info = "", -- Info script
-  Hint = "", -- Lightbulb
+    Error = '',
+    Warn = '⚡',
+    Info = '',
+    Hint = '',
 }
 
-return signs;
+return signs

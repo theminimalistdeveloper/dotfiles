@@ -1,6 +1,6 @@
-require 'settings'
-require 'mappings'
-require 'plugins/init'
-require 'statusline'
-require 'ui'
-require 'lsp/init'
+require('settings')
+require('mappings')
+require('plugins/init')
+require('statusline')
+require('ui')
+require('lsp/init')

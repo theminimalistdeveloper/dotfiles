@@ -1,0 +1,7 @@
+
+# Use single quotes for strings, force single where possible
+quote_style = "ForceSingle"
+
+# Use spaces instead of tabs and set indent width to 4
+indent_type = "Spaces"
+indent_width = 4
