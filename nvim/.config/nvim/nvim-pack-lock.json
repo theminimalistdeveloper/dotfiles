@@ -13,7 +13,7 @@
       "src": "https://github.com/douglasjordan2/claudecode.nvim"
     },
     "codecompanion.nvim": {
-      "rev": "754979bd326ab144b4a30dc99049518878efe256",
+      "rev": "9809e463e786dafb8e0c86093d5648f1fb40769f",
       "src": "https://github.com/olimorris/codecompanion.nvim"
     },
     "conform.nvim": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gitsigns.nvim": {
-      "rev": "a462f416e2ce4744531c6256252dee99a7d34a83",
+      "rev": "50c205548d8b037b7ff6378fca6d21146f0b6161",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "lualine.nvim": {
@@ -97,7 +97,7 @@
       "src": "https://github.com/nvim-mini/mini.pick"
     },
     "mini.snippets": {
-      "rev": "b4065ca6b33e4df2897672d3bb760cfc93f4390a",
+      "rev": "c7a5fd5e767dcc732940f59f2a83c64ea7346a3e",
       "src": "https://github.com/nvim-mini/mini.snippets"
     },
     "mini.statusline": {
@@ -109,7 +109,7 @@
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "neogit": {
-      "rev": "b77156034f1d87aecb04fcf224d4759e3973f0f4",
+      "rev": "aaa921cbcff77323576147ea7ba2e92c181f3ffd",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nord.nvim": {
