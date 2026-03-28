@@ -1,11 +1,15 @@
 {
   "plugins": {
+    "Comment.nvim": {
+      "rev": "e30b7f2008e52442154b66f7c519bfd2f1e32acb",
+      "src": "https://github.com/numToStr/Comment.nvim"
+    },
     "LuaSnip": {
       "rev": "642b0c595e11608b4c18219e93b88d7637af27bc",
       "src": "https://github.com/L3MON4D3/LuaSnip"
     },
     "blink.cmp": {
-      "rev": "62c3d54f7d739ee46f850ea6832383e3b7ca2ee1",
+      "rev": "7c9777bae52009a198a2e6d56bc9185dbf3d151f",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "claudecode.nvim": {
@@ -13,7 +17,7 @@
       "src": "https://github.com/douglasjordan2/claudecode.nvim"
     },
     "codecompanion.nvim": {
-      "rev": "9809e463e786dafb8e0c86093d5648f1fb40769f",
+      "rev": "d4532d89fe23a59b2f5e06f58669ab548be44b86",
       "src": "https://github.com/olimorris/codecompanion.nvim"
     },
     "conform.nvim": {
@@ -85,7 +89,7 @@
       "src": "https://github.com/nvim-mini/mini.move"
     },
     "mini.notify": {
-      "rev": "29ec27f60bf4b63e447c851d9061c434d80795a6",
+      "rev": "e506fb6da26c0a31ee6b1d2eb99626cb147f28ca",
       "src": "https://github.com/nvim-mini/mini.notify"
     },
     "mini.pairs": {
@@ -109,8 +113,12 @@
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "neogit": {
-      "rev": "aaa921cbcff77323576147ea7ba2e92c181f3ffd",
+      "rev": "4681c1fdac1b730592ae195576e87406f7255750",
       "src": "https://github.com/NeogitOrg/neogit"
+    },
+    "noice.nvim": {
+      "rev": "7bfd942445fb63089b59f97ca487d605e715f155",
+      "src": "https://github.com/folke/noice.nvim"
     },
     "nord.nvim": {
       "rev": "80c1e5321505aeb22b7a9f23eb82f1e193c12470",
@@ -119,6 +127,10 @@
     "nui.nvim": {
       "rev": "de740991c12411b663994b2860f1a4fd0937c130",
       "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
+    "nvim": {
+      "rev": "a7788416689dbefea659d9e9415c87926b0ba5d8",
+      "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-autopairs": {
       "rev": "59bce2eef357189c3305e25bc6dd2d138c1683f5",
@@ -137,7 +149,7 @@
       "src": "https://github.com/kylechui/nvim-surround"
     },
     "nvim-tree.lua": {
-      "rev": "6eaf74c9919d121d2806ac3c20e757e66bd29c31",
+      "rev": "b548cfef00a79f0b3e3af24f91ae6bd14f22af95",
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "nvim-treesitter": {

@@ -59,11 +59,3 @@ vim.cmd('filetype plugin indent on')
 vim.cmd('filetype plugin on')
 -- Enables syntax highlight
 vim.opt.termguicolors = true
-
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-    pattern = { '*.md', '*.norg' },
-    callback = function()
-        vim.o.wrap = true
-        vim.cmd('Copilot disable')
-    end,
-})

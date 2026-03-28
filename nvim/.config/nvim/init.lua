@@ -1,6 +1,5 @@
 require('settings')
 require('mappings')
-require('plugins/init')
-require('statusline')
+require('plugins.init')
+require('lsp.init')
 require('ui')
-require('lsp/init')

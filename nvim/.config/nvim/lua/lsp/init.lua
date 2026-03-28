@@ -5,12 +5,12 @@ local lsp = vim.lsp
 
 -- Run formatting before saving the buffer im.lsp.buf.formatting is deprecated.
 -- Use vim.lsp.buf.format { async = true } instead
-vim.api.nvim_create_autocmd('BufWritePre', {
-    pattern = '*',
-    callback = function(args)
-        require('conform').format({ bufnr = args.buf })
-    end,
-})
+--vim.api.nvim_create_autocmd('BufWritePre', {
+--    pattern = '*',
+--    callback = function(args)
+--        require('conform').format({ bufnr = args.buf })
+--    end,
+--})
 
 vim.diagnostic.config({
     virtual_text = true,

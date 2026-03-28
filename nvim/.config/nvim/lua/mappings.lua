@@ -6,8 +6,8 @@ vim.g.mapleader = ' '
 
 -- GENERAL COMMANDS
 --------------------------------------------------------------------------------
--- Write current buffer, with the flags to allow to create new folders
-vim.keymap.set('n', '<leader>r', '<cmd>write ++p<cr>', { desc = 'Save file' })
+-- Write current buffer
+vim.keymap.set('n', '<leader>r', '<cmd>w!<cr>', { desc = 'Save file' })
 -- Clean search
 vim.keymap.set('n', '<leader>/', '<cmd>noh<cr>', { desc = 'Clear search highlighting' })
 -- Quit all buffers at once without saving anything
