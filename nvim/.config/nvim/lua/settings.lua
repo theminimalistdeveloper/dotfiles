@@ -13,6 +13,7 @@ vim.o.updatetime = 250
 -- Undo settings, keep a much longer history of
 -- undoes even between sessions by storing in an external file
 vim.o.undodir = vim.env.HOME .. '/.undodir'
+vim.o.undofile = true
 -- Hides the buffer instead of closing the files
 vim.o.hidden = true
 -- Ignore case when searching

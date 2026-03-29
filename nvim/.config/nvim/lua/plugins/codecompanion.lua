@@ -35,11 +35,42 @@ end
 local copilot_adapter = function()
     return {
         name = 'copilot',
-        model = 'claude-opus-4.5',
+        model = 'claude-sonnet-4.6',
     }
 end
 
 local adapter = (joyia_api_key and joyia_api_url) and joyia_adapter() or copilot_adapter()
+
+-- Integrate fidget.nvim spinner with CodeCompanion
+-- This hooks into CodeCompanion events to show/hide a fidget progress notification
+local progress = require("fidget.progress")
+
+local handles = {}
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "CodeCompanionRequestStarted",
+  callback = function(event)
+    local buf = event.buf
+    local handle = progress.handle.create({
+      title = " CodeCompanion",
+      message = "Thinking...",
+      lsp_client = { name = "CodeCompanion" },
+    })
+    handles[buf] = handle
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "CodeCompanionRequestFinished",
+  callback = function(event)
+    local buf = event.buf
+    local handle = handles[buf]
+    if handle then
+      handle:finish()
+      handles[buf] = nil
+    end
+  end,
+})
 
 require('codecompanion').setup({
     display = {

@@ -3,6 +3,8 @@
 --------------------------------------------------------------------------------
 ---@diagnostic disable: undefined-global
 
+local theme = require('./theme-palete')
+
 -- Fix sign column (the column before the numbers) to avoid layout shifting
 vim.o.signcolumn = 'yes:1'
 -- Hide unused command line
@@ -17,7 +19,8 @@ vim.o.cursorline = true
 -- Show column markers at column 80 and 100
 vim.o.colorcolumn = '80'
 -- One status line for Neovim instance instead one per window
-vim.o.laststatus = 3
+vim.o.laststatus = 2
+vim.opt.fillchars = { eob = " " }
 -- Set default theme
 vim.cmd('colorscheme catppuccin-frappe')
 vim.cmd([[
@@ -29,3 +32,6 @@ vim.cmd([[
   hi StatusLine guibg=NONE ctermbg=NONE
   hi StatusLineTerm guibg=NONE ctermbg=NONE
 ]])
+vim.api.nvim_set_hl(0, "WinSeparator", { fg = theme.surface0, bg = "none" })
+vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", { fg = theme.surface0, bg = "none" })
+vim.opt.fillchars:append({ vert = "│" })
