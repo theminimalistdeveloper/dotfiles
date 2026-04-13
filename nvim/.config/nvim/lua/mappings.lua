@@ -78,6 +78,7 @@ vim.keymap.set('n', '<leader>wo', '<C-w><C-O>', { desc = 'Only window' })
 --------------------------------------------------------------------------------
 vim.keymap.set('n', '<leader>vm', '<cmd>e ~/.config/nvim/lua/mappings.lua<cr>', { desc = 'Open mappings' })
 vim.keymap.set('n', '<leader>vp', '<cmd>e ~/.config/nvim/lua/plugins/<cr>', { desc = 'Open plugins folder' })
+vim.keymap.set('n', '<leader>vpu', '<cmd>lua vim.pack.update()<cr>', { desc = 'Update plugins' })
 vim.keymap.set('n', '<leader>vn', '<cmd>e ~/.config/nvim/lua/plugins/mini.lua<cr>', { desc = 'Open mini plugins' })
 vim.keymap.set('n', '<leader>vl', '<cmd>e ~/.config/nvim/lua/lsp.lua<cr>', { desc = 'Open LSP configuration' })
 vim.keymap.set('n', '<leader>vu', '<cmd>e ~/.config/nvim/lua/ui.lua<cr>', { desc = 'Open UI' })

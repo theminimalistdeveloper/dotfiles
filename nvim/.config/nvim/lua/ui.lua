@@ -35,3 +35,6 @@ vim.cmd([[
 vim.api.nvim_set_hl(0, "WinSeparator", { fg = theme.surface0, bg = "none" })
 vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", { fg = theme.surface0, bg = "none" })
 vim.opt.fillchars:append({ vert = "│" })
+
+vim.api.nvim_set_hl(0, 'Whitespace', { fg = theme.surface1 })
+vim.api.nvim_set_hl(0, 'SpecialKey', { fg = theme.surface1 })

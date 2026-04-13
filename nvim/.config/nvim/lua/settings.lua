@@ -60,3 +60,5 @@ vim.cmd('filetype plugin indent on')
 vim.cmd('filetype plugin on')
 -- Enables syntax highlight
 vim.opt.termguicolors = true
+-- Enable editor config pickup
+vim.g.editorconfig = true
