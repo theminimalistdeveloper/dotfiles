@@ -15,6 +15,8 @@ vim.keymap.set('n', '<leader>qq', '<cmd>qall!<cr>', { desc = 'Quit all without s
 vim.keymap.set('v', '<C-l>', '<cmd>lua print(vim.fn.wordcount().visual_words)<cr>', { desc = 'Count selected words' })
 -- Reload the current file
 vim.keymap.set('n', '<leader>e', '<cmd>e!<cr>', { desc = 'Reload current file' })
+-- Restart the application
+vim.keymap.set('n', '<leader>z', '<cmd>restart<cr>', { desc = 'Restart the application' })
 
 -- BUFFERS - $B
 --------------------------------------------------------------------------------
