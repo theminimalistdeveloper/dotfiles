@@ -9,7 +9,6 @@ return {
     'html',
     'jsonls',
     'lua_ls',
-    'rust_analyzer',
     'taplo',
     'tailwindcss',
     'vtsls',
