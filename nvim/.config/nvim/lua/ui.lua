@@ -22,7 +22,7 @@ vim.o.colorcolumn = '80'
 vim.o.laststatus = 2
 vim.opt.fillchars = { eob = " " }
 -- Set default theme
-vim.cmd('colorscheme catppuccin-frappe')
+vim.cmd('colorscheme catppuccin-macchiato')
 vim.cmd([[
   hi Normal guibg=NONE ctermbg=NONE
   hi NormalNC guibg=NONE ctermbg=NONE
