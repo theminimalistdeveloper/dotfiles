@@ -42,52 +42,70 @@ vim.fn.sign_define('DapBreakpointRejected', { text = '○', texthl = 'DapBreakpo
 -------------------------------------------------------------------------------
 -- NODE / TYPESCRIPT (vscode-js-debug)
 -------------------------------------------------------------------------------
+
+local js_debugger = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
+
 dap.adapters['pwa-node'] = {
   type = 'server',
   host = 'localhost',
   port = '${port}',
   executable = {
     command = 'node',
-    args = {'/Users/dia0001r/code/lab/js-debug/src/dapDebugServer.js', '${port}'}
+    args = { js_debugger, '${port}'}
   }
 }
 
-dap.configurations.javascript = {
-   {
-     type = 'pwa-node',
-     request = 'attach',
-     name = 'Attach to Node app',
-     address = 'localhost',
-     port = 9229,
-     cwd = '${workspaceFolder}',
-     restart = true,
-   },
-  {
-    type = "pwa-node",
-    request = "launch",
-    name = "Launch file",
-    program = "${file}",
-    cwd = "${workspaceFolder}",
+dap.adapters["pwa-chrome"] = {
+  type = "server",
+  host = "localhost",
+  port = "${port}",
+  executable = {
+    command = "node",
+    args = { js_debugger, "${port}" },
   },
 }
-dap.configurations.typescript = {
-   {
-     type = 'pwa-node',
-     request = 'attach',
-     name = 'Attach to Node app',
-     address = 'localhost',
-     port = 9230,
-     cwd = '${workspaceFolder}',
-     restart = true,
-   },
-  {
-    type = "pwa-node",
-    request = "launch",
-    name = "Launch file",
-    program = "${file}",
-    cwd = "${workspaceFolder}",
-  },
-}
+
+local js_configs = {'javascript', 'typescript', 'typescriptreact', 'javascriptreact'}
+local configurations = {}
+
+for _, v in ipairs(js_configs) do
+  configurations[v] = {
+    {
+      type = 'pwa-node',
+      request = 'attach',
+      name = 'Attach to app',
+      address = 'localhost',
+      port = 9229,
+      cwd = '${workspaceFolder}',
+      restart = true,
+    },
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "Launch file",
+      program = "${file}",
+      cwd = "${workspaceFolder}",
+    },
+    {
+      type = "pwa-chrome",
+      request = "launch",
+      name = "Launch Chrome",
+      url = "https://localhost",
+      webRoot = "${workspaceFolder}",
+      sourceMaps = true,
+    },
+    {
+      type = "pwa-chrome",
+      request = "attach",
+      name = "Attach to Chrome",
+      port = 9222,
+      webRoot = "${workspaceFolder}",
+      sourceMaps = true,
+    },
+  }
+end
+
+dap.configurations = configurations
 
 -------------------------------------------------------------------------------
 -- KEYMAPS
