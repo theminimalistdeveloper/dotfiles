@@ -19,6 +19,19 @@ font pango:"Gohufont" 12
 default_border pixel 1
 client.focused "#cad3f5" "#cad3f5" "#cad3f5" "#cad3f5"
 
+# Shutdown mode
+set $mode_system System (l) lock, (e) logout, (r) reboot, (s) shutdown
+mode "$mode_system" {
+    bindsym l exec swaylock, mode "default"
+    bindsym e exec swaymsg exit, mode "default"
+    bindsym r exec systemctl -i reboot, mode "default"
+    bindsym Shift+s exec systemctl -i poweroff, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
 # WORKSPACE NAMES
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -34,10 +47,17 @@ set $ws9 "9"
 set $ws10 "10"
 
 # COMMANDS - AUTO EXECUTE ON START
+exec swaybg -c 000000
+exec protonvpn-app
 exec waybar
 exec ghostty
+exec ferdium
 exec brave
-exec swaybg -c 000000
+
+assign [app_id="com.mitchellh.ghostty"] $ws1
+assign [class="Ferdium"] $ws2
+assign [app_id="brave-browser"] $ws3
+assign [app_id="proton.vpn.app.gtk"] $ws4
 
 # BINDINGS
 ################################################################################
@@ -132,20 +152,8 @@ bindsym $mod+f fullscreen toggle
 # toggle tiling / floating
 bindsym $mod+Shift+f floating toggle
 # take a screenshot
-bindsym $mod+Shift+p exec grim ~/Pictures/$(date +"%d%m%Y%s_grim.png")
-
-# Shutdown mode
-set $mode_system System (l) lock, (e) logout, (r) reboot, (s) shutdown
-mode "$mode_system" {
-    bindsym l exec swaylock, mode "default"
-    bindsym e exec swaymsg exit, mode "default"
-    bindsym r exec systemctl -i reboot, mode "default"
-    bindsym Shift+s exec systemctl -i poweroff, mode "default"
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+bindsym $mod+Shift+p exec grim ~/CloudDrive/Screenshots/$(date +"%d%m%Y%s_grim.png")
+# shutdown mode
 bindsym $mod+Shift+e mode "$mode_system"
 
 input * {
@@ -155,3 +163,6 @@ input * {
 set $laptop eDP-1
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
+
+# Mounts
+exec rclone mount ProtonDrive: ~/CloudDrive --vfs-cache-mode writes --allow-non-empty &

@@ -28,6 +28,10 @@
       "rev": "a7e73e02c92566bf427b2a1d6a61a8f23542cc21",
       "src": "https://github.com/nvim-telekasten/calendar-vim"
     },
+    "claudecode.nvim": {
+      "rev": "fb724a7a3a43e56d44011b9e7977589d01ce208e",
+      "src": "https://github.com/douglasjordan2/claudecode.nvim"
+    },
     "codecompanion.nvim": {
       "rev": "b1cbe52ecd71e7b0ed43ac1dc6eb3aab4099db00",
       "src": "https://github.com/olimorris/codecompanion.nvim"
@@ -36,12 +40,16 @@
       "rev": "18aeab3d63d350dcf44d64c462cc489a3412af40",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "copilot.vim": {
+      "rev": "a12fd5672110c8aa7e3c8419e28c96943ca179be",
+      "src": "https://github.com/github/copilot.vim"
+    },
     "diffview.nvim": {
       "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
       "src": "https://github.com/sindrets/diffview.nvim"
     },
     "fidget.nvim": {
-      "rev": "889e2e96edef4e144965571d46f7a77bcc4d0ddf",
+      "rev": "82404b196e73a00b1727a91903beef5ddc319d22",
       "src": "https://github.com/j-hui/fidget.nvim"
     },
     "friendly-snippets": {
@@ -92,6 +100,14 @@
       "rev": "2c9941d4a358839918fac21d20fc8fef0e1ad05f",
       "src": "https://github.com/rouge8/neotest-rust"
     },
+    "noice.nvim": {
+      "rev": "7bfd942445fb63089b59f97ca487d605e715f155",
+      "src": "https://github.com/folke/noice.nvim"
+    },
+    "nord.nvim": {
+      "rev": "80c1e5321505aeb22b7a9f23eb82f1e193c12470",
+      "src": "https://github.com/shaunsingh/nord.nvim"
+    },
     "nui.nvim": {
       "rev": "de740991c12411b663994b2860f1a4fd0937c130",
       "src": "https://github.com/MunifTanjim/nui.nvim"
@@ -105,7 +121,7 @@
       "src": "https://github.com/windwp/nvim-autopairs"
     },
     "nvim-dap": {
-      "rev": "45a69eba683a2c448dd9ecfc4de89511f0646b5f",
+      "rev": "531771530d4f82ad2d21e436e3cc052d68d7aebb",
       "src": "https://github.com/mfussenegger/nvim-dap"
     },
     "nvim-dap-ui": {
@@ -146,7 +162,7 @@
       "version": "'main'"
     },
     "nvim-web-devicons": {
-      "rev": "7d8dad2c837fcdf2e65997e68657c1a21c568074",
+      "rev": "0d7d35fa946837b8738b17c18d1faa1ac351e7f9",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "plenary.nvim": {
@@ -158,11 +174,11 @@
       "src": "https://github.com/nvim-lua/popup.nvim"
     },
     "rustaceanvim": {
-      "rev": "6ba2ec95c01e49622676aeb0abdd88bfe2ce575d",
+      "rev": "6d3b5788fd7c9a6745f3d92ae1b2da6bfeab0ad1",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "schemastore.nvim": {
-      "rev": "05383893462944f20bf2044b5a1216f894c9b7a0",
+      "rev": "1f00d77909a88e5e228f3bc5ddbfac9b80fc5b9e",
       "src": "https://github.com/b0o/schemastore.nvim"
     },
     "telekasten.nvim": {
@@ -194,7 +210,7 @@
       "src": "https://github.com/christoomey/vim-tmux-navigator"
     },
     "vscode-js-debug": {
-      "rev": "a4ebdfc80ee0c4f18ba91c86a165fb0f8b6a588b",
+      "rev": "3e8203877584662586bbb40594e65c2c612f4204",
       "src": "https://github.com/microsoft/vscode-js-debug"
     },
     "which-key.nvim": {

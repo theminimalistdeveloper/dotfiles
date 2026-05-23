@@ -5,7 +5,7 @@ vim.pack.add({
 
 local tk = require('telekasten')
 
-tk.setup({ home = vim.fn.expand('~/CloudDrive') })
+tk.setup({ home = vim.fn.expand('~/CloudDrive/Notes') })
 
 vim.keymap.set('n', '<leader>kf', tk.find_notes, { desc = 'Find notes' })
 vim.keymap.set('n', '<leader>kg', tk.search_notes, { desc = 'Search notes (grep)' })
