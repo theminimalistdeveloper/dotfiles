@@ -1,12 +1,15 @@
 vim.pack.add({
   { src = 'https://github.com/saghen/blink.lib' },
-  {
+  { 
     src = 'https://github.com/saghen/blink.cmp',
-    run = 'cargo build --release',
+    run = function()
+    end,
   },
 })
 
-require('blink.cmp').setup({
+local blink = require('blink.cmp')
+blink.build():wait(60000)
+blink.setup({
     keymap = {
         preset = 'none',
         ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
@@ -17,18 +20,12 @@ require('blink.cmp').setup({
         ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
     },
-    snippets = {
-        preset = 'luasnip',
-    },
-    sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
-    },
+    snippets = { preset = 'luasnip', },
+    sources = { default = { 'lsp', 'path', 'snippets', 'buffer' }, },
     completion = {
         list = {
             selection = { preselect = true, auto_insert = true },
         },
-        menu = {
-            auto_show = true,
-        },
+        menu = { auto_show = true },
     },
 })
