@@ -1,4 +1,7 @@
-vim.pack.add({ 'https://github.com/nvim-lualine/lualine.nvim' })
+vim.pack.add({ 
+  'https://github.com/franco-ruggeri/codecompanion-lualine.nvim',
+  'https://github.com/nvim-lualine/lualine.nvim'
+})
 
 local theme = require('../theme-palete')
 
@@ -55,6 +58,11 @@ require('lualine').setup({
     section_separators = { left = '', right = '' },
   },
   sections = {
-    lualine_x = { lsp_clients, 'encoding', 'fileformat', 'filetype' },
+    lualine_x = { 
+      lsp_clients, 
+      {
+        'codecompanion',
+        icon = '',
+      }, 'encoding', 'fileformat', 'filetype' },
   },
 })
