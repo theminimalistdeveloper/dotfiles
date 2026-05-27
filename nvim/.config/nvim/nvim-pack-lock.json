@@ -17,7 +17,7 @@
       "src": "https://github.com/arborist-ts/arborist.nvim"
     },
     "blink.cmp": {
-      "rev": "35e3923a09ff3db150ceff80004befcbbfa071a0",
+      "rev": "0593548ee0b0978abf303d30f449234e07f951d1",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
@@ -31,6 +31,22 @@
     "claudecode.nvim": {
       "rev": "fb724a7a3a43e56d44011b9e7977589d01ce208e",
       "src": "https://github.com/douglasjordan2/claudecode.nvim"
+    },
+    "codecompanion-history.nvim": {
+      "rev": "bc1b4fe06eaaf0aa2399be742e843c22f7f1652a",
+      "src": "https://github.com/ravitemer/codecompanion-history.nvim"
+    },
+    "codecompanion-lualine.nvim": {
+      "rev": "3e06ae6c233628103686de37b7abb363e50868ee",
+      "src": "https://github.com/franco-ruggeri/codecompanion-lualine.nvim"
+    },
+    "codecompanion-spinner.nvim": {
+      "rev": "41c22e1fc2666c916b4be329e322368f5f86451e",
+      "src": "https://github.com/franco-ruggeri/codecompanion-spinner.nvim"
+    },
+    "codecompanion-ui.nvim": {
+      "rev": "6b068fb1b1a73d93f6bac4675bc2c325adedc168",
+      "src": "https://github.com/mrjones2014/codecompanion-ui.nvim"
     },
     "codecompanion.nvim": {
       "rev": "b1cbe52ecd71e7b0ed43ac1dc6eb3aab4099db00",
@@ -162,7 +178,7 @@
       "version": "'main'"
     },
     "nvim-web-devicons": {
-      "rev": "0d7d35fa946837b8738b17c18d1faa1ac351e7f9",
+      "rev": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "plenary.nvim": {
@@ -174,11 +190,11 @@
       "src": "https://github.com/nvim-lua/popup.nvim"
     },
     "rustaceanvim": {
-      "rev": "6d3b5788fd7c9a6745f3d92ae1b2da6bfeab0ad1",
+      "rev": "95f9e17010f232f6a5d631be821c9eb9b14469c2",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "schemastore.nvim": {
-      "rev": "1f00d77909a88e5e228f3bc5ddbfac9b80fc5b9e",
+      "rev": "e25e63f3b24fd6b8c2fc713107ad5d5594028eac",
       "src": "https://github.com/b0o/schemastore.nvim"
     },
     "telekasten.nvim": {
