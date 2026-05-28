@@ -4,8 +4,23 @@ vim.pack.add({
 })
 
 local tk = require('telekasten')
+local home_dir = vim.fn.expand('~/Notes')
+local templates_dir = vim.fs.joinpath(home_dir, 'templates')
 
-tk.setup({ home = vim.fn.expand('~/CloudDrive/Notes') })
+tk.setup({
+  home = home_dir,
+  dailies = vim.fs.joinpath(home_dir, 'dailies'),
+  weeklies = vim.fs.joinpath(home_dir, 'weeklies'),
+  monthles = vim.fs.joinpath(home_dir, 'monthlies'),
+  yearlies = vim.fs.joinpath(home_dir, 'yearlies'),
+
+  templates = templates_dir,
+  template_new_note = vim.fs.joinpath(templates_dir, 'notes.md'),
+  template_new_daily = vim.fs.joinpath(templates_dir, 'dailies.md'),
+  template_new_weekly = vim.fs.joinpath(templates_dir, 'weeklies.md'),
+  template_new_monthly = vim.fs.joinpath(templates_dir, 'monthlies.md'),
+  template_new_yearly = vim.fs.joinpath(templates_dir, 'yearlies.md')
+})
 
 vim.keymap.set('n', '<leader>kf', tk.find_notes, { desc = 'Find notes' })
 vim.keymap.set('n', '<leader>kg', tk.search_notes, { desc = 'Search notes (grep)' })
