@@ -19,13 +19,21 @@ font pango:"Gohufont" 12
 default_border pixel 1
 client.focused "#cad3f5" "#cad3f5" "#cad3f5" "#cad3f5"
 
+# PATH VARIABLES
+################################################################################
+# Screenshot directory
+set $screenshot_dir ~/CloudDrive/Screenshots
+
+# Rclone mount directory
+set $rclone_mount_dir ~/CloudDrive
+
 # Shutdown mode
 set $mode_system System (l) lock, (e) logout, (r) reboot, (s) shutdown
 mode "$mode_system" {
     bindsym l exec swaylock, mode "default"
     bindsym e exec swaymsg exit, mode "default"
     bindsym r exec systemctl -i reboot, mode "default"
-    bindsym Shift+s exec systemctl -i poweroff, mode "default"
+    bindsym s exec systemctl -i poweroff, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -45,6 +53,24 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+
+# MONITORS
+################################################################################
+# Set up monitors - laptop monitor (eDP-1) centered below external monitor
+# Detect and configure monitors automatically
+output * bg #000000 solid_color
+
+exec "swaymsg 'output * scale 1.0'"
+
+# Wait for monitors to be detected
+exec sleep 1
+
+# Set up external monitor (primary) and laptop monitor below it
+output * enable
+output * scale 1.0
+output * position 0,0
+output eDP-1 position center,bottom
+output eDP-1 scale 1.0
 
 # COMMANDS - AUTO EXECUTE ON START
 exec swaybg -c 000000
@@ -152,17 +178,23 @@ bindsym $mod+f fullscreen toggle
 # toggle tiling / floating
 bindsym $mod+Shift+f floating toggle
 # take a screenshot
-bindsym $mod+Shift+p exec grim ~/CloudDrive/Screenshots/$(date +"%d%m%Y%s_grim.png")
+bindsym $mod+Shift+p exec grim $screenshot_dir/$(date +"%d%m%Y%s_grim.png")
 # shutdown mode
 bindsym $mod+Shift+e mode "$mode_system"
+
+# Reload waybar
+bindsym $mod+Shift+w exec killall -SIGUSR2 waybar
 
 input * {
   tap enabled
 }
 
+# LID BEHAVIOR
+################################################################################
+# Turn off laptop monitor and lock screen when lid is closed
 set $laptop eDP-1
-bindswitch --reload --locked lid:on output $laptop disable
-bindswitch --reload --locked lid:off output $laptop enable
+bindswitch --reload --locked lid:on exec "swaymsg 'output $laptop disable' && swaylock"
+bindswitch --reload --locked lid:off exec "swaymsg 'output $laptop enable'"
 
 # Mounts
-exec rclone mount ProtonDrive: ~/CloudDrive --vfs-cache-mode writes --allow-non-empty &
+exec rclone mount ProtonDrive: $rclone_mount_dir --vfs-cache-mode writes --allow-non-empty &
