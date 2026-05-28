@@ -1,8 +1,36 @@
 # Dotfiles
 
-Personal configuration files for Arch Linux and macOS development environments. Managed using [GNU Stow](https://www.gnu.org/software/stow/) with a consistent Nord color theme across all tools.
+Personal configuration files for Arch Linux and macOS development environments. Managed using [GNU Stow](https://www.gnu.org/software/stow/) with a consistent [Catppuccin](https://catppuccin.com/) color theme across all tools.
 
 ## Installation
+
+### Automated Setup (Recommended)
+
+Run the setup script for guided installation:
+
+```bash
+./setup.sh
+```
+
+Or install all packages automatically:
+
+```bash
+./setup.sh --all
+```
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--all` | Install all platform-appropriate packages |
+| `--packages "..."` | Install specific packages (space-separated) |
+| `--dry-run` | Preview changes without installing |
+| `--yes`, `-y` | Skip all confirmations |
+| `--force` | Overwrite existing configs (auto-backup conflicts) |
+| `--no-backup` | Skip backup process |
+| `--help`, `-h` | Show all options |
+
+### Manual Installation
 
 Install configurations using GNU Stow:
 
@@ -45,27 +73,19 @@ Tiling window manager for X11. Alternative configuration for non-Wayland systems
 - [i3 Configuration](https://i3wm.org/docs/userguide.html#configuring)
 - [i3 Reference Card](https://i3wm.org/docs/refcard.html)
 
-#### [Polybar](https://github.com/polybar/polybar)
-
-Fast and customizable status bar for X11 window managers. Used alongside i3 for system information display.
-
-- [Polybar Wiki](https://github.com/polybar/polybar/wiki)
-- [Configuration Guide](https://github.com/polybar/polybar/wiki/Configuration)
-- [Module Examples](https://github.com/polybar/polybar/wiki/Module:-date)
-
 ### Terminal
 
-#### [Kitty](https://sw.kovidgoyal.net/kitty/)
+#### [Ghostty](https://ghostty.org/)
 
-GPU-accelerated terminal emulator with support for images, ligatures, and extensive customization.
+Fast, native terminal emulator with GPU acceleration, ligatures, and platform-native UI on macOS and Linux.
 
-- [Kitty Documentation](https://sw.kovidgoyal.net/kitty/)
-- [Configuration Reference](https://sw.kovidgoyal.net/kitty/conf/)
-- [Kitty Kittens](https://sw.kovidgoyal.net/kitty/kittens_intro/)
+- [Ghostty Documentation](https://ghostty.org/docs)
+- [Configuration Reference](https://ghostty.org/docs/config)
+- [Ghostty GitHub](https://github.com/ghostty-org/ghostty)
 
 #### [tmux](https://github.com/tmux/tmux/wiki)
 
-Terminal multiplexer for managing multiple terminal sessions. Configured with `C-a` prefix, vi-mode, and Nord theme.
+Terminal multiplexer for managing multiple terminal sessions. Configured with `C-a` prefix, vi-mode, and Catppuccin theme.
 
 - [tmux Guide](https://github.com/tmux/tmux/wiki/Getting-Started)
 - [tmux Configuration](https://man.openbsd.org/tmux.1#CONFIGURATION_FILES)
@@ -101,14 +121,6 @@ Minimalistic, powerful prompt for Zsh with git status, language versions, and ex
 
 ### Utilities
 
-#### [Picom](https://github.com/yshui/picom)
-
-Lightweight compositor for X11 providing window transparency, shadows, and effects.
-
-- [Picom Documentation](https://github.com/yshui/picom)
-- [Configuration Guide](https://github.com/yshui/picom/blob/next/picom.sample.conf)
-- [Man Page](https://man.archlinux.org/man/picom.1)
-
 #### [Tofi](https://github.com/philj56/tofi)
 
 Fast application launcher for Wayland with dmenu compatibility and minimal dependencies.
@@ -132,4 +144,4 @@ Screen locking utility for Wayland compositors with customizable appearance.
 
 ## Theme
 
-Configurations use the [Nord color palette](https://www.nordtheme.com/) for consistent visual aesthetics across Neovim, tmux, Sway, and terminal applications.
+Configurations use the [Catppuccin](https://catppuccin.com/) color palette (Macchiato/Frappe variants) for consistent visual aesthetics across Neovim, tmux, Sway, Ghostty, and terminal applications.
