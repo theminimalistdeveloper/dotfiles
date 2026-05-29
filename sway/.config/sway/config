@@ -60,20 +60,24 @@ set $ws10 "10"
 # Detect and configure monitors automatically
 output * bg #000000 solid_color
 
-exec "swaymsg 'output * scale 1.0'"
-
 # Wait for monitors to be detected
 exec sleep 1
 
-# Set up external monitor (primary) and laptop monitor below it
 output * enable
-output * scale 1.0
-output * position 0,0
-output eDP-1 position center,bottom
-output eDP-1 scale 1.0
+
+output DP-1 {
+  position 0,0
+  res 5120x1440
+  scale 1
+  adaptive_sync on
+}
+output eDP-1 {
+  position 2560,1440
+  res 2880x1800
+  scale 2.0
+}
 
 # COMMANDS - AUTO EXECUTE ON START
-exec swaybg -c 000000
 exec protonvpn-app
 exec waybar
 exec ghostty
