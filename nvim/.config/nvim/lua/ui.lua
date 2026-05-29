@@ -17,9 +17,7 @@ vim.o.scrolloff = 4
 -- Highlight cursor line
 vim.o.cursorline = true
 -- Show column markers at column 80 and 100
-vim.o.colorcolumn = '80'
--- One status line for Neovim instance instead one per window
-vim.o.laststatus = 2
+vim.o.colorcolumn = '80,100'
 vim.opt.fillchars = { eob = " " }
 -- Set default theme
 vim.cmd('colorscheme catppuccin-macchiato')
