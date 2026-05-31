@@ -1,14 +1,11 @@
 vim.pack.add({
   { src = 'https://github.com/saghen/blink.lib' },
-  { 
+  {
     src = 'https://github.com/saghen/blink.cmp',
-    run = function()
-    end,
   },
 })
 
 local blink = require('blink.cmp')
-blink.build():wait(60000)
 blink.setup({
     keymap = {
         preset = 'none',
