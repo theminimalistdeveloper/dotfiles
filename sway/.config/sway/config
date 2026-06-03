@@ -78,16 +78,14 @@ output eDP-1 {
 }
 
 # COMMANDS - AUTO EXECUTE ON START
+assign [app_id="com.mitchellh.ghostty"] $ws1
+assign [app_id="mullvad-browser"] $ws2
+assign [app_id="proton.vpn.app.gtk"] $ws4
+
 exec protonvpn-app
 exec waybar
 exec ghostty
-exec ferdium
-exec brave
-
-assign [app_id="com.mitchellh.ghostty"] $ws1
-assign [class="Ferdium"] $ws2
-assign [app_id="brave-browser"] $ws3
-assign [app_id="proton.vpn.app.gtk"] $ws4
+exec mullvad-browser
 
 # BINDINGS
 ################################################################################
@@ -156,7 +154,6 @@ mode "resize" {
   bindsym Escape mode "default"
   bindsym $mod+r mode "default"
 }
-
 # MISC
 ## Action brightness
 bindsym --locked XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
@@ -188,6 +185,9 @@ bindsym $mod+Shift+e mode "$mode_system"
 
 # Reload waybar
 bindsym $mod+Shift+w exec killall -SIGUSR2 waybar
+
+# Connect to AirpodsPro
+bindsym $mod+Shift+a exec ~/dotfiles/scripts/airpods-toggle.sh
 
 input * {
   tap enabled
