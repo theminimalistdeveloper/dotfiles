@@ -17,11 +17,11 @@
       "src": "https://github.com/arborist-ts/arborist.nvim"
     },
     "blink.cmp": {
-      "rev": "5ee69ea52492fa038b3a1cd8de55edffe205c77d",
+      "rev": "b943982a29f100a4d17b3d2d09dc06b5a0d0f398",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
-      "rev": "2cb62890cee636fe46722d03b7b2331e54fb3755",
+      "rev": "b127d48bf8e9ac9cf41f6e0fbead317503f76558",
       "src": "https://github.com/saghen/blink.lib"
     },
     "calendar-vim": {
@@ -73,7 +73,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gitsigns.nvim": {
-      "rev": "dd3f588bacbeb041be6facf1742e42097f62165d",
+      "rev": "25050e4ed39e628282831d4cbecb1850454ce915",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "image.nvim": {
@@ -194,11 +194,11 @@
       "src": "https://github.com/nvim-lua/popup.nvim"
     },
     "rustaceanvim": {
-      "rev": "4136336ac7e0dcbb1ffc60263d68dab500a6d183",
+      "rev": "8979955f409b35bd01ba32a44b239c296917989b",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "schemastore.nvim": {
-      "rev": "efa62017f59a6346486cc567d70acce965a00b12",
+      "rev": "19936230448bfb3dfd4314070e8bc499ceb55928",
       "src": "https://github.com/b0o/schemastore.nvim"
     },
     "telekasten.nvim": {
