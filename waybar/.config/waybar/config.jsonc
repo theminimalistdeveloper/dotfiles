@@ -17,6 +17,7 @@
     "memory",
     "temperature",
     "battery",
+    "disk",
     "clock"
   ],
   "sway/mode": {
@@ -55,6 +56,10 @@
     "format-critical": "{icon}",
     "format": "{icon}",
     "format-icons": ["", "", ""]
+  },
+  "disk": {
+    "path":"/",
+    "format": " {free}/{used} {percentage_used}%"
   },
   "backlight": {
     // "device": "acpi_video1",

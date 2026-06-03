@@ -19,9 +19,6 @@ window#waybar {
   background: rgba(0, 0, 0, 0.2);
 }
 
-#workspaces button.focused {
-}
-
 #workspaces button.urgent {
   background-color: #eb4d4b;
 }
