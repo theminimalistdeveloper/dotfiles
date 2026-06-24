@@ -17,6 +17,13 @@ alias quarter="git log --shortstat --since \"01.07.2024\" --until \"today\" | \
 alias n='nvim '
 # EXA - replacement for ls
 alias ls='eza --icons'
+# FZF
+alias f='fzf'
+# DuckDuckGo
+alias s='ddgr --url-handler w3m '
+# LLM - AI
+alias ai='llm -m default --no-stream -t persona '
+alias chat='llm chat -m default -t persona'
 
 # tmux 
 alias tn="tmux new -s "
