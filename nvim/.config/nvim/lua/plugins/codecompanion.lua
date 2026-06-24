@@ -7,7 +7,7 @@ vim.pack.add({
 })
 
 local adapter = function()
-  local default_model = 'deepseek-r1'
+  local default_model = 'qwen.qwen3-coder-30b-a3b-v1:0'
   local api_key = os.getenv('AI_API_KEY')
   local url = os.getenv('AI_API_URL')
 
@@ -76,10 +76,10 @@ require('codecompanion').setup({
 - Flag assumptions
 - Minimal examples unless asked
 **Formatting:**
-- Markdown, no H1/H2 (use H3 or **bold**)
-- Code blocks use four backticks with a language ID
-- When editing a file, first line inside the block is a path comment; use `// ...existing code...` for omitted regions
-- No diff/line numbers or tables unless requested
+- Markdown, no H1/H2 (use H3 or **bold**).
+- Code blocks use four backticks with a language ID.
+- When editing a file, first line inside the block is a path comment; use `// ...existing code...` for omitted regions.
+- No diff/line numbers or tables unless requested.
 **Env:** ${date} | ${os} | nvim ${version} | lang ${language:-English}]]
         end,
       },
@@ -96,7 +96,6 @@ require('codecompanion').setup({
 })
 
 vim.keymap.set('n', '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', { desc = 'Toggle CodeCompanion Chat' })
-vim.keymap.set('v', '<leader>aa', '<cmd>CodeCompanionActions<cr>', { desc = 'CodeCompanion Actions' })
-vim.keymap.set('v', '<leader>ae', '<cmd>CodeCompanionChat Add<cr>', { desc = 'Add selection to Chat' })
+vim.keymap.set('n', '<leader>aa', '<cmd>CodeCompanionActions<cr>', { desc = 'CodeCompanion Actions' })
 vim.keymap.set({ 'n', 'v' }, '<leader>ai', '<cmd>CodeCompanion<cr>', { desc = 'CodeCompanion Inline' })
 vim.keymap.set('n', '<leader>ah', '<cmd>CodeCompanionHistory<cr>', { desc = 'Toggle CodeCompanion History Chat' })
