@@ -39,4 +39,4 @@ for _, file in ipairs(lsp_files) do
     end
 end
 
-lsp.enable(require('lsp-list'))
+lsp.enable(require('../config.lsp-list'))

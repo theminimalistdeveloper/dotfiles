@@ -1,14 +1,10 @@
-vim.pack.add({
-  {
-    src = 'https://github.com/nvim-treesitter/nvim-treesitter',
-    version = 'main'
-  }
-})
+return {
+  'nvim-treesitter/nvim-treesitter',
+  config = function()
+    local configs = require('nvim-treesitter')
 
-local configs = require('nvim-treesitter')
-
-configs.setup({
-    ensure_installed = {
+    configs.setup({
+      ensure_installed = {
         'bash',
         'c',
         'css',
@@ -42,9 +38,11 @@ configs.setup({
         'vimdoc',
         'xml',
         'yaml',
-    },
-    auto_install = true,
-    highlight = {
+      },
+      auto_install = true,
+      highlight = {
         enable = true,
-    },
-})
+      },
+    })
+  end
+}

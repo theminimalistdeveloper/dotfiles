@@ -1,8 +1,3 @@
-vim.pack.add({
-    'https://github.com/NeogitOrg/neogit',
-    'https://github.com/sindrets/diffview.nvim',
-})
-
 local function open_unstaged_files()
   local output = vim.fn.system({'git', 'status', '--porcelain'})
 
@@ -63,6 +58,14 @@ local function open_staged_files()
   vim.cmd.copen()
 end
 
-vim.keymap.set('n', '<leader>gs', '<cmd>Neogit<cr>', { desc = 'Neogit Status' })
-vim.keymap.set('n', '<leader>gu', open_unstaged_files, { desc = 'Open Unstaged Files' })
-vim.keymap.set('n', '<leader>gt', open_staged_files, { desc = 'Open Staged Files' })
+return {
+  'NeogitOrg/neogit' ,
+  dependencies = {
+    'sindrets/diffview.nvim',
+  },
+  keys = {
+    { '<leader>gs', '<cmd>Neogit<cr>', { desc = 'Neogit Status' } },
+    { '<leader>gu', open_unstaged_files, { desc = 'Open Unstaged Files' } },
+    { '<leader>gt', open_staged_files, { desc = 'Open Staged Files' } },
+  },
+}

@@ -1,12 +1,16 @@
-vim.pack.add({'https://github.com/OXY2DEV/markview.nvim'})
+return {
+  'OXY2DEV/markview.nvim',
+  config = function()
+    vim.treesitter.language.register('markdown', 'telekasten')
+    vim.treesitter.language.register('markdown', 'codecompanion')
 
-vim.treesitter.language.register('markdown', 'telekasten')
-vim.treesitter.language.register('markdown', 'codecompanion')
+    require('markview').setup({
+      preview = {
+        icon_provider = 'internal',
+        filetypes = { 'markdown', 'telekasten', 'codecompanion' },
+        ignore_buftypes = {}
+      }
+    })
+  end
+}
 
-require('markview').setup({
-  preview = {
-    icon_provider = 'internal',
-    filetypes = { 'markdown', 'telekasten', 'codecompanion' },
-    ignore_buftypes = {}
-  }
-})

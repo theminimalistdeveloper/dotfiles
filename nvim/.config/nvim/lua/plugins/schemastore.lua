@@ -1,1 +1,1 @@
-vim.pack.add({ 'https://github.com/b0o/schemastore.nvim' })
+return { 'b0o/schemastore.nvim' }
