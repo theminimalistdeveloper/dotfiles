@@ -4,7 +4,7 @@ return {
     'nvim-lualine/lualine.nvim'
   },
   config = function()
-    local theme = require('../config.theme-palete')
+    local theme = require('config.theme-palette')
 
     local function lsp_clients()
       local clients = vim.lsp.get_clients({ bufnr = 0 })

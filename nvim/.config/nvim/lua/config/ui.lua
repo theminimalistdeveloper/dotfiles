@@ -3,7 +3,7 @@
 --------------------------------------------------------------------------------
 ---@diagnostic disable: undefined-global
 
-local theme = require('../config.theme-palete')
+local theme = require('config.theme-palette')
 
 -- Fix sign column (the column before the numbers) to avoid layout shifting
 vim.o.signcolumn = 'yes:1'

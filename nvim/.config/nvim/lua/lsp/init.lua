@@ -35,8 +35,8 @@ local lsp_files = vim.fn.glob(vim.fn.stdpath('config') .. '/lua/lsp/*.lua', true
 for _, file in ipairs(lsp_files) do
     local filename = vim.fn.fnamemodify(file, ':t:r') -- Get filename without extension
     if filename ~= 'init' then -- Skip init.lua to avoid circular dependency
-        require('lsp/' .. filename)
+        require('lsp.' .. filename)
     end
 end
 
-lsp.enable(require('../config.lsp-list'))
+lsp.enable(require('config.lsp-list'))
