@@ -47,9 +47,8 @@ vim.o.smartcase = true
 vim.o.list = true
 vim.o.listchars = 'trail:⋅,space:⋅'
 -- Uses the treesitter to determine where to create folds
-vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.o.foldtext = ''
+vim.o.foldmethod = 'syntax'
+-- vim.o.foldtext = ''
 vim.o.foldcolumn = '1'
 vim.o.statuscolumn = '%l %s'
 -- auto complete options
