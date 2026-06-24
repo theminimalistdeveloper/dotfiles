@@ -8,7 +8,7 @@ local home_dir = vim.fn.expand('~/Notes')
 local templates_dir = vim.fs.joinpath(home_dir, 'templates')
 
 tk.setup({
-  home = home_dir,
+  home = vim.fs.joinpath(home_dir, 'inbox'),
   dailies = vim.fs.joinpath(home_dir, 'dailies'),
   weeklies = vim.fs.joinpath(home_dir, 'weeklies'),
   monthles = vim.fs.joinpath(home_dir, 'monthlies'),
