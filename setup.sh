@@ -825,6 +825,9 @@ main() {
     echo "    3. For tmux plugins: press prefix + I inside tmux"
     echo ""
 
+    mkdir -p ~/.local/state/zsh   # history
+    mkdir -p ~/.cache/zsh         # completion cache
+
     log "Setup complete: ${#INSTALLED_PACKAGES[@]} installed, $failed failed"
     print_info "Log saved to: $LOG_FILE"
 }
