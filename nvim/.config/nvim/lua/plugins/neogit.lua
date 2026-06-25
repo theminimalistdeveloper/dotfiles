@@ -64,8 +64,8 @@ return {
     'sindrets/diffview.nvim',
   },
   keys = {
-    { '<leader>gs', '<cmd>Neogit<cr>', { desc = 'Neogit Status' } },
-    { '<leader>gu', open_unstaged_files, { desc = 'Open Unstaged Files' } },
-    { '<leader>gt', open_staged_files, { desc = 'Open Staged Files' } },
+    { '<leader>gs', '<cmd>Neogit<cr>', desc = 'Neogit Status' },
+    { '<leader>gu', open_unstaged_files, desc = 'Open Unstaged Files' },
+    { '<leader>gt', open_staged_files, desc = 'Open Staged Files' },
   },
 }

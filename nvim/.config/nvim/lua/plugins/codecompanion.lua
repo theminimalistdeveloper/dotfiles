@@ -97,9 +97,9 @@ return {
     })
   end,
   keys = {
-    { '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', { desc = 'Toggle CodeCompanion Chat' } },
-    { '<leader>aa', '<cmd>CodeCompanionActions<cr>', { desc = 'Toggle CodeCompanion Actions' } },
-    { '<leader>ai', '<cmd>CodeCompanion<cr>', { desc = 'CodeCompanion Inline' }, mode = 'v' },
-    { '<leader>ah', '<cmd>CodeCompanionHistory<cr>', { desc = 'Toggle CodeCompanion History Chat' } },
+    { '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'Toggle CodeCompanion Chat' },
+    { '<leader>aa', '<cmd>CodeCompanionActions<cr>', desc = 'Toggle CodeCompanion Actions' },
+    { '<leader>ai', '<cmd>CodeCompanion<cr>', desc = 'CodeCompanion Inline', mode = 'v' },
+    { '<leader>ah', '<cmd>CodeCompanionHistory<cr>', desc = 'Toggle CodeCompanion History Chat' },
   }
 }
