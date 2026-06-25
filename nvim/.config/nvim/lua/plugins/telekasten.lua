@@ -42,5 +42,5 @@ return {
     { '<leader>kr', '<cmd>Telekasten rename_note<cr>', { desc = 'Rename note' } },
     { '<leader>kc', '<cmd>Telekasten show_calendar<cr>', { desc = 'Show calendar' } },
     { '<leader>kk', '<cmd>Telekasten panel<cr>', { desc = 'Telekasten panel' } },
-}
+  }
 }
