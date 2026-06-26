@@ -1,8 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-add_newline = false
-
-format = "$directory$git_branch$git_status$lua$nodejs$rust$golang$php $character"
+format = "$directory$git_branch$git_status$lua$nodejs$rust$golang$php$package$aws $character"
 
 [directory]
 format            = "[$path](cyan) "
@@ -43,6 +41,10 @@ format = "[$symbol $version](purple) "
 [lua]
 symbol = ""
 format = "[$symbol $version](yellow) "
+
+[package]
+symbol = "📦"
+format = "[$symbol $version](bold blue) "
 
 [character]
 success_symbol = "[❯](green)"

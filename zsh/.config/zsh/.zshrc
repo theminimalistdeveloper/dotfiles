@@ -1,5 +1,3 @@
-# ~/.config/zsh/.zshrc
-export PATH=$HOME/bin:/usr/local/bin:$PATH
 source $ZDOTDIR/api-keys.zsh
 
 # Settings
@@ -32,9 +30,16 @@ source $ZDOTDIR/starship.zsh
 source <(fzf --zsh)
 
 # Plugins
-plugins=(aws git tmux)
+plugins=(
+  aws                    # AWS CLI integration and completions
+  git                    # Git aliases and completions
+  node                   # Node.js related commands and completions
+  rust                   # Rust language support and completions
+  tmux                   # Tmux integration and shortcuts
+  zsh-autosuggestions    # Provides command suggestions based on history
+  zsh-syntax-highlighting # Syntax highlighting for commands as you type
+)
 
 # Themes
-source $ZDOTDIR/theme.zsh
 source $ZDOTDIR/aliases.zsh
-
+source $ZDOTDIR/theme.zsh

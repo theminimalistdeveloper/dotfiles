@@ -7,9 +7,10 @@ alias e='exit'
 # APPLICATIONS
 # Neovim
 alias n='nvim '
-# EXA - replacement for ls
+# EZA - replacement for ls
 alias l='eza'
 alias la='eza -la --icons --git'
+alias t='eza --tree --icons --git'
 # FZF
 alias f='fzf'
 # DuckDuckGo
