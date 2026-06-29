@@ -6,6 +6,7 @@ return {
     'franco-ruggeri/codecompanion-spinner.nvim',
     'ravitemer/codecompanion-history.nvim',
   },
+  lazy = false,
   config = function()
     local adapter = function()
       local default_model = 'qwen.qwen3-coder-30b-a3b-v1:0'
@@ -37,16 +38,14 @@ return {
     end
 
     require('codecompanion').setup({
+      prompt_library = {
+        markdown = {
+          dirs = { '~/.config/prompts' },
+        }
+      },
       extensions = {
         spinner = {},
         history = {},
-        mcphub = {
-          callback = 'mcphub.extensions.codecompanion',
-          opts = { make_vars = true, make_slash_commands = true },
-          on_error = function(err)
-            vim.notify('mcphub extension failed: ' .. err, vim.log.levels.ERROR)
-          end,
-        }
       },
       display = {
         inline = {
@@ -98,8 +97,8 @@ return {
   end,
   keys = {
     { '<leader>ac', '<cmd>CodeCompanionChat Toggle<cr>', desc = 'Toggle CodeCompanion Chat' },
-    { '<leader>aa', '<cmd>CodeCompanionActions<cr>', desc = 'Toggle CodeCompanion Actions' },
-    { '<leader>ai', '<cmd>CodeCompanion<cr>', desc = 'CodeCompanion Inline', mode = 'v' },
+    { '<leader>aa', mode = {'n', 'v'}, '<cmd>CodeCompanionActions<cr>', desc = 'Toggle CodeCompanion Actions' },
+    { '<leader>ai', mode = 'v', '<cmd>CodeCompanion<cr>', desc = 'CodeCompanion Inline', },
     { '<leader>ah', '<cmd>CodeCompanionHistory<cr>', desc = 'Toggle CodeCompanion History Chat' },
-  }
+  },
 }
