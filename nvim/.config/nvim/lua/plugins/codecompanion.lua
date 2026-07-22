@@ -9,7 +9,7 @@ return {
   lazy = false,
   config = function()
     local adapter = function()
-      local default_model = 'azure_ai/deepseek-v4-flash'
+      local default_model = 'deepseek-ai/DeepSeek-V4-Flash'
       local api_key = os.getenv('AI_API_KEY')
       local url = os.getenv('AI_API_URL')
 
