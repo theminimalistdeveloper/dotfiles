@@ -187,7 +187,7 @@ bindsym $mod+Shift+e mode "$mode_system"
 bindsym $mod+Shift+w exec killall -SIGUSR2 waybar
 
 # Connect to AirpodsPro
-bindsym $mod+Shift+a exec ~/dotfiles/scripts/airpods-toggle.sh
+bindsym $mod+Shift+a exec ~/.config/scripts/airpods-toggle.sh
 
 input * {
   tap enabled
