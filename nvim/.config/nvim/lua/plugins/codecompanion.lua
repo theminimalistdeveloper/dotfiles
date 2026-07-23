@@ -1,5 +1,13 @@
 return {
   'olimorris/codecompanion.nvim',
+  -- Pinned to v18.x: CodeCompanion v19+ changed tool schema resolution
+  -- (resolved tools must expose `.schema` at top level). The installed
+  -- mcphub.nvim v6.2.0 emits MCP tools with `callback` as a table and the
+  -- schema nested under `callback.schema`, which v19 no longer resolves,
+  -- leaving 0 tool schemas in the request payload ("no callable tool
+  -- endpoint exposed"). v18.7.0 is the last release compatible with
+  -- mcphub v6.2.0's tool format.
+  version = '^18.7',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'ravitemer/mcphub.nvim',
@@ -37,6 +45,20 @@ return {
       })
     end
 
+    require('mcphub').setup({
+      port = 37373,
+      auto_approve = true,
+      on_ready = function()
+        -- mcphub connects to servers asynchronously. Once ready, refresh
+        -- CodeCompanion's tool/slash-command cache so the @joyia group's
+        -- system prompt (gated on hub:is_ready()) is populated instead of
+        -- returning empty, which caused "tools unavailable in this session".
+        local ok, cc = pcall(require, 'codecompanion')
+        if ok and cc.chat_refresh_cache then
+          cc.chat_refresh_cache()
+        end
+      end,
+    })
     require('codecompanion').setup({
       prompt_library = {
         markdown = {
@@ -44,6 +66,20 @@ return {
         }
       },
       extensions = {
+        mcphub = {
+          callback = 'mcphub.extensions.codecompanion',
+          opts = {
+            make_tools = true,
+            show_server_tools_in_chat = true,
+            add_mcp_prefix_to_tool_names = false,
+            show_result_in_chat = true,
+            format_tool = nil,
+            -- MCP Resources
+            make_vars = false,
+            -- MCP Prompts
+            make_slash_commands = true,
+          }
+        },
         spinner = {},
         history = {},
       },
@@ -67,38 +103,32 @@ return {
       interactions = {
         chat = {
           tools = {
+            ["codecompanion-tool"] = {
+              tools = {
+                "files",
+                "editor",
+                "cmd_runner",
+                "agent",
+              },
+            },
             opts = {
+              default_tools = { "joyia" },
               system_prompt = {
-                enabled = true, -- Enable the tools system prompt?
-                replace_main_system_prompt = false, -- Replace the main system prompt with the tools system prompt?
+                enabled = true,
+                replace_main_system_prompt = false,
 
                 ---The tool system prompt
                 ---@param args { ctx: CodeCompanion.SystemPrompt.Context, tools: string[]} The tools available
                 ---@return string
                 prompt = function(args)
                   return "<instructions>\
-                  You are a my personal assistant.\
-                  The user will ask questions or tasks. Use tools to gather context or take actions.\
+                  You are a personal assistant inside Neovim.\
+                  Use available tools to answer questions, gather context, and edit files.\
+                  Prefer parallel calls. Never fabricate tool outputs. Use exact paths.\
                   </instructions>\
-                  <toolUseInstructions>\
-                  - Follow the JSON schema exactly. Include all required properties. Output valid JSON only.\
-                  - Prefer parallel tool calls when possible.\
-                  - Use tools instead of asking the user to take manual actions.\
-                  - After saying you'll do something, use the tool immediately — don't ask permission.\
-                  - Only use tools that exist. Never write out a JSON codeblock with tool inputs manually.\
-                  - Never mention tool names to the user (e.g., say \"I'll edit the file\" instead of \"I'll use the edit tool\").\
-                  - Use exact file paths provided by the user or from previous tool outputs.\
-                  - Iterate tool calls until the task is complete. Don't give up unless it's truly impossible with available tools.\
-                  - Don't make assumptions — gather context first, then act.\
-                  - Don't repeat yourself after a tool call; continue from where you left off.\
-                  - Never print a terminal command in a codeblock unless the user explicitly asked for it.\
-                  - Don't re-read files already provided in context.\
-                  </toolUseInstructions>\
-                  <outputFormatting>\
-                  - Use proper Markdown. Wrap filenames/symbols in backticks.\
-                  - Code blocks: four backticks with correct language ID (lowercase).\
-                  - Prefer direct file edits over printing code blocks when an edit tool is available.\
-                  </outputFormatting>"
+                  <available-tools>\
+                  " .. table.concat(args.tools, ", ") .. "\
+                  </available-tools>"
                 end,
               },
             }
