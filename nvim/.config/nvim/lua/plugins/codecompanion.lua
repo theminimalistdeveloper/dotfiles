@@ -16,35 +16,6 @@ return {
   },
   lazy = false,
   config = function()
-    local adapter = function()
-      local default_model = 'deepseek-ai/DeepSeek-V4-Flash'
-      local api_key = os.getenv('AI_API_KEY')
-      local url = os.getenv('AI_API_URL')
-
-      if not api_key or not url then
-        error("AI_API_KEY and AI_API_URL must be set in your environment variables.")
-      end
-
-      local ok, adapters = pcall(require, 'codecompanion.adapters')
-      if not ok then
-        error("Failed to load codecompanion.adapters. Please check if the plugin is installed correctly.")
-      end
-
-      return adapters.extend('openai_compatible', {
-        name = 'tmd-ai',
-        formatted_name = 'TMD AI',
-        env = {
-          url = url,
-          api_key = api_key,
-        },
-        schema = {
-          model = {
-            default = default_model,
-          },
-        },
-      })
-    end
-
     require('mcphub').setup({
       port = 37373,
       auto_approve = true,
@@ -60,6 +31,38 @@ return {
       end,
     })
     require('codecompanion').setup({
+      adapters = {
+        http = {
+          tmd_ai = function()
+            local default_model = os.getenv('DEFAULT_MODEL')
+            local api_key = os.getenv('AI_API_KEY')
+            local url = os.getenv('AI_API_URL')
+
+            if not api_key or not url then
+              error("AI_API_KEY and AI_API_URL must be set in your environment variables.")
+            end
+
+            local ok, adapters = pcall(require, 'codecompanion.adapters')
+            if not ok then
+              error("Failed to load codecompanion.adapters. Please check if the plugin is installed correctly.")
+            end
+
+            return adapters.extend('openai_compatible', {
+              name = 'tmd-ai',
+              formatted_name = 'TMD AI',
+              env = {
+                url = url,
+                api_key = api_key,
+              },
+              schema = {
+                model = {
+                  default = default_model,
+                },
+              },
+            })
+          end
+        }
+      },
       prompt_library = {
         markdown = {
           dirs = { '~/.config/prompts' },
@@ -81,7 +84,12 @@ return {
           }
         },
         spinner = {},
-        history = {},
+        history = {
+          opts = {
+            dir_to_save = vim.fn.expand('~/Codecompanion_history'),
+            enable_logging = true
+          }
+        },
       },
       display = {
         inline = {
@@ -112,7 +120,7 @@ return {
               },
             },
             opts = {
-              default_tools = { "joyia" },
+              -- default_tools = { "joyia" },
               system_prompt = {
                 enabled = true,
                 replace_main_system_prompt = false,
@@ -150,7 +158,7 @@ return {
               Env$ {date} | ${os} | nvim ${version} | lang ${language:English}]]
             end,
           },
-          adapter = adapter,
+          adapter = 'tmd_ai',
           roles = {
             llm = function(ad)
               return '  ' .. ad.formatted_name .. ' ->  ' .. ad.model.name
@@ -158,7 +166,7 @@ return {
             user = os.getenv('USER') or os.getenv('USERNAME') or 'Me'
           }
         },
-        inline = { adapter = adapter },
+        inline = { adapter = 'tmd_ai' },
       },
     })
   end,
