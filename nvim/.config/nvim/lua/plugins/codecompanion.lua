@@ -1,40 +1,25 @@
 return {
   'olimorris/codecompanion.nvim',
-  -- Pinned to v18.x: CodeCompanion v19+ changed tool schema resolution
-  -- (resolved tools must expose `.schema` at top level). The installed
-  -- mcphub.nvim v6.2.0 emits MCP tools with `callback` as a table and the
-  -- schema nested under `callback.schema`, which v19 no longer resolves,
-  -- leaving 0 tool schemas in the request payload ("no callable tool
-  -- endpoint exposed"). v18.7.0 is the last release compatible with
-  -- mcphub v6.2.0's tool format.
-  version = '^18.7',
+  version = '^19',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'ravitemer/mcphub.nvim',
     'franco-ruggeri/codecompanion-spinner.nvim',
     'ravitemer/codecompanion-history.nvim',
   },
-  lazy = false,
+  lazy = true,
   config = function()
-    require('mcphub').setup({
-      port = 37373,
-      auto_approve = true,
-      on_ready = function()
-        -- mcphub connects to servers asynchronously. Once ready, refresh
-        -- CodeCompanion's tool/slash-command cache so the @joyia group's
-        -- system prompt (gated on hub:is_ready()) is populated instead of
-        -- returning empty, which caused "tools unavailable in this session".
-        local ok, cc = pcall(require, 'codecompanion')
-        if ok and cc.chat_refresh_cache then
-          cc.chat_refresh_cache()
-        end
-      end,
-    })
     require('codecompanion').setup({
+      mcp = {
+        servers = {
+          ['joyia'] = {
+            cmd = { 'joyia', 'mcp', 'server' }
+          }
+        }
+      },
       adapters = {
         http = {
           tmd_ai = function()
-            local default_model = os.getenv('DEFAULT_MODEL')
+            local default_model = os.getenv('DEFAULT_MODEL') or 'gpt-4o'
             local api_key = os.getenv('AI_API_KEY')
             local url = os.getenv('AI_API_URL')
 
@@ -48,7 +33,7 @@ return {
             end
 
             return adapters.extend('openai_compatible', {
-              name = 'tmd-ai',
+              name = 'tmd_ai',
               formatted_name = 'TMD AI',
               env = {
                 url = url,
@@ -69,20 +54,6 @@ return {
         }
       },
       extensions = {
-        mcphub = {
-          callback = 'mcphub.extensions.codecompanion',
-          opts = {
-            make_tools = true,
-            show_server_tools_in_chat = true,
-            add_mcp_prefix_to_tool_names = false,
-            show_result_in_chat = true,
-            format_tool = nil,
-            -- MCP Resources
-            make_vars = false,
-            -- MCP Prompts
-            make_slash_commands = true,
-          }
-        },
         spinner = {},
         history = {
           opts = {
@@ -110,36 +81,8 @@ return {
       },
       interactions = {
         chat = {
-          tools = {
-            ["codecompanion-tool"] = {
-              tools = {
-                "files",
-                "editor",
-                "cmd_runner",
-                "agent",
-              },
-            },
-            opts = {
-              -- default_tools = { "joyia" },
-              system_prompt = {
-                enabled = true,
-                replace_main_system_prompt = false,
-
-                ---The tool system prompt
-                ---@param args { ctx: CodeCompanion.SystemPrompt.Context, tools: string[]} The tools available
-                ---@return string
-                prompt = function(args)
-                  return "<instructions>\
-                  You are a personal assistant inside Neovim.\
-                  Use available tools to answer questions, gather context, and edit files.\
-                  Prefer parallel calls. Never fabricate tool outputs. Use exact paths.\
-                  </instructions>\
-                  <available-tools>\
-                  " .. table.concat(args.tools, ", ") .. "\
-                  </available-tools>"
-                end,
-              },
-            }
+          rules = {
+            helpers = {}
           },
           opts = {
             system_prompt = function()
@@ -155,13 +98,14 @@ return {
               - Code blocks use three backticks with a language ID
               - When editing a file, first line outside the block is a path comment
               - No diff or line numbers unless requested
-              Env$ {date} | ${os} | nvim ${version} | lang ${language:English}]]
+              Env ${date} | ${os} | nvim ${version} | lang ${language:English}]]
             end,
           },
           adapter = 'tmd_ai',
           roles = {
             llm = function(ad)
-              return '  ' .. ad.formatted_name .. ' ->  ' .. ad.model.name
+            local model_name = ad.model and ad.model.name or 'unknown'
+            return '  ' .. ad.formatted_name .. ' ->  ' .. model_name
             end,
             user = os.getenv('USER') or os.getenv('USERNAME') or 'Me'
           }
