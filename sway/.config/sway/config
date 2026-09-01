@@ -202,3 +202,5 @@ bindswitch --reload --locked lid:off exec "swaymsg 'output $laptop enable'"
 
 # Mounts
 exec rclone mount ProtonDrive: $rclone_mount_dir --vfs-cache-mode writes --allow-non-empty &
+# Pass Wayland environment to systemd user session on launch
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
