@@ -1,7 +1,6 @@
 * {
   font-size: 16px;
   min-height: 0;
-  border-radius: 1rem;
   padding: 0.1rem;
 }
 
@@ -21,12 +20,10 @@ tooltip label {
   padding: 0 5px;
   background: transparent;
   color: white;
-  border-bottom: 3px solid transparent;
 }
 
 #workspaces button.focused {
   background: #64727d;
-  border-bottom: 3px solid white;
 }
 
 #mode,
@@ -37,7 +34,6 @@ tooltip label {
 
 #mode {
   background: #64727d;
-  border-bottom: 3px solid white;
 }
 
 #clock,
