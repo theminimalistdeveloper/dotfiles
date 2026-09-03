@@ -71,6 +71,12 @@ output DP-1 {
   scale 1
   adaptive_sync on
 }
+output DP-5 {
+  position 0,0
+  res 5120x1440@120hz
+  scale 1
+  adaptive_sync on
+}
 output eDP-1 {
   position 2560,1440
   res 2880x1800
