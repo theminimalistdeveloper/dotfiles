@@ -34,7 +34,7 @@ NO_BACKUP=false
 MODE="install"  # install | restow | unstow
 
 MACOS_PACKAGES=(ghostty nvim tmux zsh scripts spaceship)
-LINUX_PACKAGES=(ghostty i3 nvim scripts spaceship sway swaylock tmux tofi waybar zsh)
+LINUX_PACKAGES=(ghostty i3 nvim quickshell scripts spaceship sway swaylock tmux zsh)
 SELECTED_PACKAGES=()
 INSTALLED_PACKAGES=()
 
@@ -585,6 +585,16 @@ check_dependencies() {
         fi
     fi
 
+    # Check quickshell (for quickshell package)
+    if printf '%s\n' "${SELECTED_PACKAGES[@]}" | grep -qx "quickshell"; then
+        if ! command -v quickshell &>/dev/null; then
+            missing_packages+=("quickshell")
+        fi
+        if ! command -v iw &>/dev/null; then
+            missing_packages+=("iw")
+        fi
+    fi
+
     # Check git (needed for TPM and Oh My Zsh)
     if ! command -v git &>/dev/null; then
         missing_packages+=("git")
@@ -638,7 +648,7 @@ check_dependencies() {
                 local aur_pkgs=()
                 for pkg in "${unique_packages[@]}"; do
                     case "$pkg" in
-                        neovim|tmux|zsh|git|ripgrep|fzf)
+                        neovim|tmux|zsh|git|ripgrep|fzf|quickshell|iw)
                             pacman_pkgs+=("$pkg")
                             ;;
                         *)

@@ -109,7 +109,10 @@ tmux/resurrect/
 # Locally-generated cache or per-host configs
 sway/.config/sway/config.local
 i3/.config/i3/config.local
-waybar/.config/waybar/*.local
+
+# Quickshell
+# qmlls generates a machine-local config next to shell.qml
+quickshell/.config/quickshell/topbar/.qmlls.ini
 
 # -----------------------------------------------------------------------------
 # Secrets / credentials — NEVER commit these

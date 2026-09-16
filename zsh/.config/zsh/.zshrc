@@ -44,6 +44,7 @@ plugins=(
 source $ZDOTDIR/aliases.zsh
 source $ZDOTDIR/theme.zsh
 source $ZDOTDIR/local.zsh
+export PATH="$HOME/.local/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/n3xu5/code/video-automation/google-cloud-sdk/path.zsh.inc' ]; then . '/home/n3xu5/code/video-automation/google-cloud-sdk/path.zsh.inc'; fi

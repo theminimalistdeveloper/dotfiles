@@ -14,10 +14,33 @@ smart_gaps on
 floating_modifier $mod
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:"Gohufont" 12
+font pango:"Inter" 11
 
-default_border pixel 1
-client.focused "#cad3f5" "#cad3f5" "#cad3f5" "#cad3f5"
+gaps inner 8px
+corner_radius 12
+
+# macOS-style soft, diffuse shadows
+shadows enable
+shadow_blur_radius 40
+shadow_color #000000ff
+shadow_inactive_color #0000003f
+shadow_offset 0 8
+
+# Smooth macOS-like window animations
+animation_duration_ms 300
+
+# Borderless windows (macOS has no per-window titlebars); focus is shown by the shadow
+default_border none
+
+# Dim unfocused windows for a clear focus cue
+default_dim_inactive 0.15
+
+# macOS acrylic blur for the quickshell menu bar
+layer_effects "quickshell" {
+    blur enable;
+    blur_ignore_transparent enable;
+    shadows enable;
+}
 
 # PATH VARIABLES
 ################################################################################
@@ -58,7 +81,7 @@ set $ws10 "10"
 ################################################################################
 # Set up monitors - laptop monitor (eDP-1) centered below external monitor
 # Detect and configure monitors automatically
-output * bg #000000 solid_color
+output * bg ~/Pictures/MacBook-Neo-wallpaper-Purple.jpeg fill
 
 # Wait for monitors to be detected
 exec sleep 1
@@ -88,10 +111,12 @@ assign [app_id="com.mitchellh.ghostty"] $ws1
 assign [app_id="mullvad-browser"] $ws2
 assign [app_id="proton.vpn.app.gtk"] $ws4
 
+# Quickshell launcher: keep it floating (sway centers it) and grab keyboard focus
+for_window [title="^Launcher$"] floating enable
+
 exec protonvpn-app
-exec waybar
+exec_always sh -c "pgrep -x quickshell > /dev/null || quickshell -c topbar"
 exec ghostty
-exec mullvad-browser
 
 # BINDINGS
 ################################################################################
@@ -174,8 +199,8 @@ bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@
 bindsym $mod+Return exec ghostty
 # kill focused window
 bindsym $mod+Shift+q kill
-# start dmenu (a program launcher)
-bindsym $mod+space exec "tofi-run | xargs swaymsg exec --"
+# start quickshell launcher (macOS Spotlight-style)
+bindsym $mod+space exec "quickshell ipc -c topbar call topbar toggleLauncher"
 # split in vertical orientation
 bindsym $mod+v split v
 # reload the configuration file
@@ -189,14 +214,21 @@ bindsym $mod+Shift+p exec grim $screenshot_dir/$(date +"%d%m%Y%s_grim.png")
 # shutdown mode
 bindsym $mod+Shift+e mode "$mode_system"
 
-# Reload waybar
-bindsym $mod+Shift+w exec killall -SIGUSR2 waybar
+# Restart quickshell
+bindsym $mod+Shift+w exec "killall quickshell; quickshell -c topbar &"
 
 # Connect to AirpodsPro
 bindsym $mod+Shift+a exec ~/.config/scripts/airpods-toggle.sh
 
 input * {
   tap enabled
+}
+
+input type:keyboard {
+    xkb_layout us
+    xkb_variant intl
+    xkb_model pc105
+    xkb_options compose:ralt
 }
 
 # LID BEHAVIOR
@@ -210,3 +242,4 @@ bindswitch --reload --locked lid:off exec "swaymsg 'output $laptop enable'"
 exec rclone mount ProtonDrive: $rclone_mount_dir --vfs-cache-mode writes --allow-non-empty &
 # Pass Wayland environment to systemd user session on launch
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec fcitx5

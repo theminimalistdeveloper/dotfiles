@@ -57,13 +57,13 @@ Tiling Wayland compositor and i3-compatible replacement for X11. Primary window 
 - [Configuration Guide](https://man.archlinux.org/man/sway.5)
 - [Getting Started](https://github.com/swaywm/sway#running)
 
-#### [Waybar](https://github.com/Alexays/Waybar)
+#### [Quickshell](https://quickshell.outfoxxed.me/)
 
-Highly customizable status bar for Wayland compositors. Configured with JSONC format and styled with CSS for a clean, informative interface.
+Flexible toolkit for building desktop shells with QtQuick (QML). Used for a Catppuccin-styled top bar and a macOS Spotlight-style launcher that talk to Sway over the i3 IPC protocol. Config lives in `~/.config/quickshell/topbar/` and hot-reloads on file save. `$mod+space` toggles the launcher.
 
-- [Waybar Wiki](https://github.com/Alexays/Waybar/wiki)
-- [Configuration Examples](https://github.com/Alexays/Waybar/wiki/Examples)
-- [Module Reference](https://github.com/Alexays/Waybar/wiki/Module:-Custom)
+- [Quickshell Website](https://quickshell.outfoxxed.me/)
+- [Quickshell Documentation](https://quickshell.outfoxxed.me/docs/)
+- [Quickshell Source](https://github.com/quickshell-mirror/quickshell)
 
 #### [i3](https://i3wm.org/)
 
@@ -120,14 +120,6 @@ Minimalistic, powerful prompt for Zsh with git status, language versions, and ex
 - [Spaceship Sections](https://spaceship-prompt.sh/sections/)
 
 ### Utilities
-
-#### [Tofi](https://github.com/philj56/tofi)
-
-Fast application launcher for Wayland with dmenu compatibility and minimal dependencies.
-
-- [Tofi Documentation](https://github.com/philj56/tofi)
-- [Configuration Reference](https://github.com/philj56/tofi/blob/master/doc/config)
-- [Tofi Examples](https://github.com/philj56/tofi#usage)
 
 #### [Swaylock](https://github.com/swaywm/swaylock)
 

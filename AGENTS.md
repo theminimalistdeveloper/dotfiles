@@ -26,13 +26,12 @@ stow */            # installs everything
 | `ghostty/` | Ghostty terminal | `~/.config/ghostty/` |
 | `i3/` | i3 window manager (X11) | `~/.config/i3/` |
 | `nvim/` | Neovim (Lua config) | `~/.config/nvim/` |
+| `quickshell/` | Quickshell top bar + launcher (QML) | `~/.config/quickshell/topbar/` |
 | `scripts/` | Utility shell scripts | `~/.config/scripts/` |
 | `spaceship/` | Spaceship Zsh prompt | `~/.config/spaceship.zsh` |
 | `sway/` | Sway compositor (Wayland) | `~/.config/sway/` |
 | `swaylock/` | Swaylock screen locker | `~/.config/swaylock/` |
 | `tmux/` | tmux multiplexer | `~/.tmux.conf` |
-| `tofi/` | Tofi launcher (Wayland) | `~/.config/tofi/` |
-| `waybar/` | Waybar status bar | `~/.config/waybar/` |
 | `zsh/` | Zsh shell | `~/.zshrc` |
 
 ## Key Technical Details
@@ -43,6 +42,7 @@ stow */            # installs everything
 - **Vim-style navigation** (`h/j/k/l`) is consistent across Sway, i3, tmux, and Neovim.
 - **tmux-vim navigation** uses `vim-tmux-navigator` for seamless `Ctrl+h/j/k/l` pane switching.
 - **Development focus:** JavaScript, TypeScript, Rust (reflected in LSP and formatter configs).
+- **Quickshell** runs the top bar AND a macOS-Spotlight-style launcher together in one process (`quickshell -c topbar`). It talks to Sway via `Quickshell.I3` IPC, exposes an `IpcHandler` target (`topbar`) so `$mod+space` can toggle the launcher with `quickshell ipc -c topbar call topbar toggleLauncher`, and hot-reloads on file save.
 
 ## Setup Script
 
@@ -70,6 +70,7 @@ The `setup.sh` script automates the deployment of dotfiles with the following fe
 |------------|------------------|---------------------------------|
 | tmux       | `Ctrl+h/j/k/l`   | Navigate panes (vim-tmux-navigator) |
 | Sway/i3    | `Super+h/j/k/l`  | Navigate windows                |
+| Sway       | `Super+space`    | Toggle launcher (Quickshell)    |
 | Neovim     | `Ctrl+h/j/k/l`   | Navigate splits                 |
 
 ## Neovim Plugin Management
@@ -86,7 +87,7 @@ Supported languages:
 | Platform  | Dependencies                          |
 |-----------|---------------------------------------|
 | macOS     | `stow`, `zsh`, `neovim`, `tmux`, `ghostty`, `git`, `ripgrep`, `fzf` |
-| Linux     | `stow`, `zsh`, `neovim`, `tmux`, `sway`, `i3`, `waybar`, `tofi`, `swaylock`, `git`, `ripgrep`, `fzf` |
+| Linux     | `stow`, `zsh`, `neovim`, `tmux`, `sway`, `i3`, `quickshell`, `swaylock`, `git`, `ripgrep`, `fzf`, `iw` |
 
 ## Backup Strategy
 
@@ -114,8 +115,7 @@ The following tools are available on macOS:
 
 The following tools are available on Linux (Arch):
 - **Sway/i3**: Window managers
-- **Waybar**: Status bar
-- **Tofi**: Launcher
+- **Quickshell**: Top bar + launcher
 - **Swaylock**: Screen locker
 - **Ghostty**: Terminal emulator
 - **Neovim**: Text editor
@@ -139,7 +139,7 @@ This script checks for:
 
 - **Lua** — Neovim configuration (`nvim/.config/nvim/`)
 - **Shell/Zsh** — Scripts and shell config (`scripts/`, `zsh/`)
-- **CSS/JSONC** — Waybar styling and config
+- **QML** — Quickshell top bar (`quickshell/.config/quickshell/`)
 
 ## Conventions
 
@@ -150,5 +150,5 @@ This script checks for:
 
 ## Platform Targets
 
-- **Arch Linux:** Full stack (Sway/i3 + Waybar + Tofi + Swaylock + terminal + Neovim + tmux + Zsh)
+- **Arch Linux:** Full stack (Sway/i3 + Quickshell (top bar + launcher) + Swaylock + terminal + Neovim + tmux + Zsh)
 - **macOS:** Subset (Ghostty + Neovim + tmux + Zsh)
