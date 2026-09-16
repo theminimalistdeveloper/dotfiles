@@ -33,8 +33,22 @@ FORCE=false
 NO_BACKUP=false
 MODE="install"  # install | restow | unstow
 
-MACOS_PACKAGES=(ghostty nvim tmux zsh scripts spaceship)
-LINUX_PACKAGES=(ghostty i3 nvim quickshell scripts spaceship sway swaylock tmux zsh)
+MACOS_PACKAGES=(ghostty nvim tmux zsh scripts)
+LINUX_PACKAGES=(ghostty nvim quickshell scripts sway swaylock tmux zsh)
+
+# Additional packages that require explicit approval before they are recommended.
+# Not installed automatically; these are the heavyweight NVIDIA/AI stack plus a
+# few optional tools, and must be individually approved (see check_dependencies).
+ADDITIONAL_PACKAGES=(
+    # NVIDIA GPU stack
+    "nvidia-open" "nvidia-utils" "lib32-nvidia-utils" "opencl-nvidia"
+    "vulkan-icd-loader" "lib32-vulkan-icd-loader" "linux-firmware-nvidia"
+    "libnvidia-container" "nvidia-container-toolkit"
+    # AI / ML workloads
+    "cuda" "ollama" "llama-cpp" "whisper-cpp" "python-pytorch-cuda"
+    # Optional tools used by the sway config
+    "rclone" "brave"
+)
 SELECTED_PACKAGES=()
 INSTALLED_PACKAGES=()
 
@@ -595,6 +609,45 @@ check_dependencies() {
         fi
     fi
 
+    # Check ghostty (for ghostty package)
+    if printf '%s\n' "${SELECTED_PACKAGES[@]}" | grep -qx "ghostty"; then
+        if ! command -v ghostty &>/dev/null; then
+            missing_packages+=("ghostty")
+        fi
+    fi
+
+    # Check sway plus the runtime stack it drives through the config (for sway package)
+    if printf '%s\n' "${SELECTED_PACKAGES[@]}" | grep -qx "sway"; then
+        if ! command -v sway &>/dev/null; then
+            missing_packages+=("sway")
+        fi
+        if ! command -v brightnessctl &>/dev/null; then
+            missing_packages+=("brightnessctl")
+        fi
+        if ! command -v grim &>/dev/null; then
+            missing_packages+=("grim")
+        fi
+        if ! command -v fcitx5 &>/dev/null; then
+            missing_packages+=("fcitx5")
+        fi
+        if ! command -v wpctl &>/dev/null; then
+            missing_packages+=("wireplumber")
+        fi
+        if ! command -v nmcli &>/dev/null; then
+            missing_packages+=("networkmanager")
+        fi
+        if ! command -v iwctl &>/dev/null; then
+            missing_packages+=("iwd")
+        fi
+    fi
+
+    # Check swaylock (for swaylock package)
+    if printf '%s\n' "${SELECTED_PACKAGES[@]}" | grep -qx "swaylock"; then
+        if ! command -v swaylock &>/dev/null; then
+            missing_packages+=("swaylock")
+        fi
+    fi
+
     # Check git (needed for TPM and Oh My Zsh)
     if ! command -v git &>/dev/null; then
         missing_packages+=("git")
@@ -648,7 +701,7 @@ check_dependencies() {
                 local aur_pkgs=()
                 for pkg in "${unique_packages[@]}"; do
                     case "$pkg" in
-                        neovim|tmux|zsh|git|ripgrep|fzf|quickshell|iw)
+                        neovim|tmux|zsh|git|ripgrep|fzf|quickshell|iw|ghostty|sway|swaylock|brightnessctl|grim|fcitx5|wireplumber|networkmanager|iwd)
                             pacman_pkgs+=("$pkg")
                             ;;
                         *)
@@ -688,6 +741,47 @@ check_dependencies() {
 }
 
 # ==============================================================================
+# ADDITIONAL PACKAGES (PENDING APPROVAL)
+# ==============================================================================
+
+report_additional_packages() {
+    echo -e "\n${BOLD}Additional packages (pending approval)${NC}\n"
+    echo "  The following are NOT required for the dotfiles to work. They are"
+    echo "  heavyweight NVIDIA/AI tooling plus optional tools this machine also"
+    echo "  uses. They are never installed automatically and each list requires"
+    echo "  explicit approval before it is recommended for installation."
+    echo ""
+    for pkg in "${ADDITIONAL_PACKAGES[@]}"; do
+        echo "    - $pkg"
+    done
+    echo ""
+
+    if [[ "$DRY_RUN" == true ]]; then
+        print_info "Would ask for approval here (dry-run)"
+        log "Additional packages shown (dry-run): ${ADDITIONAL_PACKAGES[*]}"
+        return 0
+    fi
+
+    if [[ "$AUTO_YES" == true ]]; then
+        print_info "Skipping approval prompt (--yes); additional packages remain uninstalled"
+        log "Additional packages not approved (auto mode)"
+        return 0
+    fi
+
+    if confirm "Approve installing the additional packages?"; then
+        print_success "Approved (pending install)"
+        log "Additional packages approved: ${ADDITIONAL_PACKAGES[*]}"
+        echo ""
+        echo "  Install them with:"
+        echo -e "    ${BOLD}sudo pacman -S ${ADDITIONAL_PACKAGES[*]}${NC}"
+        echo "    (some of these are served by the multilib repo or the AUR)"
+    else
+        print_info "Declined; additional packages were not approved"
+        log "Additional packages declined"
+    fi
+}
+
+# ==============================================================================
 # DRY RUN
 # ==============================================================================
 
@@ -721,6 +815,7 @@ dry_run_preview() {
 
     print_step "4/4" "Dependency check"
     check_dependencies
+    report_additional_packages
 
     echo ""
     print_info "No changes were made. Remove --dry-run to proceed."
@@ -817,6 +912,9 @@ main() {
     # Step 6: Check dependencies
     print_step "5/6" "Checking dependencies..."
     check_dependencies
+
+    # Step 6b: Additional packages (pending approval) - never auto-installed
+    report_additional_packages
 
     # Summary
     print_step "6/6" "Summary"

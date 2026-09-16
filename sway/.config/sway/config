@@ -108,7 +108,6 @@ output eDP-1 {
 
 # COMMANDS - AUTO EXECUTE ON START
 assign [app_id="com.mitchellh.ghostty"] $ws1
-assign [app_id="mullvad-browser"] $ws2
 assign [app_id="proton.vpn.app.gtk"] $ws4
 
 # Quickshell launcher: keep it floating (sway centers it) and grab keyboard focus

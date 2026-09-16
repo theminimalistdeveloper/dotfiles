@@ -42,7 +42,6 @@ plugins=(
 
 # Themes
 source $ZDOTDIR/aliases.zsh
-source $ZDOTDIR/theme.zsh
 source $ZDOTDIR/local.zsh
 export PATH="$HOME/.local/bin:$PATH"
 

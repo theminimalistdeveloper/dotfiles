@@ -65,14 +65,6 @@ Flexible toolkit for building desktop shells with QtQuick (QML). Used for a Catp
 - [Quickshell Documentation](https://quickshell.outfoxxed.me/docs/)
 - [Quickshell Source](https://github.com/quickshell-mirror/quickshell)
 
-#### [i3](https://i3wm.org/)
-
-Tiling window manager for X11. Alternative configuration for non-Wayland systems with similar keybindings to Sway.
-
-- [i3 User's Guide](https://i3wm.org/docs/userguide.html)
-- [i3 Configuration](https://i3wm.org/docs/userguide.html#configuring)
-- [i3 Reference Card](https://i3wm.org/docs/refcard.html)
-
 ### Terminal
 
 #### [Ghostty](https://ghostty.org/)
@@ -105,19 +97,19 @@ Hyperextensible Vim-based text editor with native LSP support. Comprehensive Lua
 
 #### [Zsh](https://www.zsh.org/)
 
-Powerful shell with extensive customization. Configured with Oh My Zsh, Spaceship prompt, and vi-mode keybindings.
+Powerful shell with extensive customization. Configured with Oh My Zsh, Starship prompt, and vi-mode keybindings.
 
 - [Zsh Documentation](https://zsh.sourceforge.io/Doc/)
 - [Zsh Guide](https://zsh.sourceforge.io/Guide/)
 - [Oh My Zsh](https://ohmyz.sh/)
 
-#### [Spaceship Prompt](https://spaceship-prompt.sh/)
+#### [Starship](https://starship.rs/)
 
-Minimalistic, powerful prompt for Zsh with git status, language versions, and execution time display.
+Minimal, blazing-fast, customizable prompt with git status, language versions, and execution time display.
 
-- [Spaceship Documentation](https://spaceship-prompt.sh/getting-started/)
-- [Spaceship Options](https://spaceship-prompt.sh/options/)
-- [Spaceship Sections](https://spaceship-prompt.sh/sections/)
+- [Starship Documentation](https://starship.rs/guide/)
+- [Starship Configuration](https://starship.rs/config/)
+- [Preset Configurations](https://starship.rs/presets/)
 
 ### Utilities
 

@@ -24,11 +24,9 @@ stow */            # installs everything
 | Directory | Tool | Target |
 |-----------|------|--------|
 | `ghostty/` | Ghostty terminal | `~/.config/ghostty/` |
-| `i3/` | i3 window manager (X11) | `~/.config/i3/` |
 | `nvim/` | Neovim (Lua config) | `~/.config/nvim/` |
 | `quickshell/` | Quickshell top bar + launcher (QML) | `~/.config/quickshell/topbar/` |
 | `scripts/` | Utility shell scripts | `~/.config/scripts/` |
-| `spaceship/` | Spaceship Zsh prompt | `~/.config/spaceship.zsh` |
 | `sway/` | Sway compositor (Wayland) | `~/.config/sway/` |
 | `swaylock/` | Swaylock screen locker | `~/.config/swaylock/` |
 | `tmux/` | tmux multiplexer | `~/.tmux.conf` |
@@ -39,7 +37,7 @@ stow */            # installs everything
 - **Neovim** uses native `vim.pack.add()` (requires Neovim 0.10+) for plugin management. Plugins are auto-discovered via glob patterns in `nvim/.config/nvim/lua/plugins/`.
 - **Color theme:** Catppuccin Macchiato/Frappe throughout.
 - **Cross-platform scripts** use `case "$(uname)"` for macOS/Linux detection.
-- **Vim-style navigation** (`h/j/k/l`) is consistent across Sway, i3, tmux, and Neovim.
+- **Vim-style navigation** (`h/j/k/l`) is consistent across Sway, tmux, and Neovim.
 - **tmux-vim navigation** uses `vim-tmux-navigator` for seamless `Ctrl+h/j/k/l` pane switching.
 - **Development focus:** JavaScript, TypeScript, Rust (reflected in LSP and formatter configs).
 - **Quickshell** runs the top bar AND a macOS-Spotlight-style launcher together in one process (`quickshell -c topbar`). It talks to Sway via `Quickshell.I3` IPC, exposes an `IpcHandler` target (`topbar`) so `$mod+space` can toggle the launcher with `quickshell ipc -c topbar call topbar toggleLauncher`, and hot-reloads on file save.
@@ -69,7 +67,7 @@ The `setup.sh` script automates the deployment of dotfiles with the following fe
 | Tool       | Keybinding       | Action                          |
 |------------|------------------|---------------------------------|
 | tmux       | `Ctrl+h/j/k/l`   | Navigate panes (vim-tmux-navigator) |
-| Sway/i3    | `Super+h/j/k/l`  | Navigate windows                |
+| Sway       | `Super+h/j/k/l`  | Navigate windows                |
 | Sway       | `Super+space`    | Toggle launcher (Quickshell)    |
 | Neovim     | `Ctrl+h/j/k/l`   | Navigate splits                 |
 
@@ -87,7 +85,15 @@ Supported languages:
 | Platform  | Dependencies                          |
 |-----------|---------------------------------------|
 | macOS     | `stow`, `zsh`, `neovim`, `tmux`, `ghostty`, `git`, `ripgrep`, `fzf` |
-| Linux     | `stow`, `zsh`, `neovim`, `tmux`, `sway`, `i3`, `quickshell`, `swaylock`, `git`, `ripgrep`, `fzf`, `iw` |
+| Linux     | `stow`, `zsh`, `neovim`, `tmux`, `ghostty`, `sway`, `quickshell`, `swaylock`, `git`, `ripgrep`, `fzf`, `iw`, `brightnessctl`, `grim`, `fcitx5`, `wireplumber`, `networkmanager` |
+
+### Additional (pending approval)
+
+The following packages are NOT required by the dotfiles and are never installed automatically. They are heavyweight NVIDIA/AI tooling plus optional tools this workstation also uses; `setup.sh` presents them in an "additional packages (pending approval)" step that must be explicitly approved before they are recommended.
+
+- **NVIDIA stack**: `nvidia-open`, `nvidia-utils`, `lib32-nvidia-utils`, `opencl-nvidia`, `vulkan-icd-loader`, `lib32-vulkan-icd-loader`, `linux-firmware-nvidia`, `libnvidia-container`, `nvidia-container-toolkit`
+- **AI / ML**: `cuda`, `ollama`, `llama-cpp`, `whisper-cpp`, `python-pytorch-cuda`
+- **Optional tools**: `rclone`, `brave`
 
 ## Backup Strategy
 
@@ -114,7 +120,7 @@ The following tools are available on macOS:
 ### Linux
 
 The following tools are available on Linux (Arch):
-- **Sway/i3**: Window managers
+- **Sway**: Window manager (Wayland)
 - **Quickshell**: Top bar + launcher
 - **Swaylock**: Screen locker
 - **Ghostty**: Terminal emulator
@@ -150,5 +156,5 @@ This script checks for:
 
 ## Platform Targets
 
-- **Arch Linux:** Full stack (Sway/i3 + Quickshell (top bar + launcher) + Swaylock + terminal + Neovim + tmux + Zsh)
+- **Arch Linux:** Full stack (Sway + Quickshell (top bar + launcher) + Swaylock + terminal + Neovim + tmux + Zsh)
 - **macOS:** Subset (Ghostty + Neovim + tmux + Zsh)
