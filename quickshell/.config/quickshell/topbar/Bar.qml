@@ -24,14 +24,18 @@ PanelWindow {
   }
 
   Workspaces {
+    id: workspaces
+
     anchors.left: parent.left
     anchors.leftMargin: 16
     anchors.verticalCenter: parent.verticalCenter
   }
 
   WindowTitle {
-    anchors.centerIn: parent
-    width: bar.width * 0.4
+    anchors.left: workspaces.right
+    anchors.leftMargin: 12
+    anchors.verticalCenter: parent.verticalCenter
+    width: bar.width * 0.3
   }
 
   Row {

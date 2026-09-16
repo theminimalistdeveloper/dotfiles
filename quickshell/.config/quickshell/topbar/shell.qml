@@ -9,13 +9,24 @@ Scope {
   property var bars: ({})
   property var launchers: ({})
 
-  function handleRawEvent(event) {
-    if (event.type !== "window") return
-    const data = event.data
-    if (!data || !data.container) return
-    if (data.change === "focus" && data.container.focused) {
-      BarState.focusedTitle = data.container.name || ""
+  function findFocusedTitle(node) {
+    if (!node) return ""
+    if (node.focused && (node.type === "con" || node.type === "floating_con")) {
+      return node.name || node.app_id || ""
     }
+    if (Array.isArray(node.nodes)) {
+      for (const child of node.nodes) {
+        const title = root.findFocusedTitle(child)
+        if (title) return title
+      }
+    }
+    if (Array.isArray(node.floating_nodes)) {
+      for (const child of node.floating_nodes) {
+        const title = root.findFocusedTitle(child)
+        if (title) return title
+      }
+    }
+    return ""
   }
 
   function focusedBar() {
@@ -39,10 +50,39 @@ Scope {
     if (!anyOpen) root.launchers[bar.screen.name].open(bar)
   }
 
-  Connections {
-    target: I3
-    function onRawEvent(event) {
-      root.handleRawEvent(event)
+  function applyFocusedTitleFromTree(text) {
+    try {
+      const tree = JSON.parse(text)
+      BarState.focusedTitle = root.findFocusedTitle(tree)
+    } catch (_) {}
+  }
+
+  I3IpcListener {
+    subscriptions: ["window", "workspace"]
+    onIpcEvent: (event) => {
+      if (event.type !== "window") return
+      try {
+        const data = JSON.parse(event.data)
+        if (data.change === "focus" && data.container && data.container.focused) {
+          BarState.focusedTitle = data.container.name || data.container.app_id || ""
+        }
+      } catch (_) {}
+    }
+  }
+
+  Process {
+    id: titleInitialProc
+    command: ["swaymsg", "-t", "get_tree"]
+    stdout: StdioCollector {
+      onStreamFinished: root.applyFocusedTitleFromTree(this.text)
+    }
+  }
+
+  Timer {
+    interval: 300
+    running: true
+    onTriggered: {
+      if (!titleInitialProc.running) titleInitialProc.running = true
     }
   }
 

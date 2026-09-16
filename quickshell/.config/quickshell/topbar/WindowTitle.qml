@@ -8,7 +8,7 @@ Text {
   font.family: Theme.fontFamily
   font.pixelSize: Theme.fontSize
   font.bold: true
-  horizontalAlignment: Text.AlignHCenter
+  horizontalAlignment: Text.AlignLeft
   verticalAlignment: Text.AlignVCenter
   elide: Text.ElideRight
   clip: true
