@@ -23,6 +23,7 @@ stow */            # installs everything
 
 | Directory | Tool | Target |
 |-----------|------|--------|
+| `environment.d/` | Systemd user env (GTK dead-key/compose fix: `GTK_IM_MODULE=simple`) | `~/.config/environment.d/` |
 | `ghostty/` | Ghostty terminal | `~/.config/ghostty/` |
 | `nvim/` | Neovim (Lua config) | `~/.config/nvim/` |
 | `quickshell/` | Quickshell top bar + launcher (QML) | `~/.config/quickshell/topbar/` |
@@ -85,7 +86,7 @@ Supported languages:
 | Platform  | Dependencies                          |
 |-----------|---------------------------------------|
 | macOS     | `stow`, `zsh`, `neovim`, `tmux`, `ghostty`, `git`, `ripgrep`, `fzf` |
-| Linux     | `stow`, `zsh`, `neovim`, `tmux`, `ghostty`, `sway`, `quickshell`, `swaylock`, `git`, `ripgrep`, `fzf`, `iw`, `brightnessctl`, `grim`, `fcitx5`, `wireplumber`, `networkmanager` |
+| Linux     | `stow`, `zsh`, `neovim`, `tmux`, `ghostty`, `sway`, `quickshell`, `swaylock`, `git`, `ripgrep`, `fzf`, `iw`, `brightnessctl`, `grim`, `wireplumber`, `networkmanager` |
 
 ### Additional (pending approval)
 

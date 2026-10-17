@@ -34,7 +34,7 @@ NO_BACKUP=false
 MODE="install"  # install | restow | unstow
 
 MACOS_PACKAGES=(ghostty nvim tmux zsh scripts)
-LINUX_PACKAGES=(ghostty nvim quickshell scripts sway swaylock tmux zsh)
+LINUX_PACKAGES=(environment.d ghostty nvim quickshell scripts sway swaylock tmux zsh)
 
 # Additional packages that require explicit approval before they are recommended.
 # Not installed automatically; these are the heavyweight NVIDIA/AI stack plus a
@@ -627,9 +627,6 @@ check_dependencies() {
         if ! command -v grim &>/dev/null; then
             missing_packages+=("grim")
         fi
-        if ! command -v fcitx5 &>/dev/null; then
-            missing_packages+=("fcitx5")
-        fi
         if ! command -v wpctl &>/dev/null; then
             missing_packages+=("wireplumber")
         fi
@@ -701,7 +698,7 @@ check_dependencies() {
                 local aur_pkgs=()
                 for pkg in "${unique_packages[@]}"; do
                     case "$pkg" in
-                        neovim|tmux|zsh|git|ripgrep|fzf|quickshell|iw|ghostty|sway|swaylock|brightnessctl|grim|fcitx5|wireplumber|networkmanager|iwd)
+                        neovim|tmux|zsh|git|ripgrep|fzf|quickshell|iw|ghostty|sway|swaylock|brightnessctl|grim|wireplumber|networkmanager|iwd)
                             pacman_pkgs+=("$pkg")
                             ;;
                         *)
