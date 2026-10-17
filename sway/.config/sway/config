@@ -22,7 +22,7 @@ corner_radius 12
 # macOS-style soft, diffuse shadows
 shadows enable
 shadow_blur_radius 40
-shadow_color #000000ff
+shadow_color #00000040
 shadow_inactive_color #0000003f
 shadow_offset 0 8
 
