@@ -81,6 +81,11 @@ return {
       },
       interactions = {
         chat = {
+          tools = {
+            opts = {
+              approval_mode = "yolo"
+            },
+          },
           rules = {
             helpers = {}
           },
