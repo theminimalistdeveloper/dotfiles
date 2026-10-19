@@ -9,7 +9,7 @@ alias e='exit'
 alias n='nvim '
 # EZA - replacement for ls
 alias l='eza'
-alias la='eza -la --icons --git'
+alias la='eza -la --icons --git --sort type'
 alias t='eza --tree --icons --git'
 # FZF
 alias f='fzf'
@@ -24,6 +24,24 @@ alias tn="tmux new -s "
 alias tl="tmux ls"
 alias tk="tmux kill-session -t "
 alias ta="tmux a -t "
+
+# Herdr
+alias h='herdr'
+alias hs='herdr status'
+alias hss='herdr server stop'
+alias hsc='herdr server reload-config'
+alias hu='herdr update'
+alias hw='herdr workspace'
+alias hwt='herdr worktree'
+alias ht='herdr tab'
+alias hp='herdr pane'
+alias ha='herdr agent'
+alias hac='herdr agent connect'
+alias hsession='herdr session'
+
+# Opencode
+alias o="opencode"
+alias oj="joyia agent opencode"
 
 # GIT
 # Status & info

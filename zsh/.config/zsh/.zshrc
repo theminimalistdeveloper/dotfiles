@@ -45,8 +45,5 @@ source $ZDOTDIR/aliases.zsh
 source $ZDOTDIR/local.zsh
 export PATH="$HOME/.local/bin:$PATH"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/n3xu5/code/video-automation/google-cloud-sdk/path.zsh.inc' ]; then . '/home/n3xu5/code/video-automation/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/n3xu5/code/video-automation/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/n3xu5/code/video-automation/google-cloud-sdk/completion.zsh.inc'; fi
+# opencode
+export PATH=/Users/dia0001r/.opencode/bin:$PATH
