@@ -1,0 +1,19 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugins": [
+    "opencode-models-discovery@2.0.0"
+  ],
+  "providers": {
+    "tmdai": {
+      "name": "TMD AI",
+      "package": "@opencode-ai/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "https://api.siliconflow.com",
+        "apiKey": "{env:SILICONFLOW_API_KEY}",
+        "modelsDiscovery": {
+          "enabled": true
+        }
+      }
+    }
+  }
+}

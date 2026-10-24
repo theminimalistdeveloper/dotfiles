@@ -33,8 +33,8 @@ FORCE=false
 NO_BACKUP=false
 MODE="install"  # install | restow | unstow
 
-MACOS_PACKAGES=(ghostty nvim tmux zsh scripts)
-LINUX_PACKAGES=(environment.d ghostty nvim quickshell scripts sway swaylock tmux zsh)
+MACOS_PACKAGES=(ghostty nvim opencode tmux zsh scripts)
+LINUX_PACKAGES=(environment.d ghostty nvim opencode quickshell scripts sway swaylock tmux zsh)
 
 # Additional packages that require explicit approval before they are recommended.
 # Not installed automatically; these are the heavyweight NVIDIA/AI stack plus a
@@ -613,6 +613,13 @@ check_dependencies() {
     if printf '%s\n' "${SELECTED_PACKAGES[@]}" | grep -qx "ghostty"; then
         if ! command -v ghostty &>/dev/null; then
             missing_packages+=("ghostty")
+        fi
+    fi
+
+    # Check opencode (for opencode package)
+    if printf '%s\n' "${SELECTED_PACKAGES[@]}" | grep -qx "opencode"; then
+        if ! command -v opencode &>/dev/null; then
+            missing_packages+=("opencode")
         fi
     fi
 

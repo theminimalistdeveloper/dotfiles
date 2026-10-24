@@ -3,11 +3,12 @@ local signs = require('../config.signs')
 
 return {
   'nvim-tree/nvim-tree.lua',
+  lazy = false,
   dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
   config = function()
-    require('nvim-tree').setup({
+    local config = {
       diagnostics = {
         enable = true,
         show_on_dirs = true,
@@ -29,7 +30,9 @@ return {
         width = 40,
       },
       filters = { dotfiles = false },
-    })
+    };
+
+    require('nvim-tree').setup(config)
   end,
   keys = {
     { '<leader>oo', '<cmd>NvimTreeToggle<cr>', { desc = 'Toggle Nvim Tree' } },

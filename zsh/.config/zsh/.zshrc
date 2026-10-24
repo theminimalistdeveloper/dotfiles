@@ -47,3 +47,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # opencode
 export PATH=/Users/dia0001r/.opencode/bin:$PATH
+
+# opencode
+export PATH=/home/n3xu5/.opencode/bin:$PATH

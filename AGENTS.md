@@ -26,6 +26,7 @@ stow */            # installs everything
 | `environment.d/` | Systemd user env (GTK dead-key/compose fix: `GTK_IM_MODULE=simple`) | `~/.config/environment.d/` |
 | `ghostty/` | Ghostty terminal | `~/.config/ghostty/` |
 | `nvim/` | Neovim (Lua config) | `~/.config/nvim/` |
+| `opencode/` | OpenCode (global config + CLI theme) | `~/.config/opencode/` |
 | `quickshell/` | Quickshell top bar + launcher (QML) | `~/.config/quickshell/topbar/` |
 | `scripts/` | Utility shell scripts | `~/.config/scripts/` |
 | `sway/` | Sway compositor (Wayland) | `~/.config/sway/` |
@@ -41,6 +42,7 @@ stow */            # installs everything
 - **Vim-style navigation** (`h/j/k/l`) is consistent across Sway, tmux, and Neovim.
 - **tmux-vim navigation** uses `vim-tmux-navigator` for seamless `Ctrl+h/j/k/l` pane switching.
 - **Development focus:** JavaScript, TypeScript, Rust (reflected in LSP and formatter configs).
+- **OpenCode** global config and CLI theme are synced. Machine-specific files in `~/.config/opencode/` are intentionally **not** tracked: `agent/*.md` (symlinks to a local nubes-agents path), `plugins/herdr-agent-state.js` (herdr-managed), `node_modules/`/`bun.lock`/`package*.json`, `tools/`, and `service.json` (holds auth credentials).
 - **Quickshell** runs the top bar AND a macOS-Spotlight-style launcher together in one process (`quickshell -c topbar`). It talks to Sway via `Quickshell.I3` IPC, exposes an `IpcHandler` target (`topbar`) so `$mod+space` can toggle the launcher with `quickshell ipc -c topbar call topbar toggleLauncher`, and hot-reloads on file save.
 
 ## Setup Script
